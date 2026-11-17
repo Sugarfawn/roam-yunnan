@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#172c28"><meta name="description" content="在真实云南省地图上探索梅里雪山、大理洱海、玉龙雪山、阿布吉措与西双版纳雨林。">
+  <title>循着山海，漫游云南 · ROAM YUNNAN</title>
+  <link rel="stylesheet" href="/journey.css?v=map-1">
+  <link rel="stylesheet" href="/journey-editorial.css?v=window-fit-1">
+  <link rel="stylesheet" href="/atlas-cinematic.css?v=regions-1">
+  <script src="/home-photos.js?v=selected-photos-1" defer></script><script src="/destinations.js?v=regions-1" defer></script><script src="/map-regions.js?v=regions-1" defer></script><script src="/map-geometry.js?v=map-1" defer></script><script src="/site-shell.js?v=map-1" defer></script><script src="/explore.js?v=regions-1" defer></script>
+</head>
+<body class="route-page explore-page editorial-route cinematic-atlas" data-page="explore">
+  <div class="atlas-background" aria-hidden="true"><img id="selected-image" src="/assets/selected/meili-background.webp" alt="" fetchpriority="high"></div>
+  <header class="route-header" id="site-header"></header>
+  <main class="explore-main">
+    <div class="explore-heading"><div><p class="eyebrow"><i></i> EXPLORE YUNNAN</p><h1>循着山海，<em>漫游云南</em><span>。</span></h1></div></div>
+    <div class="explore-layout">
+      <section class="map-panel" aria-label="云南省交互地图">
+        <div class="map-panel-top"><span><i></i> 云南 · 山海之间</span><span>点击州、市或编号探索</span><button type="button" id="retry-region-boundaries" hidden>重试分区边界</button></div>
+        <div class="map-stage" id="map-stage">
+          <div class="map-loader" id="map-status" role="status">正在展开云南的轮廓…</div>
+          <svg id="province-map" viewBox="0 0 900 760" role="group" aria-labelledby="map-title map-description"><title id="map-title">云南州、市边界与旅行目的地</title><desc id="map-description">真实云南省界和州、市行政区边界，以及按经纬度投影的旅行标记。点击地区或编号，与右侧风景介绍联动。</desc></svg>
+          <div class="map-compass" aria-hidden="true"><span>N</span><svg viewBox="0 0 30 60"><path d="M15 4 7 35l8-5 8 5z"/><path d="M15 4v49"/></svg></div>
+        </div>
+        <div class="map-panel-bottom"><span><i></i> <strong id="map-selected-name">梅里雪山</strong></span><button type="button" id="map-source-button">边界与地点来源 ↗</button></div>
+        <p class="map-disclaimer" id="atlas-message" role="status" aria-live="polite">点击地图，慢慢认识云南。</p>
+      </section>
+      <aside class="destination-panel" aria-label="当前地点介绍">
+        <article class="destination-feature" id="destination-feature">
+          <div class="destination-copy"><p class="atlas-category" id="selected-category">雪山与晨光</p><div class="destination-meta"><span id="selected-region">迪庆 · 德钦</span><span><b id="selected-number">01</b> / <span id="selected-total">05</span></span></div><h2 id="selected-name">梅里雪山</h2><p class="atlas-destination-english" id="selected-english">MEILI SNOW MOUNTAINS</p><p id="selected-introduction">在德钦，群峰沿着高原天际线展开。从观景区域望向梅里，让山的轮廓和光线替旅程写下开场。</p><button type="button" class="explore-place" id="explore-place">探索此地 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></button></div>
+        </article>
+      </aside>
+    </div>
+    <footer class="atlas-footer"><span>一程山海，一点留白。</span><a id="selected-source" href="https://www.pexels.com/photo/a-snow-covered-mountain-under-the-dark-sky-10520915/" target="_blank" rel="noopener noreferrer">摄影 / <span id="selected-author">Lu Li</span> ↗</a></footer>
+    <div id="selection-status" class="visually-hidden" role="status" aria-live="polite"></div>
+  </main>
+  <dialog class="sources-dialog" id="destination-dialog" aria-labelledby="destination-dialog-title">
+    <button type="button" class="close-dialog" id="close-destination" aria-label="关闭目的地介绍">×</button>
+    <span class="eyebrow" id="destination-dialog-region"></span>
+    <h2 id="destination-dialog-title"></h2><p id="destination-dialog-story"></p>
+    <ul id="destination-dialog-highlights"></ul><p id="destination-dialog-practical"></p>
+    <p>景点选择与旅行规划将在后续版本开放。</p>
+  </dialog>
+</body>
+</html>

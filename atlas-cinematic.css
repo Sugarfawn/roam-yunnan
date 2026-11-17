@@ -1,0 +1,82 @@
+/* Immersive province atlas only. The homepage carousel and planner keep their own layouts. */
+html:has(body.cinematic-atlas){height:100%;overflow:hidden;background:#132924}
+body.explore-page.cinematic-atlas{--atlas-gutter:clamp(24px,4.2vw,80px);--ink:#f6f0e3;--muted:#cfceb8;--cream:#e6d4ad;--sun:#d0b382;color:#f6f0e3;background:#132924;isolation:isolate;height:100vh;height:100dvh;overflow:hidden;min-height:0}
+.atlas-background{position:fixed;inset:0;z-index:-2;overflow:hidden;background:#132924;pointer-events:none}
+.atlas-background img{display:block;width:100%;height:100%;object-fit:cover;transition:opacity .65s ease,transform 1.3s ease;opacity:1}
+.atlas-background.is-changing img{opacity:.7;transform:scale(1.008)}
+.atlas-background:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#091d1b70,transparent 48%,#0d211a18 58%,#0a1d1882),linear-gradient(180deg,#081d1d4d,transparent 32%,transparent 70%,#0a1d1a91)}
+.cinematic-atlas .route-header{position:relative;z-index:4;border-bottom:1px solid #f2ead22b;height:clamp(68px,9dvh,92px)}
+.cinematic-atlas .route-brand{color:#fff7e6}
+.cinematic-atlas .route-header nav a,.cinematic-atlas .route-header nav button{color:#fff7e0ba;font-size:12px;letter-spacing:1.4px}
+.cinematic-atlas .route-header nav a:hover,.cinematic-atlas .route-header nav button:hover,.cinematic-atlas .route-header nav a[aria-current]{color:#fff7e6}
+.cinematic-atlas .back-home{color:#fff3d3bb;font-size:11px}
+.cinematic-atlas .explore-main{position:relative;z-index:1;flex:1;min-height:0;border:0;padding:24px 0 20px;grid-template-rows:auto minmax(0,1fr) auto;gap:22px}
+.cinematic-atlas .explore-heading{margin:0;min-width:0;display:block}
+.cinematic-atlas .eyebrow{color:#e2cda4b0;font-size:9px;letter-spacing:3px;margin-bottom:11px}
+.cinematic-atlas .eyebrow i{background:#d7bb87;width:27px}
+.cinematic-atlas .explore-heading h1{color:#fff9e9;font-size:clamp(26px,2.1vw,37px);font-weight:400;letter-spacing:2px;margin:0;line-height:1.5}
+.cinematic-atlas .explore-heading h1 em{color:#eee1c8}
+.cinematic-atlas .explore-heading h1>span{color:#d9b986}
+.cinematic-atlas .explore-layout{display:flex;align-items:center;justify-content:space-between;gap:clamp(44px,6vw,120px);height:100%;min-height:0}
+.cinematic-atlas .map-panel{flex:0 1 54%;width:54%;height:100%;max-height:650px;max-width:min(820px,calc((100dvh - 210px)*1.28));min-height:0;align-self:center;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;border:1px solid #e2d6ad42;border-radius:4px;background:linear-gradient(130deg,#0e29225e,#19362c82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 14px 50px #00161112;overflow:visible}
+.cinematic-atlas .map-panel-top{padding:15px 19px;font-size:10px;letter-spacing:1px;line-height:1.8;color:#d3d2b6;min-width:0}
+.cinematic-atlas .map-panel-top>span:first-child{color:#efe2bf}
+.cinematic-atlas .map-panel-top>span:last-of-type{color:#d7d3b6a8;font-size:9px}
+.cinematic-atlas .map-panel-top i{background:#c9ac76}
+.cinematic-atlas #retry-region-boundaries{font-size:10px;color:#f0d7a7;text-decoration:underline}
+.cinematic-atlas .map-stage{height:auto;min-height:0}
+.cinematic-atlas #province-map{width:100%;height:100%;overflow:visible}
+.cinematic-atlas .province-shape{fill:#7e9c7433;stroke:none}
+.cinematic-atlas .province-outline{fill:none;stroke:#e8ddba9e;stroke-width:1.2;vector-effect:non-scaling-stroke}
+.cinematic-atlas .atlas-region{fill:#59765714;stroke:#f3ecd55e;stroke-width:.75;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .3s,stroke .3s;outline:none}
+.cinematic-atlas .atlas-region.has-destinations{fill:#8da0771f}
+.cinematic-atlas .atlas-region:hover,.cinematic-atlas .atlas-region:focus-visible{fill:#c7c39235;stroke:#ede0b3ca;stroke-width:1.1}
+.cinematic-atlas .atlas-region.is-selected{fill:#c6bc823b;stroke:#efdab18c;stroke-width:1.1}
+.cinematic-atlas .prefecture-label{fill:#e3e2c9b8;stroke:none;font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:16px;font-weight:400;letter-spacing:1px;pointer-events:none;paint-order:stroke fill}
+.cinematic-atlas .prefecture-label.is-selected{fill:#fff2cc}
+.cinematic-atlas .marker-border{fill:#183a2c;stroke:#e3d8b6b0;stroke-width:1.25}
+.cinematic-atlas .marker-number{fill:#efe7cc;font-size:13px}
+.cinematic-atlas .map-marker:hover .marker-border,.cinematic-atlas .map-marker:focus .marker-border{stroke:#fff2cc;stroke-width:2}
+.cinematic-atlas .map-marker.is-active .marker-border{fill:#bd9c67;stroke:#f9e5b9;stroke-width:1.7}
+.cinematic-atlas .map-marker.is-active .marker-number{fill:#17382b}
+.cinematic-atlas .marker-breath{stroke:#ebcd92}
+.cinematic-atlas .marker-connector{stroke:#edddb47a;opacity:0;transition:opacity .2s;pointer-events:none}
+.cinematic-atlas .map-marker:hover .marker-connector,.cinematic-atlas .map-marker:focus .marker-connector,.cinematic-atlas .map-marker.is-active .marker-connector{opacity:1}
+.cinematic-atlas .marker-tooltip rect{fill:#163329ef;stroke:#d4bd8a7d;stroke-width:.8}
+.cinematic-atlas .marker-tooltip text{fill:#f6ecd1;font-size:12px}
+.cinematic-atlas .map-compass{color:#e4dab27a;right:17px;top:4px}
+.cinematic-atlas .map-compass path:first-child{fill:#d8cc9e30}
+.cinematic-atlas .map-panel-bottom{padding:10px 19px;border-color:#dcd6b22b;color:#d1cfb1;font-size:10px}
+.cinematic-atlas .map-panel-bottom strong{font-size:11px;color:#eee1bd;font-weight:400}
+.cinematic-atlas .map-panel-bottom button{font-size:9px;color:#d6cdacb5}
+.cinematic-atlas .map-disclaimer{font-size:9px;color:#c7ccadbb;padding:0 19px 12px;margin:0;line-height:1.8;min-height:28px}
+.cinematic-atlas .map-loader{color:#ede3c6;font-size:12px}
+.cinematic-atlas .map-loader button{color:#f0dbb6;border-color:#d7c59c5c}
+.cinematic-atlas .destination-panel{flex:0 1 35%;width:35%;max-width:480px;min-width:0;display:block;min-height:0;margin-right:clamp(0px,2vw,35px)}
+.cinematic-atlas .destination-feature{display:block;min-height:0;transition:opacity .3s,transform .4s}
+.cinematic-atlas .destination-feature.is-changing{opacity:.25;transform:translateY(5px)}
+.cinematic-atlas .destination-copy{display:block;padding:0;min-width:0}
+.cinematic-atlas .destination-copy .atlas-category{font-size:10px;letter-spacing:2px;line-height:1.9;color:#e1c697ba;margin:0 0 29px;min-height:0}
+.cinematic-atlas .destination-meta{display:flex;font-size:11px;letter-spacing:1.5px;color:#eee2c5b0;margin-bottom:14px}
+.cinematic-atlas .destination-meta>span:last-child{font-family:Georgia,serif;color:#e2d0a6a3;font-size:12px}
+.cinematic-atlas .destination-meta b{font-size:22px;color:#e3c28d;font-weight:400}
+.cinematic-atlas .destination-copy h2{font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:clamp(32px,3.15vw,53px);font-weight:400;color:#fffaee;letter-spacing:3px;line-height:1.4;margin:0 0 13px}
+.cinematic-atlas .destination-copy .atlas-destination-english{font-size:9px;font-family:Arial,sans-serif;letter-spacing:2.7px;color:#f3e6c495;line-height:1.9;margin:0 0 32px;min-height:0;display:block}
+.cinematic-atlas #selected-introduction{font-size:14px;font-weight:300;line-height:2.15;letter-spacing:.6px;color:#fff8e6ce;margin:0;display:block;min-height:0;max-width:30em}
+.cinematic-atlas .explore-place{color:#f0dfb8;border-color:#e0c69a65;font-size:12px;letter-spacing:1.5px;padding:20px 0 16px;display:flex;width:100%;max-width:280px;margin-top:30px}
+.cinematic-atlas .explore-place:hover{color:#fff4d5;border-color:#f0dbada6}
+.cinematic-atlas .explore-place svg{width:25px;stroke-width:1}
+.cinematic-atlas .atlas-footer{display:flex;align-items:center;justify-content:space-between;gap:25px;font-size:10px;color:#ede4cba3;letter-spacing:1px;line-height:1.8}
+.cinematic-atlas .atlas-footer>a{color:#f7ead08f;font-size:10px;letter-spacing:.3px}
+.cinematic-atlas .sources-dialog{color:#365b46;background:#f5f3ed;backdrop-filter:none}
+.cinematic-atlas .sources-dialog .eyebrow{color:#9b895e}
+.cinematic-atlas button:focus-visible,.cinematic-atlas a:focus-visible{outline-color:#e3c48c}
+@media(max-height:720px) and (min-width:651px){.cinematic-atlas .route-header{height:61px}.cinematic-atlas .explore-main{padding:14px 0;gap:14px}.cinematic-atlas .explore-heading h1{font-size:27px}.cinematic-atlas .eyebrow{font-size:8px;margin-bottom:5px}.cinematic-atlas .map-panel-top{padding:10px 15px}.cinematic-atlas .map-panel-bottom{padding:8px 15px}.cinematic-atlas .map-disclaimer{padding:0 15px 8px;font-size:8px;min-height:23px}.cinematic-atlas .destination-copy .atlas-category{margin-bottom:18px;font-size:9px}.cinematic-atlas .destination-copy h2{font-size:35px}.cinematic-atlas .destination-copy .atlas-destination-english{margin-bottom:20px;font-size:8px}.cinematic-atlas #selected-introduction{font-size:12px;line-height:2}.cinematic-atlas .explore-place{margin-top:17px;padding:14px 0}.cinematic-atlas .atlas-footer{font-size:9px}}
+@media(max-width:1000px){.cinematic-atlas .destination-panel{flex-basis:37%;width:37%;margin-right:0}.cinematic-atlas .explore-layout{gap:35px}.cinematic-atlas .destination-copy h2{font-size:33px;letter-spacing:1.4px}.cinematic-atlas #selected-introduction{font-size:12px}.cinematic-atlas .map-panel-top>span:last-of-type{display:none}}
+@media(max-width:650px){.cinematic-atlas .route-header{height:64px}.cinematic-atlas .route-header nav{gap:18px}.cinematic-atlas .route-header nav a,.cinematic-atlas .route-header nav button{font-size:10px;letter-spacing:.5px}.cinematic-atlas .explore-main{padding:13px 0 11px;gap:13px;grid-template-rows:auto minmax(0,1fr) auto}.cinematic-atlas .explore-heading h1{font-size:25px;letter-spacing:.4px}.cinematic-atlas .eyebrow{font-size:8px;letter-spacing:2.5px;margin-bottom:4px}.cinematic-atlas .explore-layout{flex-direction:column;gap:17px;align-items:stretch}.cinematic-atlas .map-panel{flex:1 1 auto;width:100%;max-width:none;max-height:none;min-height:0}.cinematic-atlas .map-panel-top{padding:9px 13px;font-size:9px}.cinematic-atlas .map-panel-bottom{padding:8px 13px;font-size:9px}.cinematic-atlas .map-panel-bottom strong{font-size:10px}.cinematic-atlas .map-panel-bottom button{font-size:8px}.cinematic-atlas .map-disclaimer{padding:0 13px 8px;font-size:8px;min-height:22px}.cinematic-atlas .map-compass{right:12px;font-size:7px}.cinematic-atlas .prefecture-label{display:none}.cinematic-atlas .prefecture-label.is-selected{display:block;font-size:20px}.cinematic-atlas .destination-panel{flex:0 0 auto;width:100%;max-width:none;margin:0}.cinematic-atlas .destination-copy .atlas-category{display:none}.cinematic-atlas .destination-meta{margin:0 0 6px;font-size:9px}.cinematic-atlas .destination-meta b{font-size:16px}.cinematic-atlas .destination-copy h2{font-size:28px;margin:0 0 8px;letter-spacing:1px}.cinematic-atlas .destination-copy .atlas-destination-english{display:none}.cinematic-atlas #selected-introduction{font-size:11px;line-height:1.9;letter-spacing:.2px}.cinematic-atlas .explore-place{margin-top:7px;padding:9px 0;font-size:11px;max-width:180px}.cinematic-atlas .atlas-footer{font-size:8px;letter-spacing:.4px}.cinematic-atlas .atlas-footer>a{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.cinematic-atlas *{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* Intro remains available before the planning stage is added. */
+.cinematic-atlas button.explore-place{width:100%;text-align:left}
+#destination-dialog ul{padding-left:20px;font-size:12px;line-height:2;color:#60755b}
+#destination-dialog #destination-dialog-practical{border-left:2px solid #af9464;padding-left:12px}

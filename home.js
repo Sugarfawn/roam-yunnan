@@ -181,16 +181,7 @@
     if (Math.abs(dx) > 64 && Math.abs(dx) > Math.abs(dy) * 1.4) select(active + (dx < 0 ? 1 : -1));
     touchStart = null;
   }, { passive: true });
-  // This standalone stage does not contain a map or planner.
-  $('#cover-plan').addEventListener('click', () => openDialog($('#stage-dialog')));
-  $('#cover-inspiration').addEventListener('click', () => {
-    const gallery = $('.home-gallery');
-    gallery.classList.remove('is-discovered');
-    void gallery.offsetWidth;
-    gallery.classList.add('is-discovered');
-    cards.querySelector('.home-card.is-selected').focus({preventScroll:true});
-    $('#cover-announcement').textContent = '请选择右侧照片，探索五处云南风景。';
-  });
+  // Native anchors connect the cover to the province atlas.
   $('#photo-credits').addEventListener('click', () => openDialog($('#credits-dialog')));
   $('#photo-credit-link').addEventListener('click', () => openDialog($('#credits-dialog')));
   document.addEventListener('visibilitychange', syncPlayback);

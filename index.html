@@ -20,14 +20,14 @@
     <div class="home-shade" aria-hidden="true"></div>
     <header class="home-header">
       <a class="home-brand" href="./" aria-label="漫游云南首页"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17.5"/><path d="m26.5 13.5-4.4 8.6-8.6 4.4 4.4-8.6z"/><circle cx="20" cy="20" r="1"/></svg><span>漫游<small>ROAM / YUNNAN</small></span></a>
-      <nav aria-label="首页导航"><a class="home-nav-current" href="./">首页<span></span></a><button type="button" id="cover-inspiration">风景灵感</button><button type="button" id="photo-credits">关于影像 <span aria-hidden="true">↗</span></button></nav>
+      <nav aria-label="首页导航"><a class="home-nav-current" href="./">首页<span></span></a><a href="/explore/yunnan/" id="cover-inspiration">风景灵感</a><button type="button" id="photo-credits">关于影像 <span aria-hidden="true">↗</span></button></nav>
       <div class="header-note"><span class="header-note-dot"></span> 把旅行，交给期待</div>
     </header>
     <div class="home-layout">
       <section class="home-copy" aria-labelledby="cover-title">
         <div class="home-eyebrow"><span></span> A JOURNEY LESS ORDINARY</div>
         <div id="home-text" class="home-text"><h1 id="cover-title"><span>去梅里雪山，</span><span>等风把云慢慢吹散。</span></h1><p id="cover-description">望向深色天空下的雪峰，留一段时间给远方。<br>让一程高原风景，留在眼前久一点。</p></div>
-        <button class="home-cta" id="cover-plan" type="button" aria-label="开启旅程，查看后续阶段说明"><span>开启旅程</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></button>
+        <a class="home-cta" id="cover-plan" href="/explore/yunnan/" aria-label="开启旅程，探索云南地图"><span>开启旅程</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a>
         <div class="copy-footnote"><span class="fine-line"></span> 不赶路，只感受。</div>
       </section>
       <section class="home-gallery" aria-label="云南风景选择">
@@ -44,12 +44,5 @@
     <span id="cover-announcement" class="sr-only" role="status" aria-live="polite"></span>
   </main>
   <dialog class="home-dialog credits-dialog" id="credits-dialog" aria-labelledby="credits-title"><button type="button" class="dialog-close" data-close aria-label="关闭影像信息">×</button><span class="dialog-kicker">THROUGH THEIR LENS</span><h2 id="credits-title">风景背后的镜头</h2><p class="dialog-intro">真实的云南，来自摄影者的记录。</p><div id="credits-list"></div><p class="dialog-footnote">五张作品由你选定，来自 Pexels 与 Unsplash。本版本包含由同一原图裁切的背景和卡片 WebP，不包含高清原文件，未做调色。署名、来源与平台授权说明随作品保留。</p></dialog>
-  <dialog class="home-dialog stage-dialog" id="stage-dialog" aria-labelledby="stage-title">
-    <button type="button" class="dialog-close" data-close aria-label="关闭阶段说明">×</button>
-    <span class="dialog-kicker">THE JOURNEY STARTS HERE</span>
-    <h2 id="stage-title">下一程，即将展开。</h2>
-    <p class="dialog-intro">当前是摄影封面版本。云南探索地图与行程规划将在后续阶段开放。</p>
-    <button class="stage-dialog-action" type="button" data-close>先看看这里的风景</button>
-  </dialog>
 </body>
 </html>
