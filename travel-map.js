@@ -50,6 +50,22 @@
       map.add([...lines,...markers]);map._journeyMarkers=markers;
       const frame=points.map(p=>p.key+':'+p.poi.poiId).join('|')+'|'+legs.map(l=>l.result?.paths?.length?l.result.mode+':'+l.result.distanceMeters:'').join(',');if(map._journeyFrame!==frame){if(markers.length)map.setFitView([...markers,...lines],false,[50,45,50,45]);map._journeyFrame=frame;}
     }catch{if(container.dataset.version!==token)return;container.textContent='地图暂时无法加载，左侧地点与已查交通仍可查看。';}
+  },async renderJourney(container,plan,onSelect){
+    const token=String(Number(container.dataset.version||0)+1);container.dataset.version=token;
+    container.setAttribute('aria-label','整趟旅行的高德道路总览');container.textContent='正在汇总四天路线…';
+    try{
+      const results=await Promise.all(plan.days.filter(day=>day.type!=='transfer').map(day=>root.RoamTrafficService.checkDay(plan,day)));
+      if(container.dataset.version!==token)return;const AMap=await root.RoamAMap.load();if(container.dataset.version!==token)return;
+      if(liveMaps.has(container)){liveMaps.get(container).destroy();liveMaps.delete(container);}
+      const canvas=document.createElement('div');canvas.className='personal-day-map';container.replaceChildren(canvas);
+      const first=results.flatMap(r=>r.points)[0],map=new AMap.Map(canvas,{zoom:10,center:first?.poi.coordinates||[100.18,25.7],mapStyle:'amap://styles/whitesmoke',viewMode:'2D',resizeEnable:true,animateEnable:false});liveMaps.set(container,map);
+      const colors=['#2b9fc8','#df8a43','#6657d9','#6cae45'],overlays=[],markers=[];
+      for(const result of results){const dayIndex=Math.max(0,result.dayNumber-1),color=colors[dayIndex%colors.length];
+        for(const leg of result.legs)for(const path of leg.result?.paths||[])if(path.length>1)overlays.push(new AMap.Polyline({path,strokeColor:color,strokeWeight:5,strokeOpacity:.82,lineJoin:'round',lineCap:'round',showDir:true}));
+        for(const point of result.points){const content=document.createElement('button');content.type='button';content.className='journey-map-marker journey-map-day-'+(dayIndex+1);content.textContent=(dayIndex+1)+'·'+(point.index+1);content.title='Day '+(dayIndex+1)+' · '+point.name;content.addEventListener('click',()=>onSelect?.(dayIndex,point.key));const marker=new AMap.Marker({position:point.poi.coordinates,content,anchor:'center'});markers.push(marker);}
+      }
+      map.add([...overlays,...markers]);if(markers.length)map.setFitView([...markers,...overlays],false,[48,42,48,42]);
+    }catch{if(container.dataset.version===token)container.textContent='总览暂时无法加载，可切换到单日查看已查询路线。';}
   },focus(container,key){
     const map=liveMaps.get(container);if(!map)return;
     for(const marker of map._journeyMarkers||[]){const active=marker._journeyKeys.includes(key);marker._journeyContent.classList.toggle('is-active',active);if(active&&!map.getBounds().contains(marker.getPosition()))map.setCenter(marker.getPosition());}

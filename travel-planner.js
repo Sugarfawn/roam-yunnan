@@ -20,7 +20,7 @@
     return R.normalize({...settings,area:$('#plan-area').value,areas:additional,days:$('input[name=days]:checked')?.value,pace:$('input[name=pace]:checked')?.value,transport:$('input[name=transport]:checked')?.value,preferences:$$('input[name=preference]:checked').map(x=>x.value),selected:$$('input[name=spot]:checked').map(x=>x.value),mustVisit:$$('input[name=must]:checked').map(x=>x.value),startLocation:$('#start-location').value,endLocation:$('#end-location').value,sameEndAsStart:$('#same-end').checked,arrivalWindow:$('#arrival-window').value,departureWindow:$('#departure-window').value,arrivalTime:$('#arrival-time').value,departureTime:$('#departure-time').value,personalPlaces:settings.personalPlaces,legModes:settings.legModes,poiBindings:settings.poiBindings,aiRequest:$('#ai-expectation').value});
   }
   function counts(){const selected=$$('input[name=spot]:checked').length,must=$$('input[name=must]:checked').length;$('#choice-count').textContent=`已选 ${selected} 个 · 必去 ${must} 个`;}
-  function updateLinks(){const place=D.get(settings.area);$('#planner-back-map').href=place.mapUrl;$('#result-return-map').href=place.mapUrl;$('#planner-back-guide').href=place.detailUrl;const nav=$('#site-header .planner-entry');if(nav)nav.href=place.mapUrl;$('#planner-region-name').textContent=place.shortName;const photo=$('#planner-region-photo');photo.src='/'+place.background;photo.alt=place.author+' 摄影：'+place.place;photo.style.objectPosition=place.position;document.title=place.shortName+' · 我的旅行计划 · ROAM YUNNAN';}
+  function updateLinks(){const place=D.get(settings.area),guide=$('#planner-back-guide');$('#planner-back-map').href=place.mapUrl;$('#result-return-map').href=place.mapUrl;guide.href=place.detailUrl;guide.hidden=!place.hasCatalogue;const nav=$('#site-header .planner-entry');if(nav)nav.href=place.mapUrl;$('#planner-region-name').textContent=place.shortName;const photo=$('#planner-region-photo');photo.hidden=!place.hasPhoto;if(place.hasPhoto){photo.src='/'+place.background;photo.alt=place.author+' 摄影：'+place.place;photo.style.objectPosition=place.position;}document.title=place.shortName+' · 我的旅行计划 · ROAM YUNNAN';}
   function fillOrigins(selector,area,wanted){const target=$(selector),origins=T.areas[area].origins;target.replaceChildren(...origins.map(([id,label])=>{const option=document.createElement('option');option.value=id;option.textContent=label+' · 区域参考';return option;}));target.value=origins.some(x=>x[0]===wanted)?wanted:T.defaultStart[area];}
   function renderRegionSwitches(){
     const container=$('#additional-areas');container.replaceChildren();
@@ -30,7 +30,7 @@
   }
   function renderChoices(){
     const box=$('#planner-spot-choices');box.replaceChildren();
-    for(const spot of settings.areas.flatMap(id=>A.byRegion[id])){
+    for(const spot of settings.areas.flatMap(id=>A.byRegion[id]||[])){
       const row=make('div','planner-choice-row'),label=make('label','planner-spot-choice'),select=document.createElement('input');select.type='checkbox';select.name='spot';select.value=spot.id;select.checked=settings.selected.includes(spot.id);label.append(select,make('span','choice-check','✓'));
       const photo=window.RoamAttractionPhotos?.[spot.id];
       if(photo){const thumb=make('img','choice-photo');thumb.src='/'+photo.src;thumb.alt=photo.subject||spot.name+'实景';thumb.loading='lazy';thumb.width=54;thumb.height=60;label.append(thumb);}
@@ -69,7 +69,7 @@
     if(plan&&document.body.dataset.plannerView==='result'){plan.settings.personalPlaces=settings.personalPlaces;commitEdit();}else{checkStorage(S.setDraft(readForm()));renderPersonalPlaces();}
     toast('已移除自选地点，并重新检查计划。');
   }
-  function focusSection(selector){const heading=$(selector);heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});heading.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+  function focusSection(selector){const heading=$(selector);if(!heading)return;heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}
   function showForm(push=false){stopTraffic();document.body.dataset.plannerView='edit';$('#planning-section').hidden=false;$('#result-section').hidden=true;renderForm();route('edit',push);window.RoamPlannerUI?.showStep(1);if(push)focusSection('#planning-title');}
   function assessAfterEdit(){plan.validation=R.recheck(plan);plan.warnings=R.warnings(plan);}
   function commitEdit(){stopTraffic();window.RoamTraffic.clear(plan);plan.savedAt=null;if(plan.ai)plan.ai.edited=true;assessAfterEdit();settings=plan.settings;checkStorage(S.setDraft(settings));persistTrip(true,'编辑行程');storePlan();renderResult();}
@@ -84,6 +84,7 @@
     plan.days.forEach((day,index)=>{const tab=make('button',index===plan.activeDay?'is-active':'');tab.type='button';tab.id='result-day-'+index;tab.setAttribute('role','tab');tab.setAttribute('aria-selected',String(index===plan.activeDay));tab.setAttribute('aria-controls','day-itinerary');tab.append(make('strong','',window.RoamTripModel.dayDate(plan.settings.startDate,index)?.slice(5).replace('-','.')||'Day '+String(index+1).padStart(2,'0')),make('small','',day.type==='transfer'?'转场':day.type==='buffer'?'机动':day.stops.length+' 站'));tab.addEventListener('click',()=>{plan.activeDay=index;storePlan();renderTabs();renderDay();});const status=window.RoamTraffic.assess(plan,day),small=tab.querySelector('small');small.dataset.traffic=status.status;if(!['empty','transfer'].includes(status.status))small.textContent=status.label;target.append(tab);});
   }
   function renderDay(){
+    if(window.RoamWorkbench){window.RoamWorkbench.render(plan);return;}
     const renderedPlan=plan;
     window.RoamPlannerView.renderDay(plan,{
       moveStop,removeStop,moveToDay,removePersonal:removePersonalPlace,
@@ -111,6 +112,7 @@
     const F=window.RoamTraffic,states=plan.days.map(d=>F.assess(plan,d)),over=states.filter(a=>a.status==='over').length,tight=states.filter(a=>a.status==='tight').length;
     const remaining=states.filter(a=>!['empty','transfer'].includes(a.status)&&a.complete!==true).length;
     $('#traffic-verification-text').textContent=(trafficController?`正在核验各日交通（${trafficCompleted}/${plan.days.filter(d=>d.type!=='transfer').length}）… `:'')+(over?`${over} 天安排过满，请删减或改期。 `:'')+(tight?`${tight} 天时间偏紧。 `:'')+(remaining?`${remaining} 天仍有交通、酒店或停留信息待补。`:states.some(a=>a.status==='transfer')?'城际转场尚需单独核实。':over||tight?'':`各日已完成当前道路与时间预算核验，出行前仍需复核。`);
+    if(window.RoamWorkbench){window.RoamWorkbench.render(plan);renderWarnings();return;}
     const target=$('#day-traffic-assessment');if(target)window.RoamPlannerView.renderAssessment(plan,plan.days[plan.activeDay],target,{applyTrafficSuggestion,editPlan(){settings=plan.settings;showForm(true);}});
     renderTabs();renderWarnings();
   }
@@ -128,7 +130,9 @@
       const merged=window.RoamPersonalPlaces.normalizeBindings({...result.bindings,...plan.settings.poiBindings});
       const settingsWithBindings={...plan.settings,poiBindings:merged};
       if(result.traffic.fingerprint!==F.fingerprint(day,settingsWithBindings))return;
-      plan.settings.poiBindings=merged;day.traffic=result.traffic;settings=plan.settings;persistTraffic();
+      plan.settings.poiBindings=merged;day.traffic=result.traffic;settings=plan.settings;
+      window.RoamWorkbench?.setDayRoutes(plan,result.dayNumber,result.points,result.legs);
+      persistTraffic();
     },onProgress(done){if(matches()){trafficCompleted=done;updateTrafficUI();}}}).catch(error=>{
       if(matches()&&error.name!=='AbortError')failure='交通服务暂不可用，行程已保留；未核实部分不会当作可行。';
     }).finally(()=>{clearTimeout(timeout);if(plan===activePlan&&run===trafficRun&&document.body.dataset.plannerView==='result'){trafficController=null;persistTraffic();if(controller.signal.reason==='timeout')$('#traffic-verification-text').textContent='交通核验超时，已保留查到的路段；其余待确认，可重新查询。';else if(failure)$('#traffic-verification-text').textContent=failure;}});
@@ -153,7 +157,9 @@
     $('#ai-result-summary').hidden=!plan.ai;
     if(plan.ai){$('#ai-result-title').textContent=plan.ai.title;$('#ai-result-text').textContent=plan.ai.summary;$('#ai-result-source').textContent='DeepSeek · '+plan.ai.model+' · '+(plan.ai.edited?'已手动调整，说明来自原 AI 版本；当前结果重新经过规则检查。':'依据项目景点与用户选择生成；道路查询参与下方每日负荷核验，开放、预约与园内接驳仍需确认。');}
     const sources=[...new Set(plan.days.map(day=>day.source).filter(Boolean))],classicText=(plan.templates||[]).map(item=>item.reason).filter(Boolean).join(' ');const reason=$('#template-reason');reason.hidden=!classicText&&!sources.length;reason.textContent=classicText?`人工整理参考模板：${classicText} 资料仅支持景点与片区关系，不是实测交通线路。`:'按地区片区整理为参考草案。未核实交通的地点不显示精确路线时间。';
-    renderWarnings();renderTabs();renderDay();renderUnassigned();updateLinks();startTraffic();persistTrip();window.RoamJourneyUI?.render();
+    renderWarnings();renderUnassigned();updateLinks();
+    if(window.RoamWorkbench)window.RoamWorkbench.render(plan);else{renderTabs();renderDay();}
+    window.RoamJourneyUI?.render();startTraffic();persistTrip();
   }
   async function generate(override=null){
     if(generationController)return;stopTraffic();
@@ -244,7 +250,14 @@
     saveDraft(){settings=readForm();checkStorage(S.setDraft(settings));persistTrip();},
     rename(title){if(!activeTrip)return;activeTrip.title=title;if(plan)plan.title=title;persistTrip(true,'重命名');window.RoamJourneyUI?.render();},
     restore(index){if(!activeTrip)return;const t=window.RoamTripLibrary.restore(activeTrip.id,index);if(t)this.open(t.id);},
-    addPersonal:()=>window.RoamPlaceSearch.open('other')
+    addPersonal:()=>window.RoamPlaceSearch.open('other'),
+    setActiveDay(index){if(plan&&plan.days[index])plan.activeDay=index;},
+    actions:{
+      moveStop(index,step){moveStop(index,step);},
+      removeStop(id){removeStop(id);},
+      moveToDay(id,index){moveToDay(id,index);},
+      removePersonal(id){removePersonalPlace(id);}
+    }
   };
 
   D.items.forEach(place=>{const option=document.createElement('option');option.value=place.id;option.textContent=place.city+' · '+place.shortName;$('#plan-area').append(option);});
@@ -284,3 +297,4 @@
   window.RoamAIService.status().then(status=>{const box=$('#ai-service-status');box.hidden=status.configured;box.textContent=status.configured?'已读取 DeepSeek 配置。':status.unavailable?'AI 规划服务尚未启动。':'DeepSeek API Key 尚未配置，配置后即可生成路线。';if(!status.configured){const link=make('a','','查看申请与配置步骤 ↗');link.href='/data/DEEPSEEK.md';link.target='_blank';link.rel='noopener noreferrer';box.append(link);}});
   window.addEventListener('popstate',()=>location.reload());
 })();
+

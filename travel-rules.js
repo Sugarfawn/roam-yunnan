@@ -1,13 +1,13 @@
 (function(root){
   'use strict';
-  const areaIds=['meili','erhai','yulong','shangri','banna'];
+  const areaIds=()=>Object.keys(T().areas);
   const preferenceNames={nature:'自然风光',culture:'古镇人文',photo:'摄影',food:'美食'};
   const A=()=>root.RoamAttractions,T=()=>root.RoamTravelTemplates,uniq=x=>[...new Set(Array.isArray(x)?x:[])];
   const validClock=x=>typeof x==='string'&&/^([01]\d|2[0-3]):[0-5]\d$/.test(x)?x:'';
   function normalize(input={}){
-    const area=areaIds.includes(input.area)?input.area:'erhai';
-    const requested=uniq([area,...(Array.isArray(input.areas)?input.areas:[])].filter(id=>areaIds.includes(id)));
-    const areas=requested,allowed=new Set(areas.flatMap(id=>A().byRegion[id].map(s=>s.id)));
+    const validAreas=areaIds(),area=validAreas.includes(input.area)?input.area:'erhai';
+    const requested=uniq([area,...(Array.isArray(input.areas)?input.areas:[])].filter(id=>validAreas.includes(id)));
+    const areas=requested,allowed=new Set(areas.flatMap(id=>(A().byRegion[id]||[]).map(s=>s.id)));
     const selected=uniq(input.selected).filter(id=>allowed.has(id));
     const originOptions=T().areas[area].origins;
     const startLocation=originOptions.some(([id])=>id===input.startLocation)?input.startLocation:T().defaultStart[area];
@@ -40,7 +40,7 @@
     for(const day of slots){
       const clusters=clustersOf(day),required=selected.filter(spot=>clusters.includes(spot.cluster)).map(spot=>spot.id);
       const templateIds=uniq(day.ids||[]).filter(id=>{const spot=A().get(id);return spot&&spot.area===area&&clusters.includes(spot.cluster);});
-      const catalogue=A().byRegion[area];
+      const catalogue=A().byRegion[area]||[];
       const candidates=catalogue.filter(spot=>clusters.includes(spot.cluster)&&!spot.kind.includes('hike')&&!spot.kind.includes('highland')).sort((a,b)=>settings.preferences.reduce((n,key)=>n+(b.kind.includes(key)?1:0)-(a.kind.includes(key)?1:0),0)||catalogue.indexOf(a)-catalogue.indexOf(b)).map(spot=>spot.id);
       const limit=settings.pace==='slow'?2:settings.pace==='standard'?3:4,ids=uniq([...required,...templateIds,...candidates]);
       day.stops=ids.slice(0,Math.max(limit,required.length));for(const id of required)if(!day.stops.includes(id))day.stops.push(id);

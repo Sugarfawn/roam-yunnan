@@ -9,7 +9,8 @@
         {id:'meili-glacier-day',zone:'德钦 · 冰川山地',cluster:'meili-glacier',clusters:['meili-glacier'],theme:'高山步行 · 独立留日',ids:['meili-mingyong'],periods:['完整一天 · 按当地管理要求'],why:'冰川山地与高海拔步行需要单独预留体力、天气和向导安排。',mobility:'不提供徒步路线或车程；需先核实当地管理、向导和道路条件。',buffer:'高海拔与步行强度需现场评估。'}
       ]},
     erhai:{label:'大理 · 苍山洱海',origins:[['dali-old-city','大理古城片区住宿'],['dali-xizhou','喜洲片区住宿'],['dali-shuanglang','双廊片区住宿'],['dali-erhai-park','下关片区住宿']],
-      classic:[{pace:'slow',transport:'drive',days:3,sequence:['dali-3d-oldtown-west','dali-3d-xizhou','dali-3d-west-shore']},{pace:'slow',transport:'undecided',days:3,sequence:['dali-3d-oldtown-west','dali-3d-xizhou','dali-3d-west-shore']},{pace:'standard',transport:'drive',days:3,sequence:['dali-3d-oldtown-west','dali-3d-xizhou','dali-3d-west-shore']}],
+      classic:[{pace:'slow',transport:'drive',days:3,sequence:['dali-3d-oldtown-west','dali-3d-xizhou','dali-3d-west-shore']},{pace:'slow',transport:'undecided',days:3,sequence:['dali-3d-oldtown-west','dali-3d-xizhou','dali-3d-west-shore']},{pace:'standard',transport:'drive',days:3,sequence:['dali-3d-oldtown-west','dali-3d-xizhou','dali-3d-west-shore']},
+        ...['slow','standard','full'].flatMap(pace=>['drive','public','undecided'].map(transport=>({pace,transport,days:4,sequence:['dali-3d-oldtown-west','dali-3d-west-shore','dali-3d-xizhou','dali-3d-shuanglang']})))],
       days:[
         {id:'dali-3d-oldtown-west',zone:'古城片区 · 城区西侧',cluster:'dali-west',clusters:['dali-west'],theme:'古城文化 · 历史建筑',ids:['dali-old-city','dali-three-pagodas'],periods:['上午','下午'],meal:'在古城片区安排午餐与休息，不预设餐厅。',why:'大理古城与其西北侧的崇圣寺三塔可按城区西侧关联景点分段游览。官方景点资料称三塔位于古城西北约 1.5 公里。',mobility:'接驳依住宿点、交通方式与当天路况变化；未接入道路 API，不提供车程。',buffer:'保留午餐和片区内机动余量。',source:'https://www.dalitravel.cn/content/read/233.html'},
         {id:'dali-3d-xizhou',zone:'喜洲片区 · 洱海北岸',cluster:'dali-xizhou',clusters:['dali-xizhou'],theme:'白族古镇 · 院落与街巷',ids:['dali-xizhou','dali-yan-courtyard'],periods:['上午','下午'],meal:'在喜洲片区留出午餐与休息。',why:'喜洲古镇与严家大院同处喜洲片区，以街巷为主线慢游。',mobility:'古城与喜洲往返接驳需按当天交通核实；该日不再叠加其他湖岸片区。',buffer:'院落开放情况出发前确认，预留村镇步行时间。',source:'https://www.dalitravel.cn/'},
@@ -40,6 +41,7 @@
   };
   const classic=[
     {id:'dali-three-day-relaxed',area:'erhai',days:3,pace:'slow',transports:['drive','undecided'],region:'erhai',sequence:['dali-3d-oldtown-west','dali-3d-xizhou','dali-3d-west-shore'],anchor:'dali-old-city',reason:'大理三日舒缓参考模板：古城及西侧、喜洲、洱海西岸分日。不是实时车路线，尽量减少跨湖岸折返。'},
+    ...['slow','standard','full'].map(pace=>({id:'dali-four-day-'+pace,area:'erhai',days:4,pace,transports:['drive','public','undecided'],region:'erhai',sequence:['dali-3d-oldtown-west','dali-3d-west-shore','dali-3d-xizhou','dali-3d-shuanglang'],anchor:'dali-old-city',reason:'大理四日按古城、海西、喜洲、双廊分日，减少跨岸折返并给洱海停留留出空间。'})),
     {id:'lijiang-two-day-standard-public',area:'yulong',days:2,pace:'standard',transports:['public','undecided'],region:'yulong',sequence:['lijiang-2d-city','lijiang-2d-baisha'],anchor:'lijiang-old-city',reason:'丽江两日公共交通参考模板：城区环线一天、白沙人文片区一天。束河可替换白沙日；玉龙景区建议替换其中一日并单独预留。'}
   ];
   areas.meili.days.push({id:'meili-town-day',zone:'德钦县城',cluster:'meili-town',clusters:['meili-town'],theme:'县城生活 · 休息补给',ids:['meili-deqin-town'],periods:['弹性 / 抵离缓冲'],meal:'按县城商户实际营业安排用餐休息。',why:'县城停留作为独立轻量片区，不与山地徒步拼成一日。',mobility:'到县城的实际道路接驳待核实。'});
@@ -47,5 +49,11 @@
   if(foothill)Object.assign(foothill,{cluster:'lijiang-yuhu',clusters:['lijiang-yuhu'],ids:['lijiang-yuhu'],why:'玉湖村单独作为山麓村落主题，未核实交通时不与玉水寨或雪山景区拼接。'});
   areas.yulong.days.push({id:'lijiang-yushui-day',zone:'玉龙山麓 · 玉水寨',cluster:'lijiang-south',clusters:['lijiang-south'],theme:'山麓水景 · 文化游览',ids:['lijiang-yushui'],periods:['上午 / 下午'],meal:'根据园区当日开放安排。',why:'玉水寨作为独立山麓点位，不假设与玉湖村存在已核实接驳。',mobility:'园区入口、接驳与开放安排需官方核实。'});
   const defaultStart={meili:'meili-feilai',erhai:'dali-old-city',yulong:'lijiang-old-city',shangri:'shangri-oldtown',banna:'banna-botanical'};
+  for(const place of root.RoamDestinations.items){
+    if(areas[place.id])continue;
+    const arrival=place.id+'-arrival';
+    areas[place.id]={label:place.city+' · 自由规划',origins:[[arrival,place.city+'抵达片区']],classic:[],days:[]};
+    defaultStart[place.id]=arrival;
+  }
   root.RoamTravelTemplates=Object.freeze({areas:Object.freeze(areas),classic:Object.freeze(classic.map(Object.freeze)),defaultStart:Object.freeze(defaultStart),paceBudget:Object.freeze({slow:480,standard:540,full:540}),buffer:Object.freeze({meal:60,rest:{slow:45,standard:30,full:20},mobility:60}),preferenceNames:Object.freeze({nature:'自然风光',culture:'古镇人文',photo:'摄影',food:'美食'})});
 })(window);

@@ -74,14 +74,29 @@
     banna: {region:'西双版纳 · 云南',overviewTitle:'从一片叶子，认识云南的南端。',overviewText:'在开放园区认识热带植物，在村寨和江岸感受日常。勐仑、橄榄坝、勐远与景洪属于不同片区，选择一两种感兴趣的体验，再按片区留出接驳与休息。',catalogueTitle:'挑几处，放进你的西双版纳。',catalogueIntro:'植物、村寨、江岸与雨林体验，选你真正想停留的地方。',photoPosition:'50% 55%',riskTitle:'雨林体验，以开放范围为边界。',riskNote:'园区开放、预约和户外活动受天气与现场管理影响。雨季及山地活动需核实管理要求，只进入允许游览的区域；顶部摄影不代表具体园区或拍摄入口。'}
   };
   const plannerPhotoPositions={meili:'50% 12%',erhai:'50% 34%',yulong:'50% 5%',shangri:'50% 60%',banna:'50% 50%'};
-  // A future destination may supply its own photo record without extending the five-slide homepage.
-  const items = Object.entries(places).map(([id,place],index)=>{
+  // Regions without editorial content remain valid planning entry points. They deliberately have
+  // no borrowed photo or invented catalogue; users start with an empty trip and real POIs.
+  const regionalEntries=[
+    ['kunming','昆明','昆明市',530100,'KUNMING'],['qujing','曲靖','曲靖市',530300,'QUJING'],
+    ['yuxi','玉溪','玉溪市',530400,'YUXI'],['baoshan','保山','保山市',530500,'BAOSHAN'],
+    ['zhaotong','昭通','昭通市',530600,'ZHAOTONG'],['puer','普洱','普洱市',530800,"PU'ER"],
+    ['lincang','临沧','临沧市',530900,'LINCANG'],['chuxiong','楚雄','楚雄彝族自治州',532300,'CHUXIONG'],
+    ['honghe','红河','红河哈尼族彝族自治州',532500,'HONGHE'],['wenshan','文山','文山壮族苗族自治州',532600,'WENSHAN'],
+    ['dehong','德宏','德宏傣族景颇族自治州',533100,'DEHONG'],['nujiang','怒江','怒江傈僳族自治州',533300,'NUJIANG']
+  ];
+  const featuredItems = Object.entries(places).map(([id,place])=>{
     const photo=place.photo||window.HomePhotos.find(item=>item.id===id);
     if(!photo)throw Error('Destination photo record missing: '+id);
-    return Object.freeze({...photo,...place,id,source:photo.source,locationSource:place.source,number:String(index+1).padStart(2,'0'),
+    return Object.freeze({...photo,...place,id,source:photo.source,locationSource:place.source,hasPhoto:true,hasCatalogue:true,
       journal:Object.freeze({...(place.journal||journals[id]||{region:place.region,overviewTitle:place.lead,catalogueTitle:'挑选想去的地方。',catalogueIntro:place.introduction,photoPosition:photo.position||'50% 50%'}),plannerPhotoPosition:place.journal?.plannerPhotoPosition||plannerPhotoPositions[id]||photo.position||'50% 50%'}),
       mapUrl:'/explore/yunnan/?place='+id,detailUrl:'/destinations/detail.html?id='+id});
   });
+  const regionalItems=regionalEntries.map(([id,city,region,prefectureAdcode,english])=>Object.freeze({
+    id,city,shortName:city,region,county:region,prefectureAdcode,english,category:'自由规划',hasPhoto:false,hasCatalogue:false,
+    introduction:'这里已经开放为旅行目的地。专属图片和景点内容稍后补充，现在可以先建立空白行程，再通过真实地图搜索添加想去的地点。',
+    mapUrl:'/explore/yunnan/?place='+id,detailUrl:'/explore/yunnan/?place='+id
+  }));
+  const items=[...featuredItems,...regionalItems];
   window.RoamDestinations = Object.freeze({
     items: Object.freeze(items),
     get(id) { return items.find(item => item.id === id) || null; }

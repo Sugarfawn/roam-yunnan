@@ -103,7 +103,7 @@
     $('#cover-location').textContent = `${slide.city} · ${slide.place}`;
     $('#cover-english').textContent = slide.english;
     $('#cover-author').textContent = slide.author;
-    $('#cover-index').textContent = String(active + 1).padStart(2, '0');
+    $('#cover-current-label').textContent = slide.place;
     cards.querySelectorAll('.home-card').forEach((card, cardIndex) => {
       const selected = cardIndex === active;
       card.classList.toggle('is-selected', selected);
@@ -137,8 +137,8 @@
   cards.innerHTML = `<div class="home-card-track">${slides.map((slide, index) => `
     <button class="home-card ${index === active ? 'is-selected' : ''}" type="button" data-slide="${index}" aria-label="选择${slide.city}：${slide.place}" aria-pressed="${index === active}">
       <img src="${slide.card}" alt="${slide.city}实景摄影：${slide.place}" loading="${index < 4 ? 'eager' : 'lazy'}" decoding="async" style="object-position:${slide.position}">
-      <span class="card-number">${String(index + 1).padStart(2, '0')} / ${slide.city}</span><span class="card-arrow" aria-hidden="true">↗</span>
-      <span class="card-copy"><small>${String(index + 1).padStart(2, '0')} / ${slide.city}</small><strong>${slide.place}</strong><i>${slide.english}</i></span>
+      <span class="card-arrow" aria-hidden="true">↗</span>
+      <span class="card-copy"><small>${slide.city}</small><strong>${slide.place}</strong><i>${slide.english}</i></span>
     </button>`).join('')}</div>`;
 
   cards.addEventListener('click', event => {

@@ -4,6 +4,7 @@ body.explore-page.cinematic-atlas{--atlas-gutter:clamp(24px,4.2vw,80px);--ink:#f
 .atlas-background{position:fixed;inset:0;z-index:-2;overflow:hidden;background:#132924;pointer-events:none}
 .atlas-background img{display:block;width:100%;height:100%;object-fit:cover;transition:opacity .65s ease,transform 1.3s ease;opacity:1}
 .atlas-background.is-changing img{opacity:.7;transform:scale(1.008)}
+.atlas-background.is-placeholder img{opacity:0}
 .atlas-background:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#091d1b70,transparent 48%,#0d211a18 58%,#0a1d1882),linear-gradient(180deg,#081d1d4d,transparent 32%,transparent 70%,#0a1d1a91)}
 .cinematic-atlas .route-header{position:relative;z-index:4;border-bottom:1px solid #f2ead22b;height:clamp(68px,9dvh,92px)}
 .cinematic-atlas .route-brand{color:#fff7e6}
@@ -35,10 +36,10 @@ body.explore-page.cinematic-atlas{--atlas-gutter:clamp(24px,4.2vw,80px);--ink:#f
 .cinematic-atlas .prefecture-label{fill:#e3e2c9b8;stroke:none;font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:16px;font-weight:400;letter-spacing:1px;pointer-events:none;paint-order:stroke fill}
 .cinematic-atlas .prefecture-label.is-selected{fill:#fff2cc}
 .cinematic-atlas .marker-border{fill:#183a2c;stroke:#e3d8b6b0;stroke-width:1.25}
-.cinematic-atlas .marker-number{fill:#efe7cc;font-size:13px}
+.cinematic-atlas .marker-dot{fill:#efe7cc;pointer-events:none}
 .cinematic-atlas .map-marker:hover .marker-border,.cinematic-atlas .map-marker:focus .marker-border{stroke:#fff2cc;stroke-width:2}
 .cinematic-atlas .map-marker.is-active .marker-border{fill:#bd9c67;stroke:#f9e5b9;stroke-width:1.7}
-.cinematic-atlas .map-marker.is-active .marker-number{fill:#17382b}
+.cinematic-atlas .map-marker.is-active .marker-dot{fill:#17382b}
 .cinematic-atlas .marker-breath{stroke:#ebcd92}
 .cinematic-atlas .marker-connector{stroke:#edddb47a;opacity:0;transition:opacity .2s;pointer-events:none}
 .cinematic-atlas .map-marker:hover .marker-connector,.cinematic-atlas .map-marker:focus .marker-connector,.cinematic-atlas .map-marker.is-active .marker-connector{opacity:1}

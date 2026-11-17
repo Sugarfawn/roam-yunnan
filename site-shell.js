@@ -19,7 +19,7 @@
   dialog.setAttribute('aria-labelledby', 'sources-title');
   dialog.innerHTML = `<button class="close-dialog" aria-label="关闭来源信息" type="button">×</button><span class="eyebrow">THROUGH THEIR LENS</span><h2 id="sources-title">风景背后的镜头</h2><p>继续沿用你选定的五张实景摄影作品。</p><div class="source-items"></div><div class="source-map-note"><strong>地图与地点</strong><p>云南省界及州、市行政区边界来自阿里云 DataV GeoJSON，均存入本地。省域探索标记采用区域参考位置，不代表景区入口或照片拍摄点。</p><a href="/data/SOURCES.md" target="_blank" rel="noopener">查看地图数据与地点来源 ↗</a></div>`;
   document.body.appendChild(dialog);
-  for (const place of window.RoamDestinations.items) {
+  for (const place of window.RoamDestinations.items.filter(item => item.hasPhoto)) {
     const row = document.createElement('div');
     row.className = 'source-row';
     const image = document.createElement('img'); image.src = '/' + place.card; image.alt = ''; image.loading = 'lazy';

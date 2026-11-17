@@ -16,9 +16,12 @@
     $('#explore-place').href='/explore/yunnan/planner/?place='+selected.id+'&view=edit';
   }
   function updatePanel(place){
-    const image=$('#selected-image');image.src='/'+place.background;image.alt='';image.style.objectPosition=place.position||'50% 50%';
-    $('#selected-category').textContent=place.category;$('#selected-author').textContent=place.author;$('#selected-source').href=place.source;
-    $('#selected-region').textContent=place.region;$('#selected-number').textContent=place.number;$('#selected-total').textContent=String(items.length).padStart(2,'0');
+    const image=$('#selected-image'),backdrop=$('.atlas-background'),credit=$('#selected-source');
+    backdrop.classList.toggle('is-placeholder',!place.hasPhoto);
+    if(place.hasPhoto){image.src='/'+place.background;image.alt='';image.style.objectPosition=place.position||'50% 50%';credit.hidden=false;$('#selected-author').textContent=place.author;credit.href=place.source;}
+    else credit.hidden=true;
+    $('#selected-category').textContent=place.category;
+    $('#selected-region').textContent=place.region;
     $('#selected-name').textContent=place.shortName;$('#selected-english').textContent=place.english;$('#selected-introduction').textContent=place.introduction;
     $('#selection-status').textContent='当前探索：'+place.shortName+'，'+place.region;
     announce((regionNames.get(place.prefectureAdcode)||place.region)+' · 点击地图标记切换风景');
@@ -27,13 +30,13 @@
     const place=get(id);if(!place)return;selected=place;const version=++renderVersion;syncSelection();
     if(updateUrl){const url=new URL(location.href);url.searchParams.set('place',place.id);history.replaceState(null,'',url);}
     const backdrop=$('.atlas-background'),feature=$('#destination-feature');backdrop.classList.add('is-changing');feature.classList.add('is-changing');
-    const preload=new Image();preload.src='/'+place.background;try{await preload.decode();}catch{announce('摄影资源暂时未能加载，请刷新重试。');}
+    if(place.hasPhoto){const preload=new Image();preload.src='/'+place.background;try{await preload.decode();}catch{announce('摄影资源暂时未能加载，请刷新重试。');}}
     if(!reduce.matches)await new Promise(resolve=>setTimeout(resolve,120));if(version!==renderVersion)return;
     updatePanel(place);backdrop.classList.remove('is-changing');feature.classList.remove('is-changing');
   }
   function chooseRegion(code){
     const places=regionPlaces(code),name=regionNames.get(Number(code))||'此地区';
-    if(!places.length){announce(name+' · 暂未收录旅行地点，当前风景继续保留。');$('#selection-status').textContent=name+'，暂未收录旅行地点。';return;}
+    if(!places.length){announce(name+' · 规划入口准备中。');return;}
     const place=places.includes(selected)?selected:places[0];select(place.id);announce(name+' · '+places.length+' 处风景可探索');
   }
   function renderMap(province,regions){
@@ -49,10 +52,10 @@
       const labels=element('g',{class:'map-generated prefecture-labels','aria-hidden':'true'});
       for(const feature of regions.features){
         const code=Number(feature.properties.adcode),name=feature.properties.name,setting=regionSettings.get(code)||{shortName:name},places=regionPlaces(code);regionNames.set(code,name);
-        const region=element('path',{class:'atlas-region'+(places.length?' has-destinations':''),'data-adcode':code,d:geometry.path(feature.geometry),'fill-rule':'evenodd',role:'button',tabindex:'0','aria-label':name+(places.length?'，'+places.length+'处旅行目的地':'，暂未收录旅行地点'),'aria-pressed':'false'});
+        const region=element('path',{class:'atlas-region has-destinations','data-adcode':code,d:geometry.path(feature.geometry),'fill-rule':'evenodd',role:'button',tabindex:'0','aria-label':'选择'+name+'作为旅行目的地','aria-pressed':'false'});
         region.append(element('title',{},name));region.addEventListener('click',()=>chooseRegion(code));
         region.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();chooseRegion(code);}});
-        const hover=()=>announce(name+(places.length?' · '+places.length+' 处风景可探索':' · 暂未收录旅行地点'));
+        const hover=()=>announce(name+' · 点击选择并继续规划');
         region.addEventListener('mouseenter',hover);region.addEventListener('focus',hover);layer.append(region);
         const coordinate=feature.properties.centroid||feature.properties.center;
         if(Array.isArray(coordinate)){
@@ -65,10 +68,10 @@
     const outline=element('g',{class:'map-generated province-outline-layer','aria-hidden':'true'});
     geometry.features.forEach(feature=>outline.append(element('path',{class:'province-outline',d:geometry.path(feature.geometry),'fill-rule':'evenodd'})));svg.append(outline);
     const markers=element('g',{class:'map-generated map-markers'});
-    for(const place of items){
+    for(const place of items.filter(item=>Array.isArray(item.coordinates))){
       const [x,y]=geometry.project(place.coordinates),[dx,dy]=place.labelOffset||[40,0];
-      const marker=element('g',{class:'map-marker',role:'button',tabindex:'0','data-place':place.id,'data-lng':place.coordinates[0],'data-lat':place.coordinates[1],transform:`translate(${x.toFixed(3)},${y.toFixed(3)})`,'aria-label':place.number+' '+place.shortName+'，'+place.region,'aria-pressed':'false'});
-      marker.append(element('title',{},place.shortName+' · '+place.region),element('circle',{r:30,class:'marker-target'}),element('circle',{r:28,class:'marker-breath'}),element('circle',{r:17,class:'marker-border'}),element('text',{y:.4,class:'marker-number'},place.number));
+      const marker=element('g',{class:'map-marker',role:'button',tabindex:'0','data-place':place.id,'data-lng':place.coordinates[0],'data-lat':place.coordinates[1],transform:`translate(${x.toFixed(3)},${y.toFixed(3)})`,'aria-label':place.shortName+'，'+place.region,'aria-pressed':'false'});
+      marker.append(element('title',{},place.shortName+' · '+place.region),element('circle',{r:30,class:'marker-target'}),element('circle',{r:28,class:'marker-breath'}),element('circle',{r:17,class:'marker-border'}),element('circle',{r:4,class:'marker-dot'}));
       const textX=dx<0?dx+labelWidth(place.shortName):dx;
       const tooltip=element('g',{class:'marker-tooltip',transform:`translate(${dx},${dy-15})`});tooltip.append(element('rect',{x:-9,y:-8,width:labelWidth(place.shortName),height:29,rx:3}),element('text',{x:3,y:11},place.shortName));
       const connector=element('path',{class:'marker-connector',d:`M${dx<0?-19:19},0 L${dx<0?-30:30},${dy} L${textX},${dy}`});marker.insertBefore(connector,marker.firstChild);marker.append(tooltip);

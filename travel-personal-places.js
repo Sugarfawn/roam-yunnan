@@ -2,7 +2,7 @@
 (function(root){
   'use strict';
   const clean=(s,max=160)=>typeof s==='string'?s.trim().slice(0,max):'';
-  const regionFromAdcode=code=>code.startsWith('5329')?'erhai':code.startsWith('5307')?'yulong':code.startsWith('5328')?'banna':code.startsWith('533422')?'meili':code.startsWith('5334')?'shangri':null;
+  const regionFromAdcode=code=>code.startsWith('5329')?'erhai':code.startsWith('5307')?'yulong':code.startsWith('5328')?'banna':code.startsWith('533422')?'meili':code.startsWith('5334')?'shangri':({5301:'kunming',5303:'qujing',5304:'yuxi',5305:'baoshan',5306:'zhaotong',5308:'puer',5309:'lincang',5323:'chuxiong',5325:'honghe',5326:'wenshan',5331:'dehong',5333:'nujiang'})[code.slice(0,4)]||null;
   function normalize(values){
     if(!Array.isArray(values))return[];
     const result=[],seen=new Set();

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#172c28">
@@ -12,11 +12,13 @@
   <link rel="stylesheet" href="/planner-banner.css?v=banner-1">
   <link rel="stylesheet" href="/traffic-feasibility.css?v=traffic-1">
   <link rel="stylesheet" href="/planner-glass.css?v=journeys-1">
+  <link rel="stylesheet" href="/workbench.css?v=canvas-1">
   <script src="/trip-model.js?v=journeys-1" defer></script>
   <script src="/trip-library.js?v=journeys-1" defer></script>
   <script src="/traffic-feasibility.js?v=traffic-1" defer></script>
   <script src="/traffic-service.js?v=traffic-1" defer></script>
   <script src="/ai-plan.js?v=flow-1" defer></script>
+  <script src="/ai-adjust.js?v=desktop-1" defer></script>
   <script src="/ai-service.js?v=ai-1" defer></script>
   <script src="/journey-routing.js?v=flow-1" defer></script>
   <script src="/planner-view.js?v=flow-1" defer></script>
@@ -50,14 +52,76 @@
       </div>
     </section>
     <section id="result-section" hidden aria-labelledby="result-title">
-      <div class="result-heading"><div><p class="eyebrow">YOUR JOURNEY, AT YOUR OWN PACE</p><h1 id="result-title">你的云南漫游计划</h1><p id="result-subtitle"></p></div><div class="result-actions"><button type="button" id="edit-plan">修改计划</button><button type="button" id="regenerate-plan">重新生成</button><button type="button" id="save-plan" class="gold-button">保存我的行程 <span>↗</span></button></div></div>
-      <div class="local-plan-status"><span id="save-status">仅保存在当前浏览器</span><button type="button" data-open-place-search="restaurant" id="result-add-place">添加酒店 / 餐厅 ↗</button></div>
-      <section id="ai-result-summary" class="ai-result-summary" hidden aria-label="AI规划说明"><strong id="ai-result-title"></strong><p id="ai-result-text"></p><small id="ai-result-source"></small></section>
-      <p class="form-small-note" id="result-photo-note">有对应实景照片的景点显示独立配图；其余保留文字介绍。开放与交通请出发前核实。</p>
-      <p class="template-reason" id="template-reason" hidden></p>
-      <div id="traffic-verification" class="traffic-verification" role="status" aria-live="polite"><p id="traffic-verification-text">正在核验各日交通与时间预算…</p><button type="button" id="traffic-recheck">重新核验全部日期</button><button type="button" id="traffic-edit">调整天数 / 地点</button></div>
-      <div id="plan-warnings" class="plan-warnings" aria-label="行程提醒"></div>
-      <div class="travel-result-layout"><section class="daily-itinerary" aria-label="每日路线"><div id="result-days" class="result-day-tabs" role="tablist" aria-label="选择行程日期"></div><div id="day-itinerary" role="tabpanel" tabindex="0"></div><div id="unassigned-spots" class="unassigned-spots" hidden></div></section><aside class="route-overview" aria-labelledby="overview-heading"><div class="overview-heading"><p class="eyebrow">A SENSE OF PLACE</p><h2 id="overview-heading">这一程，在哪里</h2><span id="overview-day"></span></div><div id="travel-map" class="travel-map" role="group" aria-label="地区参考地图"></div><p class="route-preview-disclaimer">景点顺序示意，并非道路导航路线</p><p class="coordinate-note" id="coordinate-note"></p><div id="route-order" class="route-order"></div><a id="result-return-map" class="overview-map-link" href="/explore/yunnan/">回到云南探索地图 <span>↗</span></a></aside></div>
+      <div class="wb-top">
+        <div class="wb-heading">
+          <p class="eyebrow">YOUR JOURNEY, AT YOUR OWN PACE</p>
+          <div class="wb-title-line"><h1 id="result-title">你的云南漫游计划</h1><span class="wb-date" id="wb-date">日期待定</span><span class="wb-duration" id="wb-duration">3天</span></div>
+          <p id="result-subtitle"></p>
+        </div>
+        <div class="wb-actions">
+          <span id="save-status" class="wb-save-status">仅保存在当前浏览器</span>
+          <button type="button" id="wb-undo" class="wb-action" disabled>撤销</button>
+          <button type="button" id="wb-export" class="wb-action">导出</button>
+          <button type="button" id="edit-plan" class="wb-action">调整地点</button>
+          <button type="button" id="regenerate-plan" class="wb-action">重新安排</button>
+          <button type="button" id="save-plan" class="gold-button wb-save">保存行程 <span>↗</span></button>
+        </div>
+      </div>
+
+      <div class="wb-statusline">
+        <div id="traffic-verification" class="traffic-verification" role="status" aria-live="polite"><p id="traffic-verification-text">正在核验各日交通与时间预算…</p><button type="button" id="traffic-recheck">重新核验全部日期</button><button type="button" id="traffic-edit">调整天数 / 地点</button></div>
+        <a id="result-return-map" href="/explore/yunnan/">返回云南地图 <span>↗</span></a>
+      </div>
+
+      <div class="wb-shell" id="workbench-shell">
+        <aside class="wb-assistant" id="assistant-panel" aria-label="AI 助手">
+          <header class="wb-panel-bar"><span>AI ASSISTANT</span><button type="button" id="toggle-assistant" class="wb-collapse" aria-expanded="true">收起</button></header>
+          <div class="wb-assistant-content">
+            <div class="wb-ai-orb" aria-hidden="true"><span></span></div>
+            <p class="eyebrow">YOUR TRAVEL COMPANION</p>
+            <h2>AI 助手</h2>
+            <p class="wb-ai-copy">聊天与修改建议将在下一轮接入。这一版先不显示模拟回复。</p>
+            <div class="wb-ai-contract">以后 AI 提出的修改会先展示修改方案；你确认后才会写入行程，并保留修改前的版本。</div>
+            <div class="wb-ai-summary" id="wb-ai-summary"></div>
+            <div class="wb-warnings" id="wb-warnings"></div>
+            <div class="wb-pool" id="unassigned-spots" hidden></div>
+            <div class="wb-ai-foot"><button type="button" id="wb-ai-adjust" class="wb-quiet" disabled>让 AI 调整 · 下一轮接入</button></div>
+          </div>
+        </aside>
+
+        <main class="wb-canvas-panel" aria-label="多日行程画布">
+          <header class="wb-canvas-bar">
+            <div><p class="eyebrow">DAY CANVAS</p><h2>每天，一条线。</h2><p>左右滚动查看全部日期；点一天，地图切到当天。</p></div>
+            <div class="wb-canvas-tools"><span id="wb-day-count">3 天 · 0 个地点</span><button type="button" id="wb-add-place" class="wb-quiet">＋ 添加地点</button><button type="button" id="wb-add-personal" class="wb-quiet">酒店 / 餐厅</button></div>
+          </header>
+          <div class="wb-day-canvas" id="day-canvas"></div>
+          <footer class="wb-canvas-foot"><span>点景点卡片可在地图定位；点地图标记可回到对应卡片。</span><span id="wb-canvas-hint">左右滚动 →</span></footer>
+        </main>
+
+        <aside class="wb-map-panel" id="map-panel" aria-label="路线地图">
+          <header class="wb-panel-bar"><span>ROUTE MAP</span><button type="button" id="toggle-map" class="wb-collapse" aria-expanded="true">收起</button></header>
+          <div class="wb-map-toolbar">
+            <div class="wb-map-mode" role="group" aria-label="地图日期范围"><button type="button" id="map-mode-all" class="is-active">全部日期</button><button type="button" id="map-mode-single">单日</button></div>
+            <span id="wb-map-day-label">全部日期</span>
+          </div>
+          <div id="workbench-map" class="wb-map" role="region" aria-label="多日路线地图"></div>
+          <div class="wb-map-legend" id="wb-map-legend"></div>
+          <div class="wb-map-summary" id="wb-map-summary"></div>
+          <p class="wb-map-note" id="wb-coordinate-note">地图点位来自高德 POI 或地区参考；未查到的路段标为待查询，不画直线冒充道路。</p>
+        </aside>
+      </div>
+
+      <!-- Legacy result hooks: hidden, but kept for the existing save/history/traffic modules. -->
+      <div class="wb-legacy" hidden aria-hidden="true">
+        <div class="local-plan-status"><span>仅保存在当前浏览器</span></div>
+        <div id="result-days" class="result-day-tabs" role="tablist"></div>
+        <div id="day-itinerary" role="tabpanel" tabindex="0"></div>
+        <div class="travel-result-layout"><section class="daily-itinerary"></section><aside class="route-overview"><div class="overview-heading"><h2 id="overview-heading">这一程，在哪里</h2><span id="overview-day"></span></div><div id="travel-map" class="travel-map"></div><p class="route-preview-disclaimer"></p><p class="coordinate-note" id="coordinate-note"></p><div id="route-order" class="route-order"></div></aside></div>
+        <section id="ai-result-summary" class="ai-result-summary" hidden aria-label="AI规划说明"><strong id="ai-result-title"></strong><p id="ai-result-text"></p><small id="ai-result-source"></small></section>
+        <p class="form-small-note" id="result-photo-note">有对应实景照片的景点显示独立配图；其余保留文字介绍。开放与交通请出发前核实。</p>
+        <p class="template-reason" id="template-reason" hidden></p>
+        <div id="plan-warnings" class="plan-warnings" aria-label="行程提醒"></div>
+      </div>
     </section>
   </main>
   <dialog id="regenerate-dialog" class="sources-dialog regenerate-dialog" aria-labelledby="regenerate-title"><h2 id="regenerate-title">按当前偏好重新安排？</h2><p>将重新调用 DeepSeek。通过校验的新结果会替换手动调整；生成失败时保留当前行程。</p><div class="dialog-actions"><button type="button" id="cancel-regenerate">保留当前行程</button><button type="button" id="confirm-regenerate" class="gold-button">重新生成</button></div></dialog>
@@ -66,5 +130,7 @@
   <script src="/planner-catalogue-search.js?v=complete-1" defer></script>
   <script src="/place-search.js?v=wizard-2" defer></script>
   <script src="/planner-experience.js?v=journeys-1" defer></script>
+  <script src="/workbench-map.js?v=canvas-1" defer></script><script src="/workbench.js?v=canvas-1" defer></script>
 </body>
 </html>
+

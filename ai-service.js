@@ -13,5 +13,13 @@
     const checked=root.RoamAIPlan.apply(root.RoamRules.generate(settings),{title:plan.ai.title,summary:plan.ai.summary,days:plan.days.map((day,i)=>({dayNumber:i+1,theme:plan.ai.dayNotes?.[i]?.theme,reason:plan.ai.dayNotes?.[i]?.reason,stops:day.stops}))},{model:plan.ai.model,generatedAt:plan.ai.generatedAt});
     checked.ai.correctionAttempts=Number(plan.ai.correctionAttempts)||0;return checked;
   }
-  root.RoamAIService=Object.freeze({status,generate});
+  async function adjust(plan,message,signal){
+    let response;try{response=await fetch(base+'/api/ai/adjust',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan,message}),signal});}catch(error){if(error.name==='AbortError')throw error;throw Error('行程助手暂时无法连接，当前路线没有改变。');}
+    let body;try{body=await response.json();}catch{throw Error('行程助手响应异常，当前路线没有改变。');}
+    if(!response.ok)throw Error(typeof body.error==='string'?body.error:'暂时无法生成安全的调整建议。');
+    const checked=root.RoamAIAdjust.apply(plan,{reply:body.reply,summary:body.summary,actions:body.actions});
+    if(JSON.stringify(checked.plan.days.map(d=>d.stops))!==JSON.stringify(body.plan?.days?.map(d=>d.stops)))throw Error('调整建议未通过本地复核。');
+    return checked;
+  }
+  root.RoamAIService=Object.freeze({status,generate,adjust});
 })(window);
