@@ -1,0 +1,40 @@
+/* Destination photography above a translucent paper workspace; editor presentation only. */
+body.planner-workspace{position:relative;isolation:isolate}
+body.planner-workspace[data-planner-view=edit]::before{content:"";position:fixed;inset:-12px;z-index:-1;pointer-events:none;background-image:linear-gradient(180deg,#f5f3ed70 18%,#f5f3edb5 72%,#f5f3eddb),var(--planner-page-photo);background-position:center top;background-size:cover;filter:blur(5px)}
+.planner-workspace .planner-banner{position:relative;height:clamp(240px,29dvh,300px);min-height:0;width:100%;overflow:hidden;isolation:isolate;background:#29483e;color:#fff7e8}
+.planner-workspace .planner-banner-photo{position:absolute;inset:0;width:100%;height:100%;margin:0}
+.planner-workspace .planner-banner-photo>img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--planner-banner-position,50% 50%)!important}
+.planner-workspace .planner-banner-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#102d2c88,transparent 76%),linear-gradient(180deg,#10282e55,transparent 48%,#19352f35);pointer-events:none}
+.planner-workspace .planner-banner figcaption{position:absolute;left:0;right:0;bottom:37px;width:var(--page-width);margin:auto;z-index:1;display:flex;flex-direction:column;gap:10px;pointer-events:none;color:#fff8e8}
+.planner-workspace .planner-banner-kicker{font:9px Arial,sans-serif;letter-spacing:3px;color:#fff2d5b8}
+.planner-workspace .planner-banner #planner-region-name{font-size:clamp(32px,3.1vw,45px);font-weight:400;letter-spacing:3px;line-height:1.45;color:#fffaee}
+.planner-workspace #planner-banner-english{font:9px Arial,sans-serif;letter-spacing:3px;line-height:1.8;color:#fff1d3b3}
+.planner-workspace .planner-banner-credit{position:absolute;right:max(28px,calc((100% - 1360px)/2));bottom:29px;z-index:2;font-size:10px;letter-spacing:.4px;color:#fff2d4af;line-height:1.8}
+.planner-workspace .planner-banner-credit:hover{color:#fff9e8}
+.planner-workspace.editorial-route[data-planner-view=edit]>.route-header{position:absolute!important;inset:0 0 auto;height:84px;margin:0 auto;z-index:5;border-bottom:1px solid #f7eacb2b}
+.planner-workspace.editorial-route[data-planner-view=edit] .route-brand{color:#fff8e8}
+.planner-workspace.editorial-route[data-planner-view=edit] .route-header nav a,.planner-workspace.editorial-route[data-planner-view=edit] .route-header nav button{color:#fff5e0c7}
+.planner-workspace.editorial-route[data-planner-view=edit] .route-header nav a:hover,.planner-workspace.editorial-route[data-planner-view=edit] .route-header nav button:hover{color:#fff9ee}
+.planner-workspace.editorial-route[data-planner-view=edit] .route-header .planner-entry{color:#fff4dc;border-color:#f5e9c965;background:#fff8df08}
+.planner-workspace[data-planner-view=edit] .travel-main{position:relative;z-index:2;box-sizing:border-box;width:var(--page-width);max-width:none;margin:-15px auto 40px;padding:0 clamp(20px,2.4vw,34px) 35px;background:linear-gradient(135deg,#faf8f0ed,#f4f4e9d1);border:1px solid #ffffff8c;border-radius:5px;box-shadow:0 16px 50px #152d1d0a;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.planner-workspace[data-planner-view=edit] .travel-breadcrumb{height:45px}
+.planner-workspace[data-planner-view=edit] .planner-step-nav{margin-top:1px;margin-bottom:13px}
+.planner-workspace[data-planner-view=edit] .planning-heading{margin-bottom:22px}
+.planner-workspace[data-planner-view=edit] .planning-heading h1{font-size:30px;line-height:1.5}
+.planner-workspace[data-planner-view=edit] .planning-layout{grid-template-columns:minmax(0,1fr) 285px;gap:35px}
+.planner-workspace[data-planner-view=edit] .planning-aside{top:22px;padding:22px;background:#ffffff52;border:1px solid #ffffffa1;border-radius:4px;box-shadow:0 7px 28px #23412706;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.planner-workspace[data-planner-view=edit] .selection-summary-heading{color:#5b7750;border-bottom:1px solid #71875a26;padding-bottom:15px;margin-bottom:4px}
+.planner-workspace[data-planner-view=edit] .selection-ledger-empty{color:#7e8e71;margin:15px 0 4px}
+.planner-workspace[data-planner-view=edit] .selection-summary-footnote{color:#94a086;border-top:1px solid #71875a22;padding-top:16px;margin-top:20px}
+.planner-workspace[data-planner-view=edit] .planner-spot-choice{background:#fffdf54a}
+.planner-workspace[data-planner-view=edit] .planner-choice-row.is-selected .planner-spot-choice{background:#e4eddebc;border-color:#789666}
+.planner-workspace[data-planner-view=edit] .planner-field select,.planner-workspace[data-planner-view=edit] .arrival-departure input,.planner-workspace[data-planner-view=edit] .arrival-departure select,.planner-workspace[data-planner-view=edit] .ai-expectation textarea{background:#fffef7b8}
+.planner-workspace[data-planner-view=edit] .planner-advanced{background:#ffffff15}
+.planner-workspace[data-planner-view=edit] .option-row input+span{background:#fffdf426}
+.planner-workspace[data-planner-view=edit] .option-row input:checked+span{background:#e4eddebc}
+.planner-workspace[data-planner-view=result] .planner-banner{display:none}
+.planner-workspace[data-planner-view=result] .travel-main{margin-top:0}
+@media(max-width:1100px){.planner-workspace[data-planner-view=edit] .planning-layout{grid-template-columns:minmax(0,1fr) 245px;gap:25px}.planner-workspace[data-planner-view=edit] .planning-aside{padding:18px}.planner-workspace[data-planner-view=edit] .travel-main{padding-left:21px;padding-right:21px}.planner-workspace .planner-banner-credit{right:clamp(24px,3.5vw,55px)}}
+@media(max-width:950px){.planner-workspace[data-planner-view=edit] .planning-layout{grid-template-columns:minmax(0,1fr)}.planner-workspace[data-planner-view=edit] .planning-aside{display:none}.planner-workspace .planner-banner{height:245px}}
+@media(max-width:600px){.planner-workspace.editorial-route[data-planner-view=edit]>.route-header{height:72px}.planner-workspace .planner-banner{height:225px}.planner-workspace .planner-banner figcaption{bottom:33px;gap:9px}.planner-workspace .planner-banner #planner-region-name{font-size:32px;letter-spacing:2px}.planner-workspace .planner-banner-kicker{font-size:7px;letter-spacing:1.7px}.planner-workspace #planner-banner-english{font-size:7px;letter-spacing:1.8px}.planner-workspace .planner-banner-credit{font-size:8px;bottom:13px;right:20px}.planner-workspace[data-planner-view=edit] .travel-main{margin-top:-11px;padding-left:15px;padding-right:15px;border-radius:4px}.planner-workspace[data-planner-view=edit] .travel-breadcrumb{height:46px;font-size:9px}.planner-workspace[data-planner-view=edit] .planning-heading h1{font-size:25px}.planner-workspace[data-planner-view=edit] .planning-heading>p:not(.eyebrow){font-size:12px}.planner-workspace[data-planner-view=edit] .place-step-heading{gap:12px}.planner-workspace[data-planner-view=edit] .planner-destination-field>label{font-size:11px}.planner-workspace[data-planner-view=edit] .quick-pick-spots{font-size:9px}.planner-workspace[data-planner-view=edit] .planner-choice-row{min-width:0}.planner-workspace[data-planner-view=edit] .planner-spot-choice{padding:12px 28px 12px 9px;gap:9px}.planner-workspace[data-planner-view=edit] .choice-photo,.planner-workspace[data-planner-view=edit] .choice-photo-pending{width:52px;height:58px;flex-basis:52px}.planner-workspace[data-planner-view=edit] .choice-copy strong{font-size:13px}.planner-workspace[data-planner-view=edit] .must-visit-toggle{right:6px}.planner-workspace[data-planner-view=edit] .form-section-title h2{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.planner-workspace .planner-banner *{transition:none!important;animation:none!important}}

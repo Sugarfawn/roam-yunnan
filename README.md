@@ -1,80 +1,127 @@
 # 漫游云南 / ROAM YUNNAN
 
-云南旅行摄影封面、交互式探索地图与景点心愿清单。
+结合云南旅行摄影、真实地图地点与 DeepSeek 的个性化旅行规划 Web 应用。
 
-当前完成：全屏风景背景、五张竖版摄影卡片、背景与文案联动、上一张 / 下一张、自动播放与暂停、键盘切换、图片署名和手机布局。
+> 本仓库按封面、地图、景点选择和完整规划集成分阶段提交，历史持续保留。本次集成现有项目中已完成的规划模块，后续继续在这一版本上迭代。见 [版本记录](docs/DEVELOPMENT-HISTORY.md)。
 
-默认首屏为梅里雪山，依次展示大理洱海、丽江玉龙雪山、香格里拉阿布吉措、西双版纳热带雨林。背景和卡片采用对应同一摄影作品，所有展示图片保存在本地，无需联网加载图片。
+## 当前体验
 
-“开启旅程”和“风景灵感”进入云南探索地图。地图包含本地真实省界、16个州 / 市边界和五个目的地标记，支持鼠标与键盘选择，背景、名称、介绍和摄影署名同步切换。探索此地进入对应地区的景点选择页，可返回地图和首页。未收录地区显示明确提示。
+首页摄影轮播 → 云南省域探索地图 → 选择景点（推荐 / 自由搜索）→ 添加酒店与餐厅（可跳过）→ 设置天数、偏好和交通 → 生成等待弹窗 → 每日路线结果。
 
-第三版增加景点选择：29个现有目录景点按地区展示，支持名称搜索、类型筛选、选择 / 取消、必去、移除、清空及每地区独立保存。26处景点使用对应本地实景摄影，其余明确标记照片待补；游览时间为编辑估算，未知则不填数字。地图选择的地区通过 URL 传入，刷新和返回地图后保留。
+- 首页保留五张指定摄影作品；云南省图展示真实的 16 个州、市边界。
+- 当前规划覆盖大理、丽江、德钦、香格里拉、西双版纳五个目的地，共 29 个目录景点、26 处景点配图。
+- 编辑页为分步骤桌面工作面：当前任务独立展示，底部操作固定，仅长列表内部滚动；手机端自然排版。
+- DeepSeek 仅从目录编排景点；校验必去、重复地点、片区、日期、徒步和时间约束。异常返回最多自动修正一次。
+- 高德搜索酒店、餐厅与自选地点，确认 POI 后加入。驾车、步行或公共交通的距离、耗时与道路折线来自实际接口。
+- 对全部日期核验已查交通、酒店往返、游览、用餐、休息预算；显示过满 / 偏紧 / 待核实，用户确认后才能应用删减或改期建议。
+- 可排序、删除、改期、切换单段交通，修改后重新核验；localStorage 保存并在刷新后恢复。
+- 不包含登录、订房、支付、实时票务、AI 聊天或数据库。
 
-当前尚未加入酒店餐厅和路线规划，也不需要地图或模型 API 密钥。选择景点后“下一步”显示后续阶段提示。存储失败会持续提示，当前页面仍可使用。
+![选择景点](docs/screenshots/向导-01-选择景点.png)
 
-页面：首页 `/`；云南地图 `/explore/yunnan/`；也可用 `?place=erhai` 等查询参数直接选择目的地。
+截图来自明确的离线 UI 验证，酒店为测试样本；截图本身不证明新的真实地图 / 模型请求。各测试的来源见 [docs/validation](docs/validation)。
 
-选景点页面：`/attractions.html?place=erhai`，另支持 meili / yulong / shangri / banna。
+## 技术栈
 
-地图数据来源及地点定位边界见 [data/SOURCES.md](data/SOURCES.md)。坐标只代表目的地区域，不是景区开放入口，也不是道路导航。
+原生 HTML / CSS / JavaScript，Node.js 内置 HTTP 服务与 fetch，DeepSeek Chat Completions，高德 JS API 2.0，本地 GeoJSON。没有框架构建步骤或生产第三方 npm 依赖；Playwright 仅用于可选浏览器测试。
 
-## 运行
+## 10 分钟本地复现
 
-需要 Node.js 20 或以上。无需安装依赖：
+先安装 Node.js 20 或以上版本与 Git。已有 API 凭证时，以下操作通常可在 10 分钟内完成；第三方账号申请、审核与额度不包含在内。
 
 ```sh
+git clone https://github.com/Sugarfawn/roam-yunnan.git
+cd roam-yunnan
 node server.cjs
 ```
 
-打开 **http://127.0.0.1:4175/**。也可使用任意静态 HTTP 服务运行。
+打开 **http://127.0.0.1:4174/**，无需 npm install 即可启动。
 
-## 文件
+首次克隆没有服务密钥。首页、摄影、省域地图与目录可本地展示；真实 AI 与高德搜索 / 道路需要网络与下述配置，没有配置不会返回伪造结果。
 
-| 文件 | 用途 |
-| --- | --- |
-| `index.html` | 封面结构及对话框 |
-| `home.css` | 桌面和手机布局、摄影过渡 |
-| `home.js` | 轮播、键盘、自动播放和按钮交互 |
-| `home-photos.js` | 五处风景及摄影数据 |
-| `assets/selected/` | 本地背景、卡片和图片来源清单 |
-| `PHOTO-CREDITS.md` | 作者、作品链接和许可 |
-| `server.cjs` | 本地静态预览服务 |
-| `explore/yunnan/index.html`、`explore.js` | 地图结构、选择与介绍弹窗 |
-| `map-geometry.js`、`map-regions.js`、`data/` | 投影、分区配置、本地真实边界 |
-| `destinations.js` | 地点、坐标、介绍与摄影的集中数据 |
+### 配置自己的凭证
 
-## 检查
+1. 复制 `.env.example` 为 `.env.local`，填入自己的 `DEEPSEEK_API_KEY`。模型采用模板默认值，也可用 `DEEPSEEK_MODEL` 调整。
+2. 复制 `map-config.example.js` 为 `map-config.local.js`，填写自己的高德 Web 端 JS API key 和 securityJsCode。
+3. 启动 `node server.cjs`，访问 4174 端口。DeepSeek 配置按请求重新读取；修改地图配置后刷新页面。
 
-运行不需要第三方依赖的基础检查：
+PowerShell 复制示例：
 
-```sh
-node tests/check.cjs
+```powershell
+Copy-Item .env.example .env.local
+Copy-Item map-config.example.js map-config.local.js
+node server.cjs
 ```
 
-检查脚本语法、图片校验、默认顺序、封面范围和静态服务。
+真实凭证只留在本机，以上本地文件已加入 Git 忽略。DeepSeek 密钥通过 Node 服务调用，不下发浏览器。高德本地 SDK 配置属于开发方式，公开部署时需按平台要求设置域名和安全代理。Node 服务默认只监听 127.0.0.1。
 
-可选浏览器验证：
+- [DeepSeek 官方文档](https://api-docs.deepseek.com/)
+- [高德 JS API 文档](https://lbs.amap.com/api/javascript-api-v2/summary)
+- [项目 DeepSeek 接入说明](data/DEEPSEEK.md)
+- [项目地图搜索说明](data/MAP-SEARCH.md)
+
+GitHub 仓库用于源码和版本记录，本次未部署在线站点。GitHub Pages 只能托管静态资源，不能直接运行这里的 Node AI 后端。
+
+## 离线检查
+
+不需要凭证、依赖安装或外网，不调用付费模型：
+
+```sh
+npm test
+```
+
+Windows PowerShell 若提示禁止执行 `npm.ps1`，使用 `npm.cmd test`；启动与离线检查也可直接运行 `node server.cjs`、`node tests/run-checks.cjs`，无需改变系统执行策略。
+
+包括全部根目录脚本的语法检查、360 组基础规则组合、酒店餐厅数据约束、17 项交通预算检查和模拟上游 AI 接口契约。报告输出至忽略的 `tests/artifacts/`；测试次数不等于真实旅行可行率。
+
+可选浏览器回归：
 
 ```sh
 npm install
 npx playwright install chromium
 npm run test:browser
-npm run test:map
-npm run test:selection
 ```
 
-Windows PowerShell 如果拦截 `npm.ps1`，可用 `npm.cmd` 代替 `npm`。浏览器测试检查轮播、自动播放、导航按钮、单屏及多尺寸布局，截图和报告生成到 `tests/artifacts/`。也可通过 `PLAYWRIGHT_EXECUTABLE_PATH` 指定本机 Chrome / Edge。
+浏览器测试使用录制的 AI 响应和离线地图替身，覆盖步骤切换、桌面窗口、自由搜索传参、刷新恢复、生成成功 / 失败 / 取消及手机布局，不使用真实付费接口。报告和截图写入 `tests/artifacts/`。可通过 `PLAYWRIGHT_EXECUTABLE_PATH` 指定本机 Chrome / Edge。
 
-## 选景点代码
+## 版本升级
 
-`attractions.html`、`attractions.css`、`assets/js/attractions.js` 为景点选择界面；`assets/js/attractions-catalogue.js` 连接现有集中目录与图片配置。存储键为 `roam.attractions.v1`，包含各地区的 selected 和 must 列表；只记录目录 ID，不包含 API 凭证。
+第三版的 /attractions.html?place=erhai 地址继续可用，会进入统一规划页。此前 roam.attractions.v1 保存的景点与必去清单在相同浏览器、相同站点地址下自动迁移一次；不会覆盖已存在的完整规划草稿。原有 4175 地址可用环境变量 PORT=4175 启动以继续访问同一存储。默认新服务是 4174。
 
-配图记录见 `assets/attractions/CREDITS.md`、`assets/dali-attractions/CREDITS.md` 和各自 manifest。manifest 中的下载原图路径是既有来源记录，本版分发 WebP 展示图片，未包含所有下载原文件。丽江古城图片作者 chensiyuan，许可 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)，[原作品](https://commons.wikimedia.org/wiki/File:1_lijiang_old_town_2012.jpg)。
+npm run test:cover、npm run test:map 和 npm run test:integration 检查封面、地图和完整入口；浏览器测试为离线模拟 / 回放，不代表新的真实接口调用。
 
-## AI 协同记录
+## 主要文件
 
-需求、封面和地图开发的 DeepSeek 会话导出及提交对应索引见 [docs/ai-records/README.md](docs/ai-records/README.md)。导出已去除个人目录前缀并检查本地密钥，原始消息顺序保留。索引说明了对话中实现与当前仓库实现的关系。
+| 路径 | 内容 |
+| --- | --- |
+| `index.html`、`home.js`、`home.css` | 全屏摄影首页 |
+| `explore/yunnan/`、`explore.js`、`map-regions.js` | 省域探索地图及规划入口 |
+| `destinations/`、`guide.js` | 目的地攻略 |
+| `attractions.js`、`travel-templates.js`、`data/` | 集中景点资料、片区模板、来源和 GeoJSON |
+| `planner-workflow.js`、`planner-window.css` | 分步填写与生成等待界面 |
+| `travel-planner.js`、`planner-view.js`、`travel-store.js` | 规划状态、结果、编辑和恢复 |
+| `server.cjs`、`ai-plan.js`、`ai-service.js` | 模型代理与输出校验 |
+| `journey-routing.js`、`traffic-*.js` | 高德道路、证据与每日负荷核验 |
+| `tests/`、`docs/` | 可复验测试、当前截图与历史说明 |
 
-## 摄影来源
+部分早期原型保留作演进参考，当前加载入口以 HTML 的 script / link 为准。历史阶段说明保存在 [DEVELOPMENT-NOTES.md](DEVELOPMENT-NOTES.md)，其中旧体验以本文及最新流程说明为准。
 
-五张作品的作者与来源见 [PHOTO-CREDITS.md](PHOTO-CREDITS.md)。图片使用范围以各来源许可为准，公开源码不改变第三方摄影许可。
+## 数据与使用边界
+
+- 高德 POI 是地图参考位置，不是已实地核实的景区开放入口。
+- 游览、用餐、休息和机动时间为明确标记的编辑估算；道路耗时为查询时估算。
+- 缺失交通、未知停留、园内接驳、索道、排队、预约、开放和天气不会编造成确定数据。没有道路响应时不拿直线当公路。
+- 跨地区单独预留转场日；没有可靠数据时不给出精确班次和到达时刻。
+- 没有酒店起终点，或仍有未知路段时，只能保存为注明限制的参考草稿。
+- 当前没有全局最优路线或未来道路可达性保证。公开服务仍需单独部署与服务端访问控制。
+- 当前行程保存在当前浏览器，没有账号同步。清除浏览器数据会清除本地行程。
+
+详见 [交通核验说明](data/TRAFFIC-FEASIBILITY.md) 和 [流程演进说明](data/PLANNING-EXPERIENCE.md)。
+
+## 摄影与公开资料
+
+摄影和地图采用第三方公开资源，按各自来源许可与服务条款使用，作者署名和来源见 [PHOTO-CREDITS.md](PHOTO-CREDITS.md)、各 assets 子目录清单、[data/SOURCES.md](data/SOURCES.md)。本仓库未将第三方摄影笼统重新授权；代码和资源的公开可见不等于拥有无限制复用许可。
+
+## AI 协同与参赛记录
+
+封面与地图的 DeepSeek 导出及代码对应说明已保存在 [AI协同记录](docs/ai-records/README.md)。后续功能的完整对话须从实际会话补充，摘要不能替代完整 Prompt 链。已有材料与待补内容见 [docs/DEVELOPMENT-HISTORY.md](docs/DEVELOPMENT-HISTORY.md)。

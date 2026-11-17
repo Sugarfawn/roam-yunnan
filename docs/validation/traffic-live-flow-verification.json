@@ -1,0 +1,300 @@
+{
+  "passed": true,
+  "at": "2026-11-11T02:14:49.970Z",
+  "mode": "actual AMap POIs, hotel selection, all-day Driving routes and restored browser state; AI is a recorded replay, zero new paid DeepSeek requests",
+  "withoutHotel": [
+    {
+      "day": 1,
+      "assessment": {
+        "status": "tight",
+        "label": "时间偏紧",
+        "hasEvidence": true,
+        "complete": false,
+        "knownLegs": 1,
+        "totalLegs": 1,
+        "missingLegs": 0,
+        "roadMinutes": 19,
+        "visitMin": 210,
+        "visitMax": 330,
+        "mealMinutes": 60,
+        "restMinutes": 45,
+        "bufferMinutes": 30,
+        "minimumMinutes": 364,
+        "maximumMinutes": 484,
+        "usableMinutes": 480,
+        "unknownStops": 0,
+        "missingHotel": true,
+        "notes": [
+          "按较宽松的游览估算可能超时，建议减少一处或增加留白。",
+          "未提供酒店起终点，住宿往返接驳尚未计入。",
+          "游览、用餐、休息与 30 分钟机动为编排估算；交通为高德当前查询，均非出行保证。"
+        ],
+        "internalTransportUnknown": false,
+        "checkedAt": "2026-11-11T02:14:46.974Z"
+      },
+      "legs": [
+        {
+          "key": "[1,\"dali-old-city\",\"dali-three-pagodas\"]",
+          "fromKey": "dali-old-city",
+          "toKey": "dali-three-pagodas",
+          "status": "ok",
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "durationSeconds": 1098,
+          "distanceMeters": 4772,
+          "queriedAt": "2026-11-11T02:14:46.940Z"
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "assessment": {
+        "status": "partial",
+        "label": "部分信息待补",
+        "hasEvidence": true,
+        "complete": false,
+        "knownLegs": 1,
+        "totalLegs": 1,
+        "missingLegs": 0,
+        "roadMinutes": 1,
+        "visitMin": 135,
+        "visitMax": 240,
+        "mealMinutes": 60,
+        "restMinutes": 45,
+        "bufferMinutes": 30,
+        "minimumMinutes": 271,
+        "maximumMinutes": 376,
+        "usableMinutes": 480,
+        "unknownStops": 0,
+        "missingHotel": true,
+        "notes": [
+          "未提供酒店起终点，住宿往返接驳尚未计入。",
+          "游览、用餐、休息与 30 分钟机动为编排估算；交通为高德当前查询，均非出行保证。"
+        ],
+        "internalTransportUnknown": false,
+        "checkedAt": "2026-11-11T02:14:47.035Z"
+      },
+      "legs": [
+        {
+          "key": "[2,\"dali-xizhou\",\"dali-yan-courtyard\"]",
+          "fromKey": "dali-xizhou",
+          "toKey": "dali-yan-courtyard",
+          "status": "ok",
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "durationSeconds": 23,
+          "distanceMeters": 72,
+          "queriedAt": "2026-11-11T02:14:47.035Z"
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "assessment": {
+        "status": "partial",
+        "label": "部分信息待补",
+        "hasEvidence": true,
+        "complete": false,
+        "knownLegs": 1,
+        "totalLegs": 1,
+        "missingLegs": 0,
+        "roadMinutes": 21,
+        "visitMin": 120,
+        "visitMax": 180,
+        "mealMinutes": 60,
+        "restMinutes": 45,
+        "bufferMinutes": 30,
+        "minimumMinutes": 276,
+        "maximumMinutes": 336,
+        "usableMinutes": 480,
+        "unknownStops": 0,
+        "missingHotel": true,
+        "notes": [
+          "未提供酒店起终点，住宿往返接驳尚未计入。",
+          "游览、用餐、休息与 30 分钟机动为编排估算；交通为高德当前查询，均非出行保证。"
+        ],
+        "internalTransportUnknown": false,
+        "checkedAt": "2026-11-11T02:14:48.167Z"
+      },
+      "legs": [
+        {
+          "key": "[3,\"dali-longkan\",\"dali-caicun\"]",
+          "fromKey": "dali-longkan",
+          "toKey": "dali-caicun",
+          "status": "ok",
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "durationSeconds": 1202,
+          "distanceMeters": 2972,
+          "queriedAt": "2026-11-11T02:14:48.167Z"
+        }
+      ]
+    }
+  ],
+  "withHotel": [
+    {
+      "day": 1,
+      "assessment": {
+        "status": "tight",
+        "label": "时间偏紧",
+        "hasEvidence": true,
+        "complete": true,
+        "knownLegs": 3,
+        "totalLegs": 3,
+        "missingLegs": 0,
+        "roadMinutes": 42,
+        "visitMin": 210,
+        "visitMax": 330,
+        "mealMinutes": 60,
+        "restMinutes": 45,
+        "bufferMinutes": 30,
+        "minimumMinutes": 387,
+        "maximumMinutes": 507,
+        "usableMinutes": 480,
+        "unknownStops": 0,
+        "missingHotel": false,
+        "notes": [
+          "按较宽松的游览估算可能超时，建议减少一处或增加留白。",
+          "游览、用餐、休息与 30 分钟机动为编排估算；交通为高德当前查询，均非出行保证。"
+        ],
+        "internalTransportUnknown": false,
+        "checkedAt": "2026-11-11T02:14:49.029Z"
+      },
+      "legCount": 3,
+      "legs": [
+        {
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "status": "ok",
+          "distanceMeters": 663,
+          "durationSeconds": 290
+        },
+        {
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "status": "ok",
+          "distanceMeters": 4772,
+          "durationSeconds": 1098
+        },
+        {
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "status": "ok",
+          "distanceMeters": 4755,
+          "durationSeconds": 1093
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "assessment": {
+        "status": "partial",
+        "label": "部分信息待补",
+        "hasEvidence": true,
+        "complete": false,
+        "knownLegs": 2,
+        "totalLegs": 3,
+        "missingLegs": 1,
+        "roadMinutes": 36,
+        "visitMin": 135,
+        "visitMax": 240,
+        "mealMinutes": 60,
+        "restMinutes": 45,
+        "bufferMinutes": 30,
+        "minimumMinutes": 306,
+        "maximumMinutes": 411,
+        "usableMinutes": 480,
+        "unknownStops": 0,
+        "missingHotel": false,
+        "notes": [
+          "1 段交通未查到，未将未知耗时当作零。",
+          "游览、用餐、休息与 30 分钟机动为编排估算；交通为高德当前查询，均非出行保证。"
+        ],
+        "internalTransportUnknown": false,
+        "checkedAt": "2026-11-11T02:14:49.156Z"
+      },
+      "legCount": 3,
+      "legs": [
+        {
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "status": "ok",
+          "distanceMeters": 20853,
+          "durationSeconds": 2133
+        },
+        {
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "status": "ok",
+          "distanceMeters": 72,
+          "durationSeconds": 23
+        },
+        {
+          "mode": "drive",
+          "source": null,
+          "status": "unavailable",
+          "distanceMeters": null,
+          "durationSeconds": null
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "assessment": {
+        "status": "partial",
+        "label": "部分信息待补",
+        "hasEvidence": true,
+        "complete": false,
+        "knownLegs": 2,
+        "totalLegs": 3,
+        "missingLegs": 1,
+        "roadMinutes": 40,
+        "visitMin": 120,
+        "visitMax": 180,
+        "mealMinutes": 60,
+        "restMinutes": 45,
+        "bufferMinutes": 30,
+        "minimumMinutes": 295,
+        "maximumMinutes": 355,
+        "usableMinutes": 480,
+        "unknownStops": 0,
+        "missingHotel": false,
+        "notes": [
+          "1 段交通未查到，未将未知耗时当作零。",
+          "游览、用餐、休息与 30 分钟机动为编排估算；交通为高德当前查询，均非出行保证。"
+        ],
+        "internalTransportUnknown": false,
+        "checkedAt": "2026-11-11T02:14:49.403Z"
+      },
+      "legCount": 3,
+      "legs": [
+        {
+          "mode": "drive",
+          "source": null,
+          "status": "unavailable",
+          "distanceMeters": null,
+          "durationSeconds": null
+        },
+        {
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "status": "ok",
+          "distanceMeters": 2972,
+          "durationSeconds": 1202
+        },
+        {
+          "mode": "drive",
+          "source": "AMap.Driving",
+          "status": "ok",
+          "distanceMeters": 4814,
+          "durationSeconds": 1160
+        }
+      ]
+    }
+  ],
+  "restored": {
+    "personalPlaces": 1,
+    "trafficDays": 3
+  },
+  "errors": []
+}

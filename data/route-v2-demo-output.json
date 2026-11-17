@@ -1,0 +1,436 @@
+{
+  "caseA": {
+    "version": 2,
+    "settings": {
+      "area": "erhai",
+      "areas": [
+        "erhai"
+      ],
+      "legModes": {},
+      "days": 3,
+      "pace": "slow",
+      "transport": "drive",
+      "preferences": [],
+      "selected": [],
+      "mustVisit": [],
+      "startLocation": "dali-old-city",
+      "endLocation": "dali-old-city",
+      "sameEndAsStart": true,
+      "arrivalWindow": "full",
+      "departureWindow": "full",
+      "arrivalTime": "",
+      "departureTime": "",
+      "personalPlaces": [],
+      "poiBindings": {},
+      "aiRequest": ""
+    },
+    "days": [
+      {
+        "id": "dali-3d-oldtown-west",
+        "zone": "古城片区 · 城区西侧",
+        "cluster": "dali-west",
+        "clusters": [
+          "dali-west"
+        ],
+        "theme": "古城文化 · 历史建筑",
+        "ids": [
+          "dali-old-city",
+          "dali-three-pagodas"
+        ],
+        "periods": [
+          "上午",
+          "下午"
+        ],
+        "meal": "在古城片区安排午餐与休息，不预设餐厅。",
+        "why": "大理古城与其西北侧的崇圣寺三塔可按城区西侧关联景点分段游览。官方景点资料称三塔位于古城西北约 1.5 公里。",
+        "mobility": "接驳依住宿点、交通方式与当天路况变化；未接入道路 API，不提供车程。",
+        "buffer": "保留午餐和片区内机动余量。",
+        "source": "https://www.dalitravel.cn/content/read/233.html",
+        "sourceTemplateId": "dali-three-day-relaxed",
+        "area": "erhai",
+        "type": "sightseeing",
+        "stops": [
+          "dali-old-city",
+          "dali-three-pagodas"
+        ],
+        "overCapacity": false,
+        "dayLimit": 2,
+        "mealMinutes": 60,
+        "restMinutes": 45,
+        "mobilityNote": "接驳依住宿点、交通方式与当天路况变化；未接入道路 API，不提供车程。",
+        "notes": [],
+        "transferReserveMinutes": 45,
+        "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+        "dayNumber": 1,
+        "startContext": {
+          "locationId": "dali-old-city",
+          "half": false,
+          "time": ""
+        },
+        "endContext": null,
+        "assessment": {
+          "status": "within",
+          "known": true,
+          "unknownCount": 0,
+          "visitMin": 210,
+          "visitMax": 330,
+          "mealMinutes": 60,
+          "restMinutes": 45,
+          "transferReserveMinutes": 45,
+          "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+          "minimumMinutes": 360,
+          "maximumMinutes": 480,
+          "usableMinutes": 480,
+          "windowStart": 540,
+          "windowEnd": 1080,
+          "realTrafficMinutes": null,
+          "totalDurationMinutes": null,
+          "confidence": "reference-only"
+        },
+        "accommodation": {
+          "label": "古城片区",
+          "basis": "沿用用户的抵达片区作为住宿基点，不是酒店推荐；与当日片区不同时接驳待核实。"
+        }
+      },
+      {
+        "id": "dali-3d-xizhou",
+        "zone": "喜洲片区 · 洱海北岸",
+        "cluster": "dali-xizhou",
+        "clusters": [
+          "dali-xizhou"
+        ],
+        "theme": "白族古镇 · 院落与街巷",
+        "ids": [
+          "dali-xizhou",
+          "dali-yan-courtyard"
+        ],
+        "periods": [
+          "上午",
+          "下午"
+        ],
+        "meal": "在喜洲片区留出午餐与休息。",
+        "why": "喜洲古镇与严家大院同处喜洲片区，以街巷为主线慢游。",
+        "mobility": "古城与喜洲往返接驳需按当天交通核实；该日不再叠加其他湖岸片区。",
+        "buffer": "院落开放情况出发前确认，预留村镇步行时间。",
+        "source": "https://www.dalitravel.cn/",
+        "sourceTemplateId": "dali-three-day-relaxed",
+        "area": "erhai",
+        "type": "sightseeing",
+        "stops": [
+          "dali-xizhou",
+          "dali-yan-courtyard"
+        ],
+        "overCapacity": false,
+        "dayLimit": 2,
+        "mealMinutes": 60,
+        "restMinutes": 45,
+        "mobilityNote": "古城与喜洲往返接驳需按当天交通核实；该日不再叠加其他湖岸片区。",
+        "notes": [],
+        "transferReserveMinutes": 45,
+        "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+        "dayNumber": 2,
+        "startContext": null,
+        "endContext": null,
+        "assessment": {
+          "status": "within",
+          "known": true,
+          "unknownCount": 0,
+          "visitMin": 135,
+          "visitMax": 240,
+          "mealMinutes": 60,
+          "restMinutes": 45,
+          "transferReserveMinutes": 45,
+          "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+          "minimumMinutes": 285,
+          "maximumMinutes": 390,
+          "usableMinutes": 480,
+          "windowStart": 540,
+          "windowEnd": 1080,
+          "realTrafficMinutes": null,
+          "totalDurationMinutes": null,
+          "confidence": "reference-only"
+        },
+        "accommodation": {
+          "label": "古城片区",
+          "basis": "沿用用户的抵达片区作为住宿基点，不是酒店推荐；与当日片区不同时接驳待核实。"
+        }
+      },
+      {
+        "id": "dali-3d-west-shore",
+        "zone": "洱海西岸 · 湖边村落",
+        "cluster": "dali-west-shore",
+        "clusters": [
+          "dali-west-shore"
+        ],
+        "theme": "湖岸漫步 · 随心取景",
+        "ids": [
+          "dali-longkan",
+          "dali-caicun"
+        ],
+        "periods": [
+          "上午 / 下午",
+          "弹性"
+        ],
+        "meal": "在湖岸附近安排午餐与休息，具体地点现场选择。",
+        "why": "龙龛与才村都在洱海西岸大理城区一侧；按住宿位置就近选择一处或两处。",
+        "mobility": "湖岸开放入口和点间接驳未核实；不声称有直连步行路线。",
+        "buffer": "可删去其中一处，给湖边留白。",
+        "sourceTemplateId": "dali-three-day-relaxed",
+        "area": "erhai",
+        "type": "sightseeing",
+        "stops": [
+          "dali-longkan",
+          "dali-caicun"
+        ],
+        "overCapacity": false,
+        "dayLimit": 2,
+        "mealMinutes": 60,
+        "restMinutes": 45,
+        "mobilityNote": "湖岸开放入口和点间接驳未核实；不声称有直连步行路线。",
+        "notes": [],
+        "transferReserveMinutes": 45,
+        "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+        "dayNumber": 3,
+        "startContext": null,
+        "endContext": {
+          "locationId": "dali-old-city",
+          "half": false,
+          "time": ""
+        },
+        "assessment": {
+          "status": "within",
+          "known": true,
+          "unknownCount": 0,
+          "visitMin": 120,
+          "visitMax": 180,
+          "mealMinutes": 60,
+          "restMinutes": 45,
+          "transferReserveMinutes": 45,
+          "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+          "minimumMinutes": 270,
+          "maximumMinutes": 330,
+          "usableMinutes": 480,
+          "windowStart": 540,
+          "windowEnd": 1080,
+          "realTrafficMinutes": null,
+          "totalDurationMinutes": null,
+          "confidence": "reference-only"
+        },
+        "accommodation": {
+          "label": "古城片区",
+          "basis": "沿用用户的抵达片区作为住宿基点，不是酒店推荐；与当日片区不同时接驳待核实。"
+        }
+      }
+    ],
+    "unassigned": [],
+    "unassignedRegions": [],
+    "savedAt": null,
+    "activeDay": 0,
+    "templates": [
+      {
+        "area": "erhai",
+        "id": "dali-three-day-relaxed",
+        "reason": "大理三日舒缓参考模板：古城及西侧、喜洲、洱海西岸分日。不是实时车路线，尽量减少跨湖岸折返。"
+      }
+    ],
+    "createdAt": null,
+    "validation": {
+      "valid": true,
+      "violations": [],
+      "warnings": [
+        "开放时段和预约信息未完成当前核实，请按官方当日信息执行。"
+      ]
+    },
+    "warnings": [
+      "开放时段和预约信息未完成当前核实，请按官方当日信息执行。",
+      "自驾道路耗时由高德当前查询参与每日核验；停车、景区内部接驳和未查路段仍需确认。",
+      "末日片区与结束参考片区不同，请预留真实交通时间。"
+    ]
+  },
+  "caseB": {
+    "version": 2,
+    "settings": {
+      "area": "yulong",
+      "areas": [
+        "yulong"
+      ],
+      "legModes": {},
+      "days": 2,
+      "pace": "standard",
+      "transport": "public",
+      "preferences": [],
+      "selected": [],
+      "mustVisit": [],
+      "startLocation": "lijiang-old-city",
+      "endLocation": "lijiang-old-city",
+      "sameEndAsStart": true,
+      "arrivalWindow": "full",
+      "departureWindow": "full",
+      "arrivalTime": "",
+      "departureTime": "",
+      "personalPlaces": [],
+      "poiBindings": {},
+      "aiRequest": ""
+    },
+    "days": [
+      {
+        "id": "lijiang-2d-city",
+        "zone": "大研古城 · 城区北侧",
+        "cluster": "lijiang-ancient",
+        "clusters": [
+          "lijiang-ancient"
+        ],
+        "theme": "古城街巷 · 黑龙潭公园",
+        "ids": [
+          "lijiang-old-city",
+          "lijiang-black-dragon"
+        ],
+        "periods": [
+          "上午",
+          "下午"
+        ],
+        "meal": "古城城区午餐与休息。",
+        "why": "丽江市文旅局的城区旅游环线串联大研古城与黑龙潭，作为城区主题日参考。",
+        "mobility": "当前公交班次、步行接驳未核实；不照搬政府旧环线的历史里程。",
+        "buffer": "给古城街巷与城区接驳留余量。",
+        "source": "https://lijiang.gov.cn/ljsrmzf/c101869/202012/6f8f0b40269c452085a58408b7197c46.shtml",
+        "sourceTemplateId": "lijiang-two-day-standard-public",
+        "area": "yulong",
+        "type": "sightseeing",
+        "stops": [
+          "lijiang-old-city",
+          "lijiang-black-dragon"
+        ],
+        "overCapacity": false,
+        "dayLimit": 3,
+        "mealMinutes": 60,
+        "restMinutes": 30,
+        "mobilityNote": "当前公交班次、步行接驳未核实；不照搬政府旧环线的历史里程。",
+        "notes": [],
+        "transferReserveMinutes": 45,
+        "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+        "dayNumber": 1,
+        "startContext": {
+          "locationId": "lijiang-old-city",
+          "half": false,
+          "time": ""
+        },
+        "endContext": null,
+        "assessment": {
+          "status": "within",
+          "known": true,
+          "unknownCount": 0,
+          "visitMin": 180,
+          "visitMax": 270,
+          "mealMinutes": 60,
+          "restMinutes": 30,
+          "transferReserveMinutes": 45,
+          "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+          "minimumMinutes": 315,
+          "maximumMinutes": 405,
+          "usableMinutes": 540,
+          "windowStart": 540,
+          "windowEnd": 1080,
+          "realTrafficMinutes": null,
+          "totalDurationMinutes": null,
+          "confidence": "reference-only"
+        },
+        "accommodation": {
+          "label": "大研古城片区",
+          "basis": "沿用用户的抵达片区作为住宿基点，不是酒店推荐；与当日片区不同时接驳待核实。"
+        }
+      },
+      {
+        "id": "lijiang-2d-baisha",
+        "zone": "白沙片区 · 玉龙山麓",
+        "cluster": "lijiang-baisha",
+        "clusters": [
+          "lijiang-baisha"
+        ],
+        "theme": "纳西古镇 · 壁画与街巷",
+        "ids": [
+          "lijiang-baisha",
+          "lijiang-mural"
+        ],
+        "periods": [
+          "上午",
+          "下午"
+        ],
+        "meal": "白沙片区午餐与休息。",
+        "why": "白沙古镇和白沙壁画同在白沙片区，以古镇人文为当日主线。",
+        "mobility": "古城、束河到白沙的公交班次需出发前确认。",
+        "buffer": "当日不追加玉龙雪山景区或南麓其他片区。",
+        "source": "https://lijiang.gov.cn/ljsrmzf/c101869/202012/6f8f0b40269c452085a58408b7197c46.shtml",
+        "sourceTemplateId": "lijiang-two-day-standard-public",
+        "area": "yulong",
+        "type": "sightseeing",
+        "stops": [
+          "lijiang-baisha",
+          "lijiang-mural"
+        ],
+        "overCapacity": false,
+        "dayLimit": 3,
+        "mealMinutes": 60,
+        "restMinutes": 30,
+        "mobilityNote": "古城、束河到白沙的公交班次需出发前确认。",
+        "notes": [],
+        "transferReserveMinutes": 45,
+        "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+        "dayNumber": 2,
+        "startContext": null,
+        "endContext": {
+          "locationId": "lijiang-old-city",
+          "half": false,
+          "time": ""
+        },
+        "assessment": {
+          "status": "within",
+          "known": true,
+          "unknownCount": 0,
+          "visitMin": 135,
+          "visitMax": 240,
+          "mealMinutes": 60,
+          "restMinutes": 30,
+          "transferReserveMinutes": 45,
+          "transferReserveLabel": "片区衔接机动的编辑估算，不是道路或公交车程。",
+          "minimumMinutes": 270,
+          "maximumMinutes": 375,
+          "usableMinutes": 540,
+          "windowStart": 540,
+          "windowEnd": 1080,
+          "realTrafficMinutes": null,
+          "totalDurationMinutes": null,
+          "confidence": "reference-only"
+        },
+        "accommodation": {
+          "label": "大研古城片区",
+          "basis": "沿用用户的抵达片区作为住宿基点，不是酒店推荐；与当日片区不同时接驳待核实。"
+        }
+      }
+    ],
+    "unassigned": [],
+    "unassignedRegions": [],
+    "savedAt": null,
+    "activeDay": 0,
+    "templates": [
+      {
+        "area": "yulong",
+        "id": "lijiang-two-day-standard-public",
+        "reason": "丽江两日公共交通参考模板：城区环线一天、白沙人文片区一天。束河可替换白沙日；玉龙景区建议替换其中一日并单独预留。"
+      }
+    ],
+    "createdAt": null,
+    "validation": {
+      "valid": true,
+      "violations": [],
+      "warnings": [
+        "开放时段和预约信息未完成当前核实，请按官方当日信息执行。"
+      ]
+    },
+    "warnings": [
+      "开放时段和预约信息未完成当前核实，请按官方当日信息执行。",
+      "公共交通方案由高德当前查询参与每日核验；未来班次、换乘候车与景区接驳仍需确认。",
+      "末日片区与结束参考片区不同，请预留真实交通时间。"
+    ]
+  }
+}

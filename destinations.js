@@ -66,9 +66,24 @@
   };
 
   // Presentation copy stays beside destination data; itinerary facts remain in attractions.js.
-  const items=Object.entries(places).map(([id,place],index)=>{
-    const photo=window.HomePhotos.find(item=>item.id===id);
-    return Object.freeze({...photo,...place,id,source:photo.source,locationSource:place.source,number:String(index+1).padStart(2,'0'),mapUrl:'/explore/yunnan/?place='+id});
+  const journals = {
+    erhai: {region:'大理白族自治州 · 云南',overviewTitle:'在苍山与洱海之间，慢下来。',catalogueTitle:'挑几处，放进你的大理。',catalogueIntro:'古城、湖岸、村落，各有各的节奏。选择你真正想去的地方。',photoPosition:'50% 52%'},
+    yulong: {region:'丽江 · 玉龙 · 云南',displayName:'丽江 · 玉龙雪山',overviewTitle:'从石板街巷，走向雪山。',overviewText:'大研古城的水巷、白沙的村落与雪山南麓，构成丽江不同的旅行片段。先挑选真正感兴趣的片区，再给街巷、山景和休息各留一些时间。',catalogueTitle:'挑几处，放进你的丽江。',catalogueIntro:'古城、村落与雪山，按片区认识丽江，不必一次走遍。',photoPosition:'50% 10%',riskTitle:'雪山体验，需要单独留白。',riskNote:'玉龙雪山、云杉坪涉及高海拔与景区接驳。预约、索道、天气和个人身体状态出发前另行确认，不与多个远距离片区塞进同一天。'},
+    meili: {region:'迪庆 · 德钦 · 云南',overviewTitle:'等一束光，也给旅途留些空白。',overviewText:'观景区域、县城与冰川山地，是德钦不同的旅行片段。观景不等于登山；等待雪峰显露时，也给天气变化、山路接驳和身体适应留出余量。',catalogueTitle:'挑几处，放进你的德钦。',catalogueIntro:'把观景、休息与山地体验分开考虑，按当天条件决定走多远。',photoPosition:'50% 35%',riskTitle:'先适应高原，再决定走多远。',riskNote:'德钦涉及高海拔和山路。明永冰川属于山地步行体验，需单独考虑体力、天气及当地管理要求；本页不提供登山或徒步导航。'},
+    shangri: {region:'迪庆 · 香格里拉 · 云南',displayName:'香格里拉 · 阿布吉措',overviewTitle:'在高原，把脚步交给风景。',overviewText:'古城街巷、寺院建筑与季节性湿地，是认识香格里拉的不同方式。阿布吉措则属于另需准备的高山徒步体验，选择前先了解天气、管理与向导要求。',catalogueTitle:'挑几处，放进你的香格里拉。',catalogueIntro:'城区人文、湿地与高山湖泊，各留适合自己的时间。',photoPosition:'50% 62%',riskTitle:'高山湖泊，不等于普通城区散步。',riskNote:'阿布吉措涉及高海拔徒步，应独立安排并核实进山管理与向导要求。纳帕海水位和开放道路随季节变化；寺院参观请遵循当地礼仪。'},
+    banna: {region:'西双版纳 · 云南',overviewTitle:'从一片叶子，认识云南的南端。',overviewText:'在开放园区认识热带植物，在村寨和江岸感受日常。勐仑、橄榄坝、勐远与景洪属于不同片区，选择一两种感兴趣的体验，再按片区留出接驳与休息。',catalogueTitle:'挑几处，放进你的西双版纳。',catalogueIntro:'植物、村寨、江岸与雨林体验，选你真正想停留的地方。',photoPosition:'50% 55%',riskTitle:'雨林体验，以开放范围为边界。',riskNote:'园区开放、预约和户外活动受天气与现场管理影响。雨季及山地活动需核实管理要求，只进入允许游览的区域；顶部摄影不代表具体园区或拍摄入口。'}
+  };
+  const plannerPhotoPositions={meili:'50% 12%',erhai:'50% 34%',yulong:'50% 5%',shangri:'50% 60%',banna:'50% 50%'};
+  // A future destination may supply its own photo record without extending the five-slide homepage.
+  const items = Object.entries(places).map(([id,place],index)=>{
+    const photo=place.photo||window.HomePhotos.find(item=>item.id===id);
+    if(!photo)throw Error('Destination photo record missing: '+id);
+    return Object.freeze({...photo,...place,id,source:photo.source,locationSource:place.source,number:String(index+1).padStart(2,'0'),
+      journal:Object.freeze({...(place.journal||journals[id]||{region:place.region,overviewTitle:place.lead,catalogueTitle:'挑选想去的地方。',catalogueIntro:place.introduction,photoPosition:photo.position||'50% 50%'}),plannerPhotoPosition:place.journal?.plannerPhotoPosition||plannerPhotoPositions[id]||photo.position||'50% 50%'}),
+      mapUrl:'/explore/yunnan/?place='+id,detailUrl:'/destinations/detail.html?id='+id});
   });
-  window.RoamDestinations=Object.freeze({items:Object.freeze(items),get(id){return items.find(item=>item.id===id)||null;}});
+  window.RoamDestinations = Object.freeze({
+    items: Object.freeze(items),
+    get(id) { return items.find(item => item.id === id) || null; }
+  });
 })();

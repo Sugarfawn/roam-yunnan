@@ -1,0 +1,11 @@
+.traffic-verification{margin:16px 0 22px;padding:13px 0;border-block:1px solid var(--line,#b2a99144);display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:12px;color:#556855;line-height:1.85}
+.traffic-verification p{margin:0;flex:1;min-width:180px}.traffic-verification button{font-size:12px;color:#8b7047;text-decoration:underline;text-underline-offset:4px}
+.traffic-assessment{margin:0 0 22px;padding:17px 18px;border:1px solid #8a997c45;border-radius:5px;background:#f3f3e950;color:#53694f;font-size:12px;line-height:1.9}
+.traffic-assessment[data-status=over]{border-color:#b1735266;background:#eadbc62e}.traffic-assessment[data-status=tight]{border-color:#b2955c66}
+.traffic-assessment h3{font-size:15px;margin:0 0 8px;font-weight:500}.traffic-assessment p{margin:5px 0;font-size:12px!important;color:inherit!important}
+.traffic-budget{display:flex;height:5px;margin:12px 0;background:#506b4c12;border-radius:4px;overflow:hidden}.traffic-budget span{background:#688261}.traffic-budget .budget-road{background:#b8985f}.traffic-budget .budget-rest{background:#acb5a1}
+.traffic-assessment details{margin-top:9px;font-size:11px}.traffic-assessment summary{cursor:pointer}.traffic-assessment details p{font-size:11px!important}
+.traffic-suggestions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.traffic-suggestions button{padding:6px 10px;border:1px solid #a68b5c55;border-radius:3px;color:#816c45;font-size:11px;text-align:left;line-height:1.8}
+.traffic-assessment .traffic-suggestion-note{font-size:11px!important;color:#8d7954!important}
+.planner-workspace .result-day-tabs button small[data-traffic=over]{color:#a26748}.planner-workspace .result-day-tabs button small[data-traffic=tight]{color:#9c8351}
+@media(max-width:600px){.traffic-assessment{padding:13px}.traffic-verification{gap:9px}.traffic-verification p{flex-basis:100%}}

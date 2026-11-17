@@ -25,7 +25,7 @@
     window.clearTimeout(timer);
     timer = 0;
     stopProgress();
-    const paused = userPaused || pointerOnGallery || keyboardOnGallery || document.hidden || reducedMotion.matches || Boolean(document.querySelector('dialog[open]'));
+    const paused = userPaused || pointerOnGallery || keyboardOnGallery || document.hidden || reducedMotion.matches;
     $('#cover-pause').setAttribute('aria-pressed', String(userPaused || reducedMotion.matches));
     $('#cover-pause').setAttribute('aria-label', userPaused || reducedMotion.matches ? '开启自动轮播' : '暂停自动轮播');
     $('#cover-pause').textContent = userPaused || reducedMotion.matches ? '▷' : 'Ⅱ';
@@ -33,7 +33,7 @@
 
     const bar = $('#cover-progress');
     if (bar.animate) {
-      progressAnimation = bar.animate([{ width: '0%' }, { width: '100%' }], { duration: 7200, easing: 'linear', fill: 'forwards' });
+      progressAnimation = bar.animate([{ width: '0%' }, { width: '100%' }], { duration: 5600, easing: 'linear', fill: 'forwards' });
     }
     timer = window.setTimeout(() => select((active + 1) % slides.length), 7200);
   }
@@ -181,7 +181,7 @@
     if (Math.abs(dx) > 64 && Math.abs(dx) > Math.abs(dy) * 1.4) select(active + (dx < 0 ? 1 : -1));
     touchStart = null;
   }, { passive: true });
-  // Native anchors connect the cover to the province atlas.
+  // Homepage and exploration navigation use native anchors; the carousel stays independent.
   $('#photo-credits').addEventListener('click', () => openDialog($('#credits-dialog')));
   $('#photo-credit-link').addEventListener('click', () => openDialog($('#credits-dialog')));
   document.addEventListener('visibilitychange', syncPlayback);

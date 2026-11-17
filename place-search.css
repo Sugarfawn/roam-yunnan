@@ -1,0 +1,74 @@
+/* Hotels and dining extend the existing warm-paper planner. */
+.editorial-route .planning-steps{flex-wrap:wrap;gap:13px 25px}
+.editorial-route .personal-place-actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+.editorial-route .personal-place-actions button{border:1px solid #71875a50;border-radius:3px;padding:11px 15px;font-size:12px;color:#527347;background:#e8edde33;line-height:1.8}
+.editorial-route .personal-place-actions button:hover{background:#e3e9da}
+.editorial-route .personal-places-empty{font-size:12px;color:#939c83;line-height:1.9;padding:18px 0;margin:0}
+.editorial-route .personal-place-item{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;border-top:1px solid var(--line);padding:20px 0}
+.editorial-route .personal-place-item>div:first-child,.editorial-route .personal-stop-card>div:first-child{min-width:0;flex:1}
+.editorial-route .personal-place-item small{font-size:10px;color:#aa946d;line-height:1.8}
+.editorial-route .personal-place-item h3{font-size:17px;line-height:1.8;font-weight:400;margin:5px 0 7px;color:#365b46;overflow-wrap:anywhere}
+.editorial-route .personal-place-item p{font-size:12px;line-height:1.9;color:#87977a;margin:0;overflow-wrap:anywhere}
+.editorial-route .personal-place-item p.personal-place-warning{color:#aa774e;margin-top:7px}
+.editorial-route .personal-place-item-actions{display:flex;gap:10px;flex-shrink:0;align-items:center}
+.editorial-route .personal-place-item-actions button{font-size:10px;color:#829470;padding:7px 9px;border:1px solid #71875a30;border-radius:2px;line-height:1.8}
+.editorial-route #result-add-place{font-size:11px;color:#557748;letter-spacing:.5px;line-height:1.8}
+.editorial-route .personal-stop-card{display:flex;gap:20px;padding:20px 22px;align-items:flex-start;border:1px solid #71875a38;border-left:2px solid #ad946a;border-radius:3px;background:#eceee33d;min-width:0}
+.editorial-route .personal-stop-card h3{font-size:18px;font-weight:400;color:#3b6145;margin:7px 0;line-height:1.7;overflow-wrap:anywhere}
+.editorial-route .personal-stop-card p{font-size:12px;color:#849575;line-height:1.9;margin:0 0 9px;overflow-wrap:anywhere}
+.editorial-route .personal-stop-card small{font-size:10px;color:#9ba589;line-height:1.8}
+.editorial-route .personal-day-note{font-size:11px;color:#a18d69;line-height:1.95;border-left:1px solid #b39b6d;padding:5px 13px;margin:12px 0 18px}
+.editorial-route .personal-stop-card .personal-place-item-actions{flex-direction:column;align-items:stretch}
+.editorial-route .travel-map:has(.personal-day-map){padding:0;display:block;height:300px}
+.personal-day-map{width:100%;height:100%;min-height:230px}
+.editorial-route .personal-map-error{font-size:11px;text-align:center;color:#8a977c;margin:15px}
+.editorial-route .personal-map-retry{font-size:11px;color:#58794a;border:1px solid #71875a40;padding:8px 14px;justify-self:center;align-self:start}
+.editorial-route .personal-place-dialog{width:min(1050px,calc(100vw - 40px));max-width:none;max-height:calc(100dvh - 44px);padding:34px;background:#f5f3ed;border-radius:5px;color:#365b46;overflow:auto}
+.personal-place-dialog::backdrop{background:#163529bd;backdrop-filter:blur(7px)}
+.editorial-route .personal-place-dialog h2{font-size:27px;line-height:1.6;margin:4px 0 12px;color:#355940}
+.editorial-route .personal-place-dialog .place-search-intro{font-size:12px;line-height:1.9;color:#87977a;margin:0 0 21px}
+.place-query-form{display:flex;align-items:flex-end;gap:14px}
+.place-query-form>label{display:block;font-size:11px;color:#819575;line-height:1.8}
+.place-query-form .place-keyword-label{flex:1;min-width:0}
+.place-query-form select,.place-query-form input,.place-assignment select{display:block;width:100%;height:43px;border:1px solid #71875a50;background:#fbfaf5;color:#55734b;border-radius:3px;font:inherit;font-size:12px;padding:9px 12px;margin-top:7px;min-width:0}
+.place-query-form .gold-button{height:43px;padding:10px 18px;white-space:nowrap;flex:none}
+.editorial-route .place-search-status{font-size:11px;color:#9b855b;line-height:1.9;min-height:22px;margin:15px 0 12px}
+.place-search-layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:20px;height:310px;min-height:0}
+.place-search-results{min-width:0;overflow:auto;border:1px solid #71875a30;background:#f1f1e7;overscroll-behavior:contain;scrollbar-width:thin}
+.place-search-map{width:100%;height:310px;min-width:0;border:1px solid #71875a30;background:#e6ebde}
+.place-result{display:flex;gap:12px;width:100%;text-align:left;border-bottom:1px solid #71875a25;padding:15px 14px;min-height:70px}
+.place-result:hover,.place-result.is-selected{background:#dce6d355}
+.place-result.is-selected{box-shadow:inset 2px 0 #71875a}
+.place-result-number{font-family:Georgia,serif;font-size:11px;color:#aa946a;flex:none;margin-top:3px}
+.place-result-copy{min-width:0}
+.place-result-copy strong{display:block;font-size:12px;font-weight:400;line-height:1.8;color:#496b3e;overflow-wrap:anywhere}
+.place-result-copy small{display:block;font-size:10px;color:#909b81;line-height:1.9;margin-top:6px;overflow-wrap:anywhere}
+.place-empty{font-size:12px;color:#98a18a;padding:18px;line-height:2;margin:0}
+.place-confirm{border:1px solid #71875a30;background:#e9eddf55;padding:18px 20px;margin-top:20px}
+.place-confirm h3{font-size:19px;line-height:1.7;font-weight:400;color:#3f6444;margin:0 0 7px}
+.place-confirm p{font-size:11px;line-height:1.9;color:#8a997c;margin:0 0 8px;overflow-wrap:anywhere}
+.place-confirm #place-coordinate-note{font-size:10px;color:#9ca48c}
+.place-assignment{display:flex;align-items:flex-end;gap:15px;margin-top:15px;flex-wrap:wrap}
+.place-assignment>label{font-size:11px;color:#839875;min-width:115px;flex:1}
+.place-assignment .gold-button{height:43px;white-space:nowrap;padding:10px 17px;margin-left:auto}
+.editorial-route .personal-place-dialog .place-service-note{font-size:10px;line-height:1.9;color:#9aa389;margin:17px 0 0}
+@media(max-width:800px){.place-search-layout{grid-template-columns:240px minmax(0,1fr)}.editorial-route .personal-place-dialog{padding:28px 22px}.editorial-route .personal-place-dialog h2{font-size:24px}.place-query-form{gap:10px}}
+@media(max-width:600px){
+ .editorial-route .personal-place-dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 20px);padding:28px 16px 20px}
+ .editorial-route .personal-place-dialog h2{font-size:21px}
+ .place-query-form{display:grid;grid-template-columns:1fr auto;gap:12px}
+ .place-query-form>label:first-child{grid-column:1/-1}
+ .place-search-layout{display:flex;flex-direction:column-reverse;gap:12px;height:auto}
+ .place-search-map{height:220px;flex:none}
+ .place-search-results{max-height:220px;min-height:70px;flex:none}
+ .place-confirm{padding:16px}
+ .place-assignment{gap:12px}
+ .place-assignment>label{min-width:90px}
+ .place-assignment .gold-button{width:100%;margin:0;justify-content:center}
+ .editorial-route .personal-place-item{gap:14px}
+ .editorial-route .personal-place-item-actions{flex-direction:column;align-items:stretch}
+ .editorial-route .personal-place-actions{gap:9px}
+ .editorial-route .personal-place-actions button{padding:9px 11px;font-size:11px}
+ .editorial-route .personal-stop-card{padding:16px;gap:12px;flex-wrap:wrap}
+ .editorial-route .personal-stop-card .personal-place-item-actions{width:100%;flex-direction:row;justify-content:flex-end}
+}

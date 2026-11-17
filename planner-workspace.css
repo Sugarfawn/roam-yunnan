@@ -1,0 +1,141 @@
+/* Place-first planning: one collection surface, one arrangement surface, a route workspace. */
+.planner-workspace.editorial-route{--page-width:min(1360px,calc(100% - clamp(40px,7vw,112px)))}
+.planner-workspace.editorial-route>.route-header{position:relative!important;color:#365b46;height:84px}
+.planner-workspace.editorial-route .route-brand{color:#365b46}
+.planner-workspace.editorial-route .route-header nav a,.planner-workspace.editorial-route .route-header nav button{color:#78876b}
+.planner-workspace.editorial-route .route-header .planner-entry{color:#55734b;border-color:#82936c50;background:transparent}
+.planner-workspace .travel-main{border-top:1px solid var(--line)}
+.planner-workspace .travel-breadcrumb{height:42px;font-size:11px;border-bottom:0}
+.planner-workspace .travel-breadcrumb>span{display:none}
+.planner-workspace .planner-step-nav{display:flex;gap:32px;margin:4px 0 12px;align-items:center}
+.planner-workspace .planner-step-nav button{display:flex;align-items:center;gap:10px;font-size:13px;color:#97a08b;padding:8px 0;border-bottom:2px solid transparent}
+.planner-workspace .planner-step-nav button span{font:11px Georgia,serif;color:#b29d76}
+.planner-workspace .planner-step-nav button.is-current{color:#365b46;border-bottom-color:#365b46}
+.planner-workspace .planner-step-nav button:disabled{opacity:.65;cursor:default}
+.planner-workspace .planning-heading{margin:0 0 18px}
+.planner-workspace .planning-heading h1{font-size:33px;letter-spacing:1px;margin-bottom:9px;scroll-margin-top:20px}
+.planner-workspace .planning-heading .eyebrow{display:none}
+.planner-workspace .planning-heading>p:not(.eyebrow){font-size:13px;color:#8a967e}
+.planner-workspace .planning-layout{grid-template-columns:minmax(0,1fr) 310px;gap:48px}
+.planner-workspace .ai-service-status{font-size:10px;color:#a0a58d;margin:0 0 25px}
+.planner-workspace .place-step-heading{display:flex;gap:25px;align-items:flex-end;justify-content:space-between;margin:0 0 23px}
+.planner-workspace .planner-destination-field{margin:0;flex:1;max-width:460px}
+.planner-workspace .planner-destination-field>label{font-size:12px;color:#849476}
+.planner-workspace .planner-destination-field select{font-size:15px;color:#3d6245;height:47px;background:#f9f8f1}
+.planner-workspace .quick-pick-spots{font-size:12px;color:#829572;white-space:nowrap;padding:13px 0}
+.planner-workspace .form-section{padding:23px 0 28px}
+.planner-workspace .form-section-title{margin-bottom:14px}
+.planner-workspace .form-section-title h2{font-size:19px;letter-spacing:.5px}
+.planner-workspace .form-small-note{font-size:12px;line-height:1.9;color:#8b977e;margin:0 0 18px}
+.planner-workspace .planner-spot-choices{gap:13px 17px;grid-template-columns:1fr 1fr}
+.planner-workspace .planner-choice-row{position:relative;gap:0}
+.planner-workspace .planner-spot-choice{border-radius:4px;padding:15px 35px 15px 13px;gap:12px;background:#faf9f135;min-height:97px}
+.planner-workspace .planner-choice-row.is-selected .planner-spot-choice{background:#e5edde73;border-color:#799767}
+.planner-workspace .choice-check{height:15px;width:15px;margin-top:22px}
+.planner-workspace .choice-photo{width:65px;height:65px;flex-basis:65px;border-radius:3px}
+.planner-workspace .choice-photo-pending{width:65px;height:65px;flex-basis:65px;font-size:10px}
+.planner-workspace .choice-copy strong{font-size:14px;line-height:1.7;color:#436441}
+.planner-workspace .choice-copy small{font-size:10px;margin-top:5px;color:#8e9d7c}
+.planner-workspace .choice-copy small.choice-caution:empty{display:none}
+.planner-workspace .choice-copy small.choice-photo-credit{display:none}
+.planner-workspace .must-visit-toggle{position:absolute;right:9px;top:14px;min-width:20px;min-height:25px}
+.planner-workspace .must-visit-toggle span{font-size:18px}
+.planner-workspace .spot-choice-summary{font-size:12px;margin-bottom:6px;color:#778b6a}
+.planner-workspace .personal-places-section{border-bottom:0;padding-bottom:15px}
+.planner-workspace .personal-place-actions{gap:10px;margin:18px 0 12px}
+.planner-workspace .personal-place-actions button{background:transparent;font-size:12px;border-style:dashed;padding:10px 15px}
+.planner-workspace .personal-place-item{padding:15px 0}
+.planner-workspace .selection-empty-hint{font-size:12px;color:#a28c60;margin:14px 0}
+.planner-workspace .planner-next{width:100%;margin-top:14px;padding:14px 20px;font-size:13px;min-height:48px}
+.planner-workspace .planner-next:disabled{background:#94a18a;border-color:#94a18a;cursor:default;transform:none}
+.planner-workspace .planner-step-back{font-size:12px;color:#859675;margin:0 0 8px;padding:8px 0}
+.planner-workspace .planner-submit-bar{padding-top:8px}
+.planner-workspace .planner-submit-bar .gold-button{width:100%;min-height:49px;padding:14px 20px;font-size:14px}
+.planner-workspace .generation-note{font-size:11px;line-height:1.9;color:#9aa288}
+.planner-workspace .planning-aside{top:22px;padding:22px;border-radius:4px;border-color:#71875a30;background:#eeefe64d}
+.planner-workspace .selection-summary-heading{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#678056;margin-bottom:18px}
+.planner-workspace .selection-summary-heading strong{font:22px Georgia,serif;color:#a99368;font-weight:400}
+.planner-workspace .selection-region-photo{aspect-ratio:auto;height:132px;margin:0 0 13px;border-radius:3px}
+.planner-workspace .planning-aside figcaption{left:15px;bottom:12px;gap:0}
+.planner-workspace .planning-aside figcaption>span{font-size:19px}
+.planner-workspace #planner-region-name{font-size:21px;letter-spacing:1px;line-height:1.5;color:#fff8e7}
+.planner-workspace .planning-aside figcaption>small{display:none}
+.planner-workspace .selection-ledger{max-height:340px;overflow:auto;scrollbar-width:thin;overscroll-behavior:contain}
+.planner-workspace .selection-ledger-empty{font-size:12px;color:#939f86;line-height:2;margin:8px 0}
+.planner-workspace .selection-ledger-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #71875a20;font-size:12px;color:#718665;line-height:1.8}
+.planner-workspace .selection-ledger-row>span{min-width:0}
+.planner-workspace .selection-ledger-row button{font-size:17px;color:#9ea68f;padding:2px 5px}
+.planner-workspace .selection-ledger-row small{font-size:9px;color:#a3a78e;white-space:nowrap}
+.planner-workspace .selection-summary-footnote{font-size:10px;color:#a0a58c;line-height:1.9;margin:17px 0 0}
+.planner-workspace .resume-plan{margin-top:12px;font-size:11px}
+.planner-workspace .result-heading{margin:20px 0 18px}
+.planner-workspace .result-heading .eyebrow{display:none}
+.planner-workspace .result-heading h1{font-size:31px;margin:0 0 8px}
+.planner-workspace .result-heading p:not(.eyebrow){font-size:12px;color:#8c987d}
+.planner-workspace .result-actions{gap:19px}
+.planner-workspace .local-plan-status{font-size:10px;margin-bottom:12px;border-bottom:0;padding:11px 0 0}
+.planner-workspace .ai-result-summary{margin:0 0 22px;padding:0;border:0;background:none}
+.planner-workspace .ai-result-summary>summary{font-size:11px;color:#9d926f;cursor:pointer;padding:9px 0;line-height:1.9}
+.planner-workspace .ai-result-summary>strong,.planner-workspace .ai-result-summary>p,.planner-workspace .ai-result-summary>small{margin:0;padding:8px 15px;border-left:1px solid #ad976b55;background:#e9edde40}
+.planner-workspace .ai-result-summary strong{font-size:13px}
+.planner-workspace .ai-result-summary p{font-size:12px;line-height:1.95}
+.planner-workspace .travel-result-layout{grid-template-columns:minmax(400px,.93fr) minmax(0,1.07fr);gap:36px}
+.planner-workspace .result-day-tabs{margin-bottom:20px;position:sticky;top:0;background:#f5f3edf5;z-index:3}
+.planner-workspace .result-day-tabs button{padding:13px 19px;gap:10px}
+.planner-workspace .result-day-tabs button strong{font-size:15px}
+.planner-workspace .day-intro{margin-bottom:13px}
+.planner-workspace .day-intro h2{font-size:23px;line-height:1.7;margin-bottom:5px}
+.planner-workspace .day-overview-line{font-size:11px!important;color:#99a187!important}
+.planner-workspace .day-arrangement-note{margin:0 0 22px;font-size:11px;color:#93a080}
+.planner-workspace .day-arrangement-note>summary{cursor:pointer;font-size:11px;line-height:1.8;color:#8d9b7b}
+.planner-workspace .day-arrangement-note p{font-size:11px;color:#8c9c7c;line-height:1.95;margin:10px 0}
+.planner-workspace .day-important-note{font-size:11px;line-height:1.9;color:#a18c61;border-left:2px solid #b49a6e;padding:9px 13px;background:#eee8da66;margin:0 0 17px}
+.planner-workspace .daily-stop{grid-template-columns:25px minmax(0,1fr);gap:12px;margin-bottom:0}
+.planner-workspace .daily-stop:before{display:none}
+.planner-workspace .stop-index{padding-top:20px;font-size:12px}
+.planner-workspace .daily-stop-card,.planner-workspace .personal-stop-card{padding:17px;gap:14px;flex-wrap:nowrap;border-radius:5px;background:#faf9f238;border:1px solid #71875a32;transition:border-color .2s,background .2s;cursor:pointer;align-items:flex-start}
+.planner-workspace .personal-stop-card{border-left:2px solid #b29a6e}
+.planner-workspace .daily-stop.is-map-selected .daily-stop-card,.planner-workspace .daily-stop.is-map-selected .personal-stop-card{border-color:#779366;background:#e9efdf80}
+.planner-workspace .daily-stop-card>img{width:74px;height:76px;border-radius:3px;flex:none}
+.planner-workspace .stop-card-copy{min-width:0;flex:1}
+.planner-workspace .stop-card-copy h3{font-size:17px;margin:4px 0 7px;line-height:1.65;letter-spacing:0}
+.planner-workspace .stop-kind{font-size:10px;letter-spacing:.3px;color:#aa986f}
+.planner-workspace .stop-card-copy>small{font-size:10px;color:#92a083;line-height:1.8}
+.planner-workspace .stop-more{font-size:10px;line-height:1.9;margin-top:9px;color:#98a187}
+.planner-workspace .stop-more summary{cursor:pointer;font-size:10px;color:#9aa38a}
+.planner-workspace .stop-more p{font-size:11px;line-height:1.95;margin:8px 0;color:#869978}
+.planner-workspace .stop-location-action{font-size:10px;color:#a18d60;border:0;background:none;padding:7px 0 0;text-align:left}
+.planner-workspace .stop-location-action.is-resolved{color:#8e9e7d}
+.planner-workspace .stop-controls{width:54px;max-width:54px;gap:4px;flex:none;border:0;padding:0;align-items:stretch;flex-direction:column}
+.planner-workspace .stop-controls button{font-size:12px;height:25px;padding:2px 5px;color:#8b9d7c;border-color:#71875a25}
+.planner-workspace .stop-controls button:last-of-type{font-size:9px;width:100%;margin-top:3px}
+.planner-workspace .move-stop-day{font:10px Georgia,serif;color:#8f9c7d;max-width:54px;width:54px;background:#faf9f2;border:1px solid #71875a2a;padding:4px 0;border-radius:2px;margin-top:3px}
+.planner-workspace .route-leg{margin:0 0 0 37px;min-height:54px;display:flex;align-items:center;gap:10px;padding:10px 0;line-height:1.8}
+.planner-workspace .route-leg-line{font-size:19px;color:#aeb99e;flex:none}
+.planner-workspace .route-leg-text{font-size:11px;color:#829773;min-width:0;flex:1;line-height:1.9}
+.planner-workspace .route-leg-mode{font-size:10px;color:#8a9c79;background:transparent;border:1px solid #71875a24;border-radius:3px;padding:5px 4px;max-width:103px}
+.planner-workspace .route-leg-mode:disabled{color:#a8af9b;border-color:transparent}
+.planner-workspace .route-overview{position:sticky;top:20px;background:#eeefe640;border-color:#71875a2e;border-radius:5px}
+.planner-workspace .overview-heading{padding:19px 22px 15px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.planner-workspace .overview-heading .eyebrow{display:none}
+.planner-workspace .overview-heading h2{font-size:19px;margin:0}
+.planner-workspace .overview-heading>span{font:12px Georgia,serif;color:#a08c64}
+.planner-workspace .travel-map{height:min(58dvh,600px);min-height:370px;display:block;padding:0}
+.planner-workspace .personal-day-map{height:100%;min-height:370px}
+.planner-workspace .route-preview-disclaimer{font-size:10px;color:#9a8f6f;padding:14px 20px 0;margin-bottom:5px}
+.planner-workspace .coordinate-note{font-size:10px;padding:0 20px 12px;color:#9ba68b}
+.planner-workspace .route-order{padding:13px 20px 18px}
+.planner-workspace .route-overview-summary{font-size:12px;line-height:1.9;color:#6d885c;margin:0 0 9px}
+.planner-workspace .refresh-day-routes{font-size:10px;color:#899b7a;padding:6px 0}
+.planner-workspace .route-data-note{font-size:10px;color:#a1a88f;margin-top:8px;line-height:1.9}
+.planner-workspace .route-data-note summary{cursor:pointer}
+.planner-workspace .route-data-note p{font-size:10px;color:#96a185;line-height:1.95;margin:9px 0}
+.planner-workspace .overview-map-link{display:none}
+.planner-workspace .result-references{margin-top:30px;padding:17px 0;border-block:1px solid var(--line)}
+.planner-workspace .result-references>summary{font-size:11px;padding:0;color:#99a186;cursor:pointer}
+.planner-workspace .journey-map-marker{height:31px;min-width:31px;padding:0 8px;border:2px solid #f9f5e7;border-radius:18px;background:#3b674e;color:#fff9e9;box-shadow:0 2px 8px #1f3e3030;font:12px Georgia,serif;cursor:pointer}
+.planner-workspace .journey-map-marker.is-active{background:#b38f5b;transform:scale(1.14)}
+@media(max-width:1150px){.planner-workspace .planning-layout{grid-template-columns:minmax(0,1fr) 265px;gap:28px}.planner-workspace .planning-aside{padding:18px}.planner-workspace .travel-result-layout{grid-template-columns:minmax(330px,.95fr) minmax(0,1.05fr);gap:24px}.planner-workspace .daily-stop-card,.planner-workspace .personal-stop-card{padding:14px;gap:11px}.planner-workspace .daily-stop-card>img{width:60px;height:66px}.planner-workspace .choice-photo{width:54px;height:60px;flex-basis:54px}.planner-workspace .choice-copy strong{font-size:13px}}
+@media(max-width:950px){.planner-workspace .planning-layout{grid-template-columns:minmax(0,1fr)}.planner-workspace .planning-aside{position:static;display:none}.planner-workspace .travel-result-layout{grid-template-columns:1fr}.planner-workspace .route-overview{position:relative;top:0;order:-1}.planner-workspace .travel-map,.planner-workspace .personal-day-map{height:330px;min-height:330px}.planner-workspace .route-order{padding-top:9px}.planner-workspace .result-day-tabs{position:static}.planner-workspace .route-data-note{display:none}}
+@media(max-width:600px){.planner-workspace.editorial-route>.route-header{height:74px}.planner-workspace .travel-breadcrumb{height:49px}.planner-workspace .planning-heading h1{font-size:27px}.planner-workspace .planner-step-nav{gap:23px;margin:12px 0 19px}.planner-workspace .planner-spot-choices{grid-template-columns:1fr}.planner-workspace .place-step-heading{align-items:flex-end;gap:15px}.planner-workspace .quick-pick-spots{font-size:10px}.planner-workspace .planner-destination-field select{font-size:13px}.planner-workspace .choice-photo{width:66px;height:66px;flex-basis:66px}.planner-workspace .choice-copy strong{font-size:14px}.planner-workspace .result-heading h1{font-size:26px}.planner-workspace .result-actions{gap:17px}.planner-workspace .daily-stop-card,.planner-workspace .personal-stop-card{padding:13px;gap:10px}.planner-workspace .daily-stop-card>img{width:52px;height:60px}.planner-workspace .stop-card-copy h3{font-size:16px}.planner-workspace .stop-controls{width:34px;max-width:34px}.planner-workspace .move-stop-day{max-width:34px;width:34px;font-size:8px}.planner-workspace .route-leg{flex-wrap:wrap;gap:7px}.planner-workspace .route-leg-text{font-size:10px}.planner-workspace .route-leg-mode{font-size:9px;max-width:90px}.planner-workspace .travel-map,.planner-workspace .personal-day-map{height:290px;min-height:290px}.planner-workspace .day-intro h2{font-size:21px}}
+@media(prefers-reduced-motion:reduce){.planner-workspace *{scroll-behavior:auto!important;transition:none!important}}

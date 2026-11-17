@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-11T02:12:33.511Z",
+  "mode": "actual live AMap SDK and road request, no DeepSeek call",
+  "passed": true,
+  "stage": "road-query",
+  "status": "ok",
+  "reason": null,
+  "source": "AMap.Driving",
+  "distanceMeters": 4772,
+  "durationSeconds": 1186,
+  "errors": []
+}

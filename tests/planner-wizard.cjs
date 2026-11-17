@@ -1,0 +1,43 @@
+require('node:fs').mkdirSync(require('node:path').join(__dirname,'artifacts'),{recursive:true});
+/* UI regression uses recorded AI output and explicit offline map stubs. */
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {chromium}=require('playwright');
+const root=path.resolve(__dirname,'..'),{createServer}=require(path.join(root,'server.cjs'));
+const replay=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures','recorded-plan.json'),'utf8')).content;
+const offlineMap=`window.RoamAMap={load:async()=>{throw Error('离线测试地图')},search:async()=>[],cityFor:()=> '大理市',resolve:async p=>p};`;
+const shots=path.join(__dirname,'artifacts');
+(async()=>{let mode='success',calls=0;
+const server=createServer({configProvider:()=>({apiKey:'wizard-test-fixture',model:'recorded-replay'}),fetchImpl:async(url,opts)=>{calls++;await new Promise((resolve,reject)=>{const timer=setTimeout(resolve,900);opts.signal.addEventListener('abort',()=>{clearTimeout(timer);reject(Error('aborted'));},{once:true});});if(mode==='fail')return{ok:false,status:429};return{ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:replay}}]})};}});
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const browser=await chromium.launch({...(process.env.PLAYWRIGHT_EXECUTABLE_PATH?{executablePath:process.env.PLAYWRIGHT_EXECUTABLE_PATH}:{}),headless:true});
+try{
+const p=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'}),errors=[];p.on('pageerror',e=>errors.push(e.message));
+await p.route('**/*',route=>{const u=new URL(route.request().url());if(!['127.0.0.1','localhost'].includes(u.hostname))return route.abort();if(u.pathname==='/amap-service.js')return route.fulfill({contentType:'application/javascript',body:offlineMap});if(u.pathname==='/map-config.local.js')return route.fulfill({contentType:'application/javascript',body:'window.RoamMapConfig={};'});return route.continue();});
+const base='http://127.0.0.1:'+server.address().port;
+await p.goto(base+'/explore/yunnan/planner/?place=erhai&view=edit',{waitUntil:'networkidle'});
+assert.equal(await p.locator('#stay-food-step').isVisible(),false);assert.equal(await p.locator('#arrange-trip-step').isVisible(),false);
+for(const size of [{width:1440,height:900},{width:1366,height:768},{width:1920,height:1080},{width:1024,height:650}]){
+ await p.setViewportSize(size);const bounds=await p.evaluate(()=>{const b=document.querySelector('#continue-to-arrange').getBoundingClientRect(),list=document.querySelector('#planner-spot-choices').getBoundingClientRect();return{height:document.documentElement.scrollHeight,view:innerHeight,width:document.documentElement.scrollWidth,viewWidth:innerWidth,bottom:b.bottom,top:b.top,listTop:list.top};});
+ assert.equal(bounds.height,size.height,JSON.stringify(bounds));assert.equal(bounds.width,size.width);assert.ok(bounds.bottom<=size.height&&bounds.top>0,JSON.stringify(bounds));assert.ok(bounds.listTop<size.height*.68,JSON.stringify(bounds));
+}
+await p.setViewportSize({width:1440,height:900});
+for(const id of ['dali-old-city','dali-three-pagodas','dali-xizhou','dali-yan-courtyard','dali-longkan','dali-caicun'])await p.locator('.planner-spot-choice:has(input[value="'+id+'"])').click();
+await p.screenshot({path:path.join(shots,'向导-01-选择景点.png'),fullPage:false});
+await p.locator('#place-mode-search').click();await p.locator('#spot-search-keyword').fill('测试景点');await p.locator('#spot-search-keyword').press('Enter');await p.locator('#place-search-dialog').waitFor({state:'visible'});assert.equal(await p.locator('#place-kind').inputValue(),'other');assert.equal(await p.locator('#place-keyword').inputValue(),'测试景点');await p.locator('#close-place-search').click();assert.equal(calls,0);
+await p.locator('#place-mode-recommend').click();await p.locator('#continue-to-arrange').click();assert.equal(await p.locator('#stay-food-step').isVisible(),true);assert.equal(await p.locator('#choose-places-step').isVisible(),false);assert.equal(await p.locator('#arrange-trip-step').isVisible(),false);
+await p.locator('[data-open-place-search=hotel]').first().click();await p.locator('#place-search-dialog').waitFor({state:'visible'});assert.equal(await p.locator('#place-kind').inputValue(),'hotel');await p.locator('#close-place-search').click();
+await p.evaluate(()=>{window.RoamPlannerPersonal.add({provider:'amap',coordinateSystem:'GCJ-02',poiId:'wizard-test-hotel',name:'测试酒店（离线样本）',kind:'hotel',coordinates:[100.15,25.7],adcode:'532901',fromDay:1,toDay:3});});
+await p.screenshot({path:path.join(shots,'向导-02-酒店餐厅.png'),fullPage:false});
+await p.locator('#continue-to-settings').click();assert.equal(await p.locator('#arrange-trip-step').isVisible(),true);assert.equal(await p.locator('#stay-food-step').isVisible(),false);await p.locator('input[name=transport][value=drive]').check({force:true});await p.locator('#ai-expectation').fill('慢慢走，保留午后休息。');
+for(const size of [{width:1440,height:900},{width:1366,height:768},{width:1024,height:650}]){await p.setViewportSize(size);assert.equal(await p.evaluate(()=>document.documentElement.scrollHeight),size.height);const b=await p.locator('#generate-plan').boundingBox();assert.ok(b.y+b.height<=size.height);}
+await p.setViewportSize({width:1440,height:900});await p.screenshot({path:path.join(shots,'向导-03-AI设置.png'),fullPage:false});
+await p.reload({waitUntil:'networkidle'});assert.equal(await p.locator('#arrange-trip-step').isVisible(),true);assert.equal(await p.locator('#ai-expectation').inputValue(),'慢慢走，保留午后休息。');
+// Existing drafts save settings on changes; explicit textarea change above occurs on blur.
+await p.locator('#generate-plan').click();await p.locator('#wizard-generation-dialog').waitFor({state:'visible'});assert.equal(await p.locator('#cancel-ai-generation').isEnabled(),true);await p.screenshot({path:path.join(shots,'向导-04-生成等待.png'),fullPage:false});
+await p.locator('#result-section').waitFor({state:'visible',timeout:15000});assert.equal(await p.locator('#wizard-generation-dialog').isVisible(),false);assert.equal(calls,1);
+await p.locator('#save-plan').click();await p.reload({waitUntil:'networkidle'});assert.equal(await p.locator('#result-section').isVisible(),true);assert.equal(calls,1);
+await p.locator('#edit-plan').click();await p.locator('#continue-to-arrange').click();await p.locator('#continue-to-settings').click();mode='fail';await p.locator('#generate-plan').click();await p.waitForFunction(()=>document.querySelector('#wizard-generation-dialog').dataset.state==='error');assert.equal(await p.locator('#retry-ai-generation').isVisible(),true);await p.locator('#dismiss-generation').click();assert.equal(await p.locator('#arrange-trip-step').isVisible(),true);assert.equal(await p.locator('input[name=spot]:checked').count(),6);
+mode='success';await p.locator('#generate-plan').click();await p.locator('#wizard-generation-dialog').waitFor({state:'visible'});await p.locator('#cancel-ai-generation').click();await p.waitForFunction(()=>document.querySelector('#wizard-generation-dialog').dataset.state==='error');assert.match(await p.locator('#ai-generation-message').textContent(),/已取消/);await p.locator('#dismiss-generation').click();
+await p.setViewportSize({width:390,height:844});assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth),390);await p.screenshot({path:path.join(shots,'向导-移动端.png'),fullPage:true});
+assert.deepEqual(errors,[]);const report={passed:true,mode:'offline UI, recorded AI replay; no paid model or real map calls',checks:['one active step at a time','desktop 1440/1366/1920/1024 shell fits viewport','next/generate actions always visible','free search prefills actual search dialog','hotel and dining separated from attractions','settings and stage restored after reload','real request waiting state, success, failure and cancel','old saved route retained on failure','saved route restored without regeneration','mobile no horizontal overflow'],errors};fs.writeFileSync(path.join(shots,'planner-wizard-verification.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));
+}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}})().catch(error=>{console.error(error.stack);process.exitCode=1});

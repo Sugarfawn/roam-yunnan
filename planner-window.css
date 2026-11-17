@@ -1,0 +1,122 @@
+/* One task per screen. The shell, step heading and actions never scroll. */
+.catalogue-search{display:flex;gap:10px;align-items:center;margin:0 0 12px;font-size:11px;color:#718568}
+.catalogue-search input{flex:1;min-width:0;border:1px solid #71875a40;background:#fffdf586;border-radius:3px;padding:8px 10px;color:#365b46;font-size:12px}
+.planner-workspace .planner-choice-row[hidden]{display:none!important}
+.planner-workspace .planner-step-pane[hidden]{display:none!important}
+.planner-workspace .place-mode-panel[hidden]{display:none!important}
+.planner-workspace .place-mode-tabs{display:flex;gap:24px;margin:0 0 12px;border-bottom:1px solid #71875a2b}
+.planner-workspace .place-mode-tabs button{position:relative;padding:8px 0 11px;color:#7b886e;font-size:12px}
+.planner-workspace .place-mode-tabs button:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:transparent}
+.planner-workspace .place-mode-tabs button.is-current{color:#3f6548}
+.planner-workspace .place-mode-tabs button.is-current:after{background:#3f6548}
+.planner-workspace .free-search-intro{margin:0 0 18px;font-size:13px;color:#75856b;line-height:1.9}
+.planner-workspace .spot-search-form{display:flex;gap:12px;max-width:720px;padding:14px 0}
+.planner-workspace .spot-search-form input{flex:1;min-width:0;height:49px;padding:0 16px;border:1px solid #71875a45;background:#fffdf59c;border-radius:4px;color:#365b46;font:inherit;font-size:14px}
+.planner-workspace .spot-search-form button{flex:none;padding:12px 22px;font-size:12px}
+.planner-workspace .wizard-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid #71875a30;padding:14px 0 0;margin-top:12px;flex:none}
+.planner-workspace .wizard-footer .gold-button{width:auto;min-height:45px;margin:0;padding:11px 24px;white-space:nowrap;font-size:13px}
+.planner-workspace #choose-places-step .wizard-footer{justify-content:flex-end}
+.planner-workspace .wizard-footer .selection-empty-hint{margin:0 auto 0 0;font-size:11px}
+.planner-workspace .wizard-footer .planner-step-back{margin:0;white-space:nowrap;color:#627b58}
+.planner-workspace .wizard-footer .generation-note{margin:0;max-width:340px;font-size:10px;line-height:1.7;color:#7a896c}
+.planner-workspace .settings-grid{display:grid;grid-template-columns:minmax(230px,.8fr) minmax(0,1.2fr);gap:18px 30px;align-content:start}
+.planner-workspace .settings-grid .ai-expectation{grid-column:1/-1;margin:0}
+.planner-workspace .settings-grid .form-section{border:0;margin:0;padding:0}
+.planner-workspace .settings-grid .form-section-title{margin-bottom:12px}
+.planner-workspace .settings-grid fieldset{margin:0 0 17px}
+.planner-workspace .settings-grid .option-row{gap:8px}
+.planner-workspace .settings-grid .option-row input+span{font-size:12px;padding:9px 10px}
+.planner-workspace .settings-grid .option-row small{font-size:9px;line-height:1.7;margin-top:3px}
+.planner-workspace .settings-grid .ai-expectation textarea{min-height:60px;height:66px}
+.planner-workspace .settings-grid .planner-advanced{margin-top:18px}
+.planner-workspace .settings-grid .planner-advanced-body{padding-top:14px}
+.planner-workspace .selection-ledger-row button{flex:none}
+.planner-workspace .selection-summary-footnote{flex:none}
+
+/* Generation is a real request state, with cancellation, retry and a way back. */
+.wizard-generation-dialog{width:min(660px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:40px clamp(22px,5vw,54px);box-sizing:border-box;border:1px solid #cbbf9b66;border-radius:7px;background:#f6f3eaf7;color:#365b46;text-align:center;overflow:auto;box-shadow:0 30px 100px #102e2a40}
+.wizard-generation-dialog::backdrop{background:#102e2ad4;backdrop-filter:blur(14px)}
+.wizard-generation-dialog .step-kicker{font:9px Arial,sans-serif;letter-spacing:2.4px;color:#9d875c;margin:0 0 25px}
+.wizard-generation-dialog h2{font-size:27px;line-height:1.65;font-weight:400;margin:20px 0 12px}
+.wizard-generation-dialog .generation-description{font-size:13px;color:#71816b;line-height:2;margin:0}
+.generation-orbit{width:70px;height:70px;margin:0 auto;border:1px solid #b6a67a44;border-radius:50%;position:relative}
+.generation-orbit:before{content:"";position:absolute;inset:9px;border:1px solid #71875a40;border-radius:50%}
+.generation-orbit:after{content:"";position:absolute;inset:-1px;border:2px solid transparent;border-top-color:#9b8052;border-radius:50%;animation:journey-orbit 1.6s linear infinite}
+.wizard-generation-dialog[data-state=error] .generation-orbit:after{animation:none;border-top-color:#ad7951;transform:rotate(30deg)}
+.wizard-generation-dialog .ai-generation-progress{margin:25px 0 0;padding:15px 0 0;border:0;border-top:1px solid #71875a30;background:none;font-size:12px;line-height:1.9}
+.wizard-generation-dialog .ai-generation-progress p{font-size:12px;color:#6b7d61;margin:0 0 16px}
+.wizard-generation-dialog .ai-generation-progress button,.wizard-generation-dialog .wizard-dismiss{font-size:12px;border:1px solid #71875a55;color:#4e7046;padding:9px 18px;margin:4px;border-radius:3px;background:transparent}
+.wizard-generation-dialog .ai-generation-progress.is-error p{color:#956848}
+@keyframes journey-orbit{to{transform:rotate(360deg)}}
+
+@media(min-width:951px){
+  html:has(body.planner-workspace[data-planner-view=edit]){overflow:hidden}
+  body.planner-workspace[data-planner-view=edit]{--wizard-masthead:146px;height:100dvh;min-height:0;overflow:hidden}
+  body.planner-workspace[data-planner-view=edit] .planner-banner{height:var(--wizard-masthead);min-height:0}
+  body.planner-workspace.editorial-route[data-planner-view=edit]>.route-header{height:62px}
+  body.planner-workspace .planner-banner figcaption{bottom:15px;gap:3px}
+  body.planner-workspace .planner-banner-kicker{display:none}
+  body.planner-workspace .planner-banner #planner-region-name{font-size:29px;line-height:1.4;letter-spacing:2px}
+  body.planner-workspace #planner-banner-english{font-size:8px}
+  body.planner-workspace .planner-banner-credit{bottom:19px}
+  body.planner-workspace[data-planner-view=edit] .travel-main{height:calc(100dvh - var(--wizard-masthead));margin:0 auto;padding:0 28px 18px;display:flex;flex-direction:column;overflow:hidden;border-radius:0 0 5px 5px}
+  body.planner-workspace[data-planner-view=edit] .travel-breadcrumb{height:33px;flex:none;font-size:10px}
+  body.planner-workspace[data-planner-view=edit] #planning-section{flex:1;min-height:0;display:flex;flex-direction:column}
+  body.planner-workspace[data-planner-view=edit] .planner-step-nav{flex:none;margin:0 0 10px;gap:30px}
+  body.planner-workspace[data-planner-view=edit] .planner-step-nav button{font-size:12px;padding:6px 0}
+  body.planner-workspace[data-planner-view=edit] .planning-heading{margin:0 0 18px;flex:none}
+  body.planner-workspace[data-planner-view=edit] .planning-heading h1{font-size:27px;line-height:1.5;margin:0 0 5px}
+  body.planner-workspace[data-planner-view=edit] .planning-heading p:not(.eyebrow){font-size:12px;margin:0;line-height:1.8}
+  body.planner-workspace[data-planner-view=edit] .ai-service-status{flex:none;margin:0 0 8px}
+  body.planner-workspace[data-planner-view=edit] .planning-layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:28px;flex:1;min-height:0;overflow:hidden;align-items:stretch}
+  body.planner-workspace[data-planner-view=edit] .planning-layout>.travel-form{height:100%;min-height:0;overflow:hidden}
+  body.planner-workspace[data-planner-view=edit] .planning-layout .planner-step-pane{height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:0}
+  body.planner-workspace[data-planner-view=edit] .wizard-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:10px}
+  body.planner-workspace[data-planner-view=edit] .place-step-heading{margin:0 0 10px;flex:none;gap:18px}
+  body.planner-workspace[data-planner-view=edit] .planner-destination-field>label{display:none}
+  body.planner-workspace[data-planner-view=edit] .planner-destination-field select{height:40px;font-size:13px;margin:0}
+  body.planner-workspace[data-planner-view=edit] .quick-pick-spots{font-size:11px;padding:9px 0}
+  body.planner-workspace[data-planner-view=edit] .place-mode-tabs{flex:none;margin-bottom:10px}
+  body.planner-workspace[data-planner-view=edit] .planner-step-pane .form-section{padding:0}
+  body.planner-workspace[data-planner-view=edit] #choose-places-step .form-section-title,body.planner-workspace[data-planner-view=edit] #choose-places-step .form-small-note{display:none}
+  body.planner-workspace[data-planner-view=edit] .spot-choice-summary{margin:0 0 10px;font-size:11px}
+  body.planner-workspace[data-planner-view=edit] .planner-spot-choices{gap:12px}
+  body.planner-workspace[data-planner-view=edit] .planner-spot-choice{min-height:92px;padding-top:12px;padding-bottom:12px}
+  body.planner-workspace[data-planner-view=edit] .planning-aside{position:static;top:auto;height:100%;min-height:0;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column;padding:20px}
+  body.planner-workspace[data-planner-view=edit] .selection-summary-heading{flex:none;margin-bottom:0}
+  body.planner-workspace[data-planner-view=edit] .selection-ledger{flex:1;min-height:0;max-height:none;overflow:auto;scrollbar-width:thin}
+  body.planner-workspace[data-planner-view=edit] .selection-summary-footnote{margin:12px 0 0;padding-top:12px}
+  body.planner-workspace[data-planner-view=edit] .resume-plan{flex:none}
+  body.planner-workspace[data-planner-view=edit] #stay-food-step .personal-place-actions{display:grid;grid-template-columns:1fr 1fr;margin:22px 0}
+  body.planner-workspace[data-planner-view=edit] #stay-food-step [data-open-place-search=other]{display:none}
+  body.planner-workspace[data-planner-view=edit] .travel-notice{flex:none;font-size:11px;margin:0 0 6px}
+}
+@media(min-width:951px) and (max-height:780px){
+  .planner-workspace .catalogue-search{margin-bottom:6px}
+  .planner-workspace .catalogue-search input{padding:5px 8px}
+  body.planner-workspace[data-planner-view=edit] .spot-choice-summary{margin-bottom:4px}
+  body.planner-workspace[data-planner-view=edit]{--wizard-masthead:120px}
+  body.planner-workspace .planner-banner #planner-region-name{font-size:22px}
+  body.planner-workspace .planner-banner figcaption{bottom:8px;gap:0}
+  body.planner-workspace[data-planner-view=edit] .planning-heading{margin-bottom:10px}
+  body.planner-workspace[data-planner-view=edit] .planning-heading h1{font-size:23px}
+  body.planner-workspace[data-planner-view=edit] .planner-step-nav{margin-bottom:6px}
+  body.planner-workspace[data-planner-view=edit] .travel-main{padding-bottom:12px}
+}
+@media(max-width:950px){
+  .planner-workspace .wizard-footer{position:sticky;bottom:0;z-index:2;background:#f6f4ebf5;padding:12px 0;margin-top:20px;flex-wrap:wrap}
+  .planner-workspace .wizard-footer .generation-note{display:none}
+  .planner-workspace .wizard-footer .gold-button{margin-left:auto}
+  .planner-workspace .settings-grid{display:block}
+  .planner-workspace .settings-grid .form-section{padding:20px 0}
+  .planner-workspace .planner-step-nav{gap:16px;flex-wrap:wrap}
+  .planner-workspace .planner-step-nav button{font-size:11px;gap:5px}
+}
+@media(max-width:600px){
+  .planner-workspace .spot-search-form{flex-wrap:wrap}
+  .planner-workspace .spot-search-form input{flex-basis:100%}
+  .planner-workspace .wizard-footer .gold-button{font-size:11px;padding:10px 15px}
+  .planner-workspace .wizard-footer .planner-step-back{font-size:10px}
+  .wizard-generation-dialog h2{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){.generation-orbit:after{animation:none}}

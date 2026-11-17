@@ -11,6 +11,7 @@
       0.5,
       0.5
     ],
+    "original": "assets/selected/originals/meili.jpg",
     "background": "assets/selected/meili-background.webp",
     "card": "assets/selected/meili-card.webp",
     "sourceDimensions": [
@@ -30,19 +31,7 @@
       600,
       800
     ],
-    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
-    "originalInFullProject": "assets/selected/originals/meili.jpg",
-    "originalIncludedInThisStage": false,
-    "stageAssets": {
-      "background": {
-        "path": "assets/selected/meili-background.webp",
-        "sha256": "b4f9e74c966d2e837066b946b7d967a335da8bfc9082fd0ae4555d7493bbdca5"
-      },
-      "card": {
-        "path": "assets/selected/meili-card.webp",
-        "sha256": "725eaad23b1bb1cb07c8a1f604134d1532a605b01644c4b4f490268d0cc740b8"
-      }
-    }
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph."
   },
   {
     "id": "erhai",
@@ -56,6 +45,7 @@
       0.5,
       0.5
     ],
+    "original": "assets/selected/originals/erhai.jpg",
     "background": "assets/selected/erhai-background.webp",
     "card": "assets/selected/erhai-card.webp",
     "sourceDimensions": [
@@ -75,19 +65,7 @@
       600,
       800
     ],
-    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
-    "originalInFullProject": "assets/selected/originals/erhai.jpg",
-    "originalIncludedInThisStage": false,
-    "stageAssets": {
-      "background": {
-        "path": "assets/selected/erhai-background.webp",
-        "sha256": "768feeaa568341996d468219f0e9f36921d84fdfe33867ea8b41a866cc8fdba4"
-      },
-      "card": {
-        "path": "assets/selected/erhai-card.webp",
-        "sha256": "47830e3107065507e133081d32b8942111d078dd6989e96836cc59b369677a33"
-      }
-    }
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph."
   },
   {
     "id": "yulong",
@@ -101,6 +79,7 @@
       0.5,
       0.5
     ],
+    "original": "assets/selected/originals/yulong.jpg",
     "background": "assets/selected/yulong-background.webp",
     "card": "assets/selected/yulong-card.webp",
     "sourceDimensions": [
@@ -120,19 +99,7 @@
       600,
       800
     ],
-    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
-    "originalInFullProject": "assets/selected/originals/yulong.jpg",
-    "originalIncludedInThisStage": false,
-    "stageAssets": {
-      "background": {
-        "path": "assets/selected/yulong-background.webp",
-        "sha256": "caade3727308eb98587488a234f26a4422b9f005ebd2e0d87e2684538e909261"
-      },
-      "card": {
-        "path": "assets/selected/yulong-card.webp",
-        "sha256": "876b6025c0345012bc6f4a0a5eb511f79117c031161a6d0b491d07def86a0c47"
-      }
-    }
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph."
   },
   {
     "id": "shangri",
@@ -146,6 +113,7 @@
       0.5,
       0.5
     ],
+    "original": "assets/selected/originals/shangri.jpg",
     "background": "assets/selected/shangri-background.webp",
     "card": "assets/selected/shangri-card.webp",
     "sourceDimensions": [
@@ -173,19 +141,7 @@
       600,
       800
     ],
-    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
-    "originalInFullProject": "assets/selected/originals/shangri.jpg",
-    "originalIncludedInThisStage": false,
-    "stageAssets": {
-      "background": {
-        "path": "assets/selected/shangri-background.webp",
-        "sha256": "5f288cb822007e9c031a558efa88d5f32bf6b636ddac1bba4c63c90556520606"
-      },
-      "card": {
-        "path": "assets/selected/shangri-card.webp",
-        "sha256": "a8eba81ffa3397cf0a509ea420838e0e8f7b545a700041cfa254b521d4a50212"
-      }
-    }
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph."
   },
   {
     "id": "banna",
@@ -199,6 +155,7 @@
       0.5,
       0.5
     ],
+    "original": "assets/selected/originals/banna.jpg",
     "background": "assets/selected/banna-background.webp",
     "card": "assets/selected/banna-card.webp",
     "sourceDimensions": [
@@ -218,18 +175,6 @@
       600,
       800
     ],
-    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
-    "originalInFullProject": "assets/selected/originals/banna.jpg",
-    "originalIncludedInThisStage": false,
-    "stageAssets": {
-      "background": {
-        "path": "assets/selected/banna-background.webp",
-        "sha256": "37c3e72734dfa26d7ce57bee43498c61d49ee4807517a04fd69154b4c452c8b7"
-      },
-      "card": {
-        "path": "assets/selected/banna-card.webp",
-        "sha256": "8d23b335999b67ba29663e64b2250026817ef281f5b1bf57387944f32c7aca22"
-      }
-    }
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph."
   }
 ]

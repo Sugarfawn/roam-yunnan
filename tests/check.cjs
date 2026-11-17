@@ -1,16 +1,2 @@
-const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict'),crypto=require('node:crypto'),{spawnSync}=require('node:child_process');
-const root=path.resolve(__dirname,'..'),context={window:{}};vm.createContext(context);
-for(const file of ['home.js','home-photos.js','server.cjs','explore.js','destinations.js','site-shell.js','map-geometry.js','map-regions.js','attractions.js','attraction-photos.js','dali-attraction-photos.js','attraction-photo-data.js','assets/js/attractions.js','assets/js/attractions-catalogue.js']){const result=spawnSync(process.execPath,['--check',path.join(root,file)],{stdio:'inherit'});assert.equal(result.status,0);}
-vm.runInContext(fs.readFileSync(path.join(root,'home-photos.js'),'utf8'),context);
-vm.runInContext(fs.readFileSync(path.join(root,'destinations.js'),'utf8'),context);
-const regions=JSON.parse(fs.readFileSync(path.join(root,'data/yunnan-prefectures.geojson'),'utf8'));
-assert.equal(regions.features.length,16);
-function ringHas([x,y],ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])inside=!inside;}return inside;}
-for(const place of context.window.RoamDestinations.items){const region=regions.features.find(f=>f.properties.adcode===place.prefectureAdcode);assert.ok(region);const polygons=region.geometry.type==='Polygon'?[region.geometry.coordinates]:region.geometry.coordinates;assert.ok(polygons.some(rings=>ringHas(place.coordinates,rings[0])&&!rings.slice(1).some(r=>ringHas(place.coordinates,r))),place.id+' real prefecture location');}
-
-const photos=context.window.HomePhotos,manifest=JSON.parse(fs.readFileSync(path.join(root,'assets/selected/manifest.json'),'utf8'));
-assert.equal(photos.length,5);assert.equal(photos[0].id,'meili');
-for(const p of photos){const record=manifest.find(item=>item.id===p.id);assert.ok(record);assert.equal(record.author,p.author);assert.equal(record.source,p.source);for(const role of ['background','card']){const b=fs.readFileSync(path.join(root,p[role]));assert.equal(b.subarray(0,4).toString(),'RIFF');assert.equal(b.subarray(8,12).toString(),'WEBP');assert.equal(crypto.createHash('sha256').update(b).digest('hex'),record.stageAssets[role].sha256);}}
-const html=fs.readFileSync(path.join(root,'index.html'),'utf8');assert.ok(!html.includes('planning-view-template'));assert.ok(html.includes('/explore/yunnan/'));assert.equal((html.match(/<main\b/g)||[]).length,1);
-for(const forbidden of ['.env.local','map-config.local.js','ai-service.js','travel-planner.js'])assert.equal(fs.existsSync(path.join(root,forbidden)),false);
-(async()=>{const {createServer}=require('../server.cjs'),server=createServer();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));try{const base='http://127.0.0.1:'+server.address().port;for(const p of ['/','/home.js','/home.css','/assets/selected/meili-background.webp','/explore/yunnan/','/data/yunnan-prefectures.geojson'])assert.equal((await fetch(base+p)).status,200);for(const p of ['/.git/config','/server.cjs','/explore/yunnan/planner/'])assert.equal((await fetch(base+p)).status,404);console.log('PASS: cover scripts, five matched photos, asset hashes, no planner/credentials, static preview and private-file restrictions.');}finally{await new Promise(resolve=>server.close(resolve));}})().catch(e=>{console.error(e);process.exitCode=1;});
+// Preserve the earlier check command as the complete offline suite.
+require('./run-checks.cjs');

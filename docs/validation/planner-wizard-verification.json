@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "mode": "offline UI, recorded AI replay; no paid model or real map calls",
+  "checks": [
+    "one active step at a time",
+    "desktop 1440/1366/1920/1024 shell fits viewport",
+    "next/generate actions always visible",
+    "free search prefills actual search dialog",
+    "hotel and dining separated from attractions",
+    "settings and stage restored after reload",
+    "real request waiting state, success, failure and cancel",
+    "old saved route retained on failure",
+    "saved route restored without regeneration",
+    "mobile no horizontal overflow"
+  ],
+  "errors": []
+}

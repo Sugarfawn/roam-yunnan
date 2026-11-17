@@ -1,0 +1,4 @@
+{
+  "note": "Previously recorded AI response, replay fixture only. Browser tests stub the provider and map and make no paid call.",
+  "content": "{\"title\":\"大理古城与洱海西岸三日慢行\",\"summary\":\"以古城为住宿基点，按古城西侧、喜洲、洱海西岸分日慢游，保留大理古城、崇圣寺三塔和龙龛码头，并串联才村与严家大院。整体以文化街巷和湖岸摄影为主，不安排高海拔项目，减少跨片区折返；开放、预约与跨片区交通均待核实。\",\"days\":[{\"dayNumber\":1,\"theme\":\"古城文化 · 三塔历史建筑\",\"reason\":\"先游大理古城，再往西北侧崇圣寺三塔，同属古城西侧片区，减少折返；两地接驳与开放区域待核实，保留午餐和休息余量。\",\"stops\":[\"dali-old-city\",\"dali-three-pagodas\"]},{\"dayNumber\":2,\"theme\":\"喜洲古镇 · 白族院落街巷\",\"reason\":\"喜洲与严家大院同属喜洲片区，以街巷慢游串联院落文化；不叠加其他湖岸点，往返古城交通待核实，院落开放以现场为准。\",\"stops\":[\"dali-xizhou\",\"dali-yan-courtyard\"]},{\"dayNumber\":3,\"theme\":\"洱海西岸 · 湖岸摄影慢游\",\"reason\":\"龙龛与才村同属洱海西岸片区，适合湖面、苍山与村落取景；按慢节奏弹性安排，湖岸入口与点间接驳待核实，返古城时间预留。\",\"stops\":[\"dali-longkan\",\"dali-caicun\"]}]}"
+}

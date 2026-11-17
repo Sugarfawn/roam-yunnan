@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#172c28">
+  <meta name="description" content="让 DeepSeek 结合旅行偏好、真实景点与自己的酒店餐厅，安排可编辑的云南旅行路线。"><title>我的旅行计划 · ROAM YUNNAN</title>
+  <link rel="stylesheet" href="/journey.css?v=map-1"><link rel="stylesheet" href="/travel.css?v=route-v2">
+  <link rel="stylesheet" href="/journey-editorial.css?v=spot-photos-1">
+  <link rel="stylesheet" href="/place-search.css?v=places-1">
+  <link rel="stylesheet" href="/ai-planning.css?v=ai-1">
+  <link rel="stylesheet" href="/planner-workspace.css?v=flow-1">
+  <link rel="stylesheet" href="/planner-window.css?v=wizard-2">
+  <link rel="stylesheet" href="/planner-banner.css?v=banner-1">
+  <link rel="stylesheet" href="/traffic-feasibility.css?v=traffic-1">
+  <script src="/traffic-feasibility.js?v=traffic-1" defer></script>
+  <script src="/traffic-service.js?v=traffic-1" defer></script>
+  <script src="/ai-plan.js?v=flow-1" defer></script>
+  <script src="/ai-service.js?v=ai-1" defer></script>
+  <script src="/journey-routing.js?v=flow-1" defer></script>
+  <script src="/planner-view.js?v=flow-1" defer></script>
+  <script src="/dali-attraction-photos.js?v=phase-1-photos" defer></script>
+  <script src="/attraction-photo-data.js?v=spot-photos-1" defer></script>
+  <script src="/attraction-photos.js?v=spot-photos-1" defer></script>
+  <script src="/map-config.local.js" defer></script>
+  <script src="/amap-service.js?v=places-1" defer></script>
+  <script src="/travel-personal-places.js?v=flow-1" defer></script>
+  <script src="/home-photos.js?v=selected-photos-1" defer></script><script src="/destinations.js?v=map-1" defer></script><script src="/attractions.js?v=route-v2" defer></script><script src="/travel-templates.js?v=route-v2" defer></script><script src="/travel-rules.js?v=flow-1" defer></script><script src="/travel-store.js?v=route-v2" defer></script><script src="/map-geometry.js?v=map-1" defer></script><script src="/site-shell.js?v=plan-2" defer></script><script src="/travel-map.js?v=flow-1" defer></script><script src="/selection-migration.js?v=complete-1" defer></script><script src="/travel-planner.js?v=flow-1" defer></script>
+</head>
+<body class="route-page planner-page editorial-route" data-page="planner">
+  <header id="site-header" class="route-header"></header>
+  <main class="travel-main">
+    <div class="travel-breadcrumb"><a id="planner-back-map" href="/explore/yunnan/">← 返回云南地图</a><span>YOUR PERSONAL JOURNEY</span><a id="planner-back-guide" href="/destinations/detail.html?id=erhai">目的地攻略 ↗</a></div>
+    <p class="travel-notice" id="travel-notice" role="status" hidden></p>
+    <section id="planning-section" aria-labelledby="planning-title">
+      <div class="planning-heading"><p class="eyebrow">A LITTLE PLAN. A LOT OF POSSIBILITY.</p><h1 id="planning-title">把期待，写进<em>下一程。</em></h1><p>选你喜欢的地方，留适合自己的节奏。</p></div>
+      <p class="ai-service-status" id="ai-service-status" role="status">正在检查 AI 规划服务…</p>
+      <div id="ai-generation-progress" class="ai-generation-progress" hidden role="status" aria-live="polite"><p id="ai-generation-message"></p><button type="button" id="cancel-ai-generation">取消生成</button><button type="button" id="retry-ai-generation" hidden>再试一次</button></div>
+      <div class="planning-layout">
+        <form id="travel-form" class="travel-form">
+          <div class="form-section"><div class="form-section-title"><span>01</span><h2>从哪里开始</h2></div><div class="planner-field"><label for="plan-area">主要目的地</label><select id="plan-area" name="area"></select></div><div class="planner-field"><label for="start-location">出发 / 抵达片区</label><select id="start-location" name="startLocation"></select><small>选择区域参考，不是具体车站或住宿地址</small></div><div class="planner-field end-location-field"><label for="end-location">结束片区</label><div class="end-location-row"><select id="end-location" name="endLocation"></select><label class="same-location"><input id="same-end" type="checkbox" checked>同出发片区</label></div></div><fieldset class="more-regions-field"><legend>途中还会前往其他地区 <small>可选</small></legend><div id="additional-areas" class="additional-area-options"></div></fieldset><fieldset><legend>旅行天数</legend><div class="option-row day-options"><label><input type="radio" name="days" value="1"><span>1 天</span></label><label><input type="radio" name="days" value="2"><span>2 天</span></label><label><input type="radio" name="days" value="3" checked><span>3 天</span></label><label><input type="radio" name="days" value="4"><span>4 天</span></label></div></fieldset><fieldset><legend>抵离日可用时间 <small>可选，默认完整游玩日</small></legend><div class="arrival-departure"><label><span>抵达日</span><select id="arrival-window"><option value="full">完整日（默认）</option><option value="half">半日可用</option></select></label><label><span>离开日</span><select id="departure-window"><option value="full">完整日（默认）</option><option value="half">半日可用</option></select></label></div><div class="arrival-departure arrival-clock"><label><span>抵达时间（可选）</span><input id="arrival-time" type="time" aria-label="抵达时间，可选"></label><label><span>离开时间（可选）</span><input id="departure-time" type="time" aria-label="离开时间，可选"></label></div></fieldset></div>
+          <div class="form-section"><div class="form-section-title"><span>02</span><h2>照着自己的节奏</h2></div><fieldset><legend>旅行偏好 <small>可多选</small></legend><div class="option-row preference-options"><label><input type="checkbox" name="preference" value="nature" checked><span>自然风光</span></label><label><input type="checkbox" name="preference" value="culture"><span>古镇人文</span></label><label><input type="checkbox" name="preference" value="photo" checked><span>摄影</span></label><label><input type="checkbox" name="preference" value="food"><span>美食</span></label></div></fieldset><fieldset><legend>旅行节奏</legend><div class="option-row pace-options"><label><input type="radio" name="pace" value="slow" checked><span>舒缓慢旅行<small>每天少量景点，留白更多</small></span></label><label><input type="radio" name="pace" value="standard"><span>标准节奏<small>平衡观赏与休息</small></span></label><label><input type="radio" name="pace" value="full"><span>充实探索<small>适度增加同片区景点</small></span></label></div></fieldset><fieldset><legend>交通方式</legend><div class="option-row transport-options"><label><input type="radio" name="transport" value="public"><span>公共交通</span></label><label><input type="radio" name="transport" value="drive"><span>自驾</span></label><label><input type="radio" name="transport" value="undecided" checked><span>暂未决定</span></label></div></fieldset></div>
+          <div class="form-section"><div class="form-section-title"><span>03</span><h2>放进你的心愿单</h2></div><p class="form-small-note">勾选加入行程，标记 ★ 设为必去。没有已核实数据的时长和位置不会作具体推断。</p><div class="spot-choice-summary"><span id="choice-count">已选 0 个景点</span><button type="button" id="clear-choices">清空选择</button></div><div id="planner-spot-choices" class="planner-spot-choices"></div></div>
+          <div class="form-section personal-places-section"><div class="form-section-title"><span>04</span><h2>住在哪里，吃点什么</h2></div><p class="form-small-note">搜索你订的酒店、想去的餐厅，确认地图位置后放到指定日期。支持在不同日期更换酒店。</p><div class="personal-place-actions"><button type="button" data-open-place-search="hotel">＋ 添加酒店 / 民宿</button><button type="button" data-open-place-search="restaurant">＋ 添加餐厅 / 美食</button><button type="button" data-open-place-search="other">＋ 其他地点</button></div><div id="personal-places-list" class="personal-places-list" aria-live="polite"></div></div>
+          <div class="ai-expectation"><label for="ai-expectation">还有哪些旅行期待？<small>可选，最多400字</small></label><textarea id="ai-expectation" maxlength="400" placeholder="例如：喜欢安静的湖边和摄影，尽量少走路，想给午后休息留些时间。"></textarea></div>
+          <p class="generation-note">由 DeepSeek 根据偏好和所选景点安排；生成时会发送本次偏好、景点及你添加的酒店 / 餐厅。生成后会查询各日交通并核验负荷；未知路段、营业与景区接驳仍需确认。</p><button type="submit" id="generate-plan" class="gold-button">生成我的路线 <span>↗</span></button>
+        </form>
+        <aside class="planning-aside"><figure><img id="planner-region-photo" alt="" src="/assets/selected/erhai-background.webp"><figcaption><span id="planner-region-name">大理洱海</span><small>LET THE JOURNEY UNFOLD.</small></figcaption></figure><div class="rule-explanation"><p class="eyebrow">THOUGHTFULLY ARRANGED</p><h2>少一点折返，<br>多一点在场。</h2><ol><li><span>01</span><p>优先保留你选的地方。</p></li><li><span>02</span><p>按片区分日，减少跨区折返。</p></li><li><span>03</span><p>高海拔与徒步项目保留独立空间。</p></li></ol><p class="aside-footnote">这是可编辑的出行草案。开放、票务、天气与交通需要出发前再次确认。</p></div><button type="button" id="resume-plan" class="resume-plan" hidden>继续上次的行程 ↗</button></aside>
+      </div>
+    </section>
+    <section id="result-section" hidden aria-labelledby="result-title">
+      <div class="result-heading"><div><p class="eyebrow">YOUR JOURNEY, AT YOUR OWN PACE</p><h1 id="result-title">你的云南漫游计划</h1><p id="result-subtitle"></p></div><div class="result-actions"><button type="button" id="edit-plan">修改计划</button><button type="button" id="regenerate-plan">重新生成</button><button type="button" id="save-plan" class="gold-button">保存我的行程 <span>↗</span></button></div></div>
+      <div class="local-plan-status"><span id="save-status">仅保存在当前浏览器</span><button type="button" data-open-place-search="restaurant" id="result-add-place">添加酒店 / 餐厅 ↗</button></div>
+      <section id="ai-result-summary" class="ai-result-summary" hidden aria-label="AI规划说明"><strong id="ai-result-title"></strong><p id="ai-result-text"></p><small id="ai-result-source"></small></section>
+      <p class="form-small-note" id="result-photo-note">有对应实景照片的景点显示独立配图；其余保留文字介绍。开放与交通请出发前核实。</p>
+      <p class="template-reason" id="template-reason" hidden></p>
+      <div id="traffic-verification" class="traffic-verification" role="status" aria-live="polite"><p id="traffic-verification-text">正在核验各日交通与时间预算…</p><button type="button" id="traffic-recheck">重新核验全部日期</button><button type="button" id="traffic-edit">调整天数 / 地点</button></div>
+      <div id="plan-warnings" class="plan-warnings" aria-label="行程提醒"></div>
+      <div class="travel-result-layout"><section class="daily-itinerary" aria-label="每日路线"><div id="result-days" class="result-day-tabs" role="tablist" aria-label="选择行程日期"></div><div id="day-itinerary" role="tabpanel" tabindex="0"></div><div id="unassigned-spots" class="unassigned-spots" hidden></div></section><aside class="route-overview" aria-labelledby="overview-heading"><div class="overview-heading"><p class="eyebrow">A SENSE OF PLACE</p><h2 id="overview-heading">这一程，在哪里</h2><span id="overview-day"></span></div><div id="travel-map" class="travel-map" role="group" aria-label="地区参考地图"></div><p class="route-preview-disclaimer">景点顺序示意，并非道路导航路线</p><p class="coordinate-note" id="coordinate-note"></p><div id="route-order" class="route-order"></div><a id="result-return-map" class="overview-map-link" href="/explore/yunnan/">回到云南探索地图 <span>↗</span></a></aside></div>
+    </section>
+  </main>
+  <dialog id="regenerate-dialog" class="sources-dialog regenerate-dialog" aria-labelledby="regenerate-title"><h2 id="regenerate-title">按当前偏好重新安排？</h2><p>将重新调用 DeepSeek。通过校验的新结果会替换手动调整；生成失败时保留当前行程。</p><div class="dialog-actions"><button type="button" id="cancel-regenerate">保留当前行程</button><button type="button" id="confirm-regenerate" class="gold-button">重新生成</button></div></dialog>
+  <div class="travel-toast" id="travel-toast" role="status" aria-live="polite"></div>
+  <script src="/planner-workflow.js?v=wizard-2" defer></script>
+  <script src="/planner-catalogue-search.js?v=complete-1" defer></script>
+  <script src="/place-search.js?v=wizard-2" defer></script>
+</body>
+</html>

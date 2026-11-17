@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "mode": "offline browser with synthetic AMap SDK responses and recorded AI replay; no live traffic verification or paid API requests",
+  "providerCalls": 1,
+  "checks": [
+    "home and map entry retained",
+    "all three days automatically checked",
+    "hotel round trip included",
+    "overfull day blocks final save",
+    "user chooses walking and mode persists",
+    "suggested deferral preserves must-visit/hotel/wishlist",
+    "save and refresh restore without AI regeneration",
+    "unknown roads stay partial and reference drafts can save",
+    "manual reorder triggers new directed road queries",
+    "responsive desktop and mobile",
+    "cancel stale traffic on editor navigation"
+  ],
+  "errors": []
+}

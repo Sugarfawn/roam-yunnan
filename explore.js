@@ -13,8 +13,7 @@
     svg.querySelectorAll('.atlas-region').forEach(node=>{const active=Number(node.dataset.adcode)===selected.prefectureAdcode;node.classList.toggle('is-selected',active);node.setAttribute('aria-pressed',String(active));});
     svg.querySelectorAll('.prefecture-label').forEach(node=>node.classList.toggle('is-selected',Number(node.dataset.adcode)===selected.prefectureAdcode));
     $('#map-selected-name').textContent=selected.shortName;
-    $('#explore-place').setAttribute('aria-label','选择'+selected.shortName+'的景点');
-    $('#explore-place').href='/attractions.html?place='+selected.id;
+    $('#explore-place').href='/explore/yunnan/planner/?place='+selected.id+'&view=edit';
   }
   function updatePanel(place){
     const image=$('#selected-image');image.src='/'+place.background;image.alt='';image.style.objectPosition=place.position||'50% 50%';

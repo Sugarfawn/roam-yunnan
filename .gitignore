@@ -1,7 +1,21 @@
-node_modules/
-tests/artifacts/
+# Local browser SDK credentials; use a serviceHost proxy before public deployment.
+map-config.local.js
+.env.local
+.ai-diagnostics.jsonl
+
+# Private environment variants; keep only the empty example.
 .env
 .env.*
+!.env.example
+*.pem
+*.key
+
+# Generated validation output and local dependencies are not source history.
+node_modules/
+验证截图/
+tests/artifacts/
+playwright-report/
+test-results/
 *.log
 *.zip
 Thumbs.db

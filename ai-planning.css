@@ -1,0 +1,16 @@
+.editorial-route .ai-expectation{margin:28px 0 20px}
+.editorial-route .ai-expectation label{display:block;font-size:13px;line-height:1.9;color:#607e54;margin-bottom:10px}
+.editorial-route .ai-expectation label small{font-size:10px;color:#9ca58b;margin-left:10px}
+.editorial-route .ai-expectation textarea{display:block;width:100%;min-height:95px;resize:vertical;border:1px solid #71875a40;border-radius:3px;background:#faf9f2;color:#55734b;font:inherit;font-size:12px;line-height:1.95;padding:13px 15px}
+.editorial-route .ai-service-status{font-size:11px;line-height:1.9;color:#9a8865;margin:12px 0 22px}
+.editorial-route .ai-service-status a{color:#71865e;text-decoration:underline;text-underline-offset:3px;margin-left:12px}
+.editorial-route .ai-generation-progress{padding:18px 22px;border:1px solid #71875a3d;background:#e9eedf77;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:12px;color:#6a8559;margin:20px 0}
+.editorial-route .ai-generation-progress p{margin:0;line-height:1.9}
+.editorial-route .ai-generation-progress button{border:1px solid #71875a40;padding:9px 13px;font-size:11px;white-space:nowrap;border-radius:3px}
+.editorial-route .ai-generation-progress.is-error{border-color:#a9946e4f;background:#eee8da5c;color:#9b835c}
+.editorial-route .ai-result-summary{border-left:2px solid #a49165;padding:14px 19px;background:#e8ecdf55;margin:18px 0 20px}
+.editorial-route .ai-result-summary strong{display:block;font-size:13px;font-weight:400;color:#547347;line-height:1.8}
+.editorial-route .ai-result-summary p{font-size:12px;color:#7f9073;line-height:2;margin:8px 0 0}
+.editorial-route .ai-result-summary small{display:block;font-size:10px;color:#9aa58b;line-height:1.9;margin-top:9px}
+.editorial-route .ai-day-note{font-size:12px;line-height:2;color:#7d8e6d;border-left:1px solid #a4916570;padding:5px 14px;margin:14px 0 20px}
+@media(max-width:650px){.editorial-route .ai-generation-progress{padding:15px;gap:13px;font-size:11px}.editorial-route .ai-result-summary{padding:13px 15px}.editorial-route .ai-result-summary p{font-size:11px}}

@@ -6,6 +6,14 @@
     <a class="route-brand" href="/" aria-label="漫游云南首页"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17.5"/><path d="m26.5 13.5-4.4 8.6-8.6 4.4 4.4-8.6z"/><circle cx="20" cy="20" r="1"/></svg><span>漫游<small>ROAM / YUNNAN</small></span></a>
     <nav aria-label="主导航"><a href="/">首页</a><a href="/explore/yunnan/" ${current === 'explore' ? 'aria-current="page"' : ''}>风景灵感<span></span></a><button type="button" id="open-sources">关于影像 <span aria-hidden="true">↗</span></button></nav>
     <a class="back-home" href="/">← <span>返回首页</span></a>`;
+  if(current==='detail'||current==='planner'){
+    const params=new URLSearchParams(location.search),region=window.RoamDestinations.get(params.get(current==='detail'?'id':'place'));
+    const area=region?.id||'erhai',action=header.querySelector('.back-home');
+    action.className='planner-entry';
+    if(current==='detail'){
+      action.href='/explore/yunnan/planner/?place='+area+'&view=edit';action.textContent='开始规划 ↗';action.dataset.startPlan='';
+    }else{action.href='/explore/yunnan/?place='+area;action.textContent='返回地图 ↗';}
+  }
   const dialog = document.createElement('dialog');
   dialog.className = 'sources-dialog';
   dialog.setAttribute('aria-labelledby', 'sources-title');
