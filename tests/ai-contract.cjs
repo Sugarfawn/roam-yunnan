@@ -23,11 +23,17 @@ const half=R.generate({...input,days:1,arrivalWindow:'half'});const halfBad={...
 const personal={provider:'amap',poiId:'TEST-HOTEL',name:'仅测试酒店',address:'测试',city:'大理',adcode:'532901',coordinates:[100.2,25.7],coordinateSystem:'GCJ-02',kind:'hotel',fromDay:1,toDay:3};
 const fixed=R.generate({...input,personalPlaces:[personal]});assert.equal(A.apply(fixed,proposal).settings.personalPlaces[0].name,'仅测试酒店');
 (async()=>{
- let mode='no-key',calls=0;
+ let mode='no-key',calls=0,recoveryAttempt=0;
  const server=createServer({configProvider:()=>({apiKey:mode==='no-key'?'':'test-only-not-real',model:'test-model'}),fetchImpl:async(url,opts)=>{
-  calls++;assert.equal(url,'https://api.deepseek.com/chat/completions');assert.ok(opts.headers.Authorization);const body=JSON.parse(opts.body);assert.equal(body.response_format.type,'json_object');assert.equal(body.stream,false);assert.match(body.messages[0].content,/json/);
+  calls++;assert.equal(url,'https://api.deepseek.com/chat/completions');assert.ok(opts.headers.Authorization);const body=JSON.parse(opts.body);assert.equal(body.response_format.type,'json_object');assert.equal(body.stream,false);assert.match(body.messages[0].content,/json/);assert.equal(body.thinking.type,'disabled');assert.ok(body.max_tokens>=8000);
+  if(mode==='recover-truncated'||mode==='recover-empty'){
+    recoveryAttempt++;
+    if(recoveryAttempt===1)return{ok:true,json:async()=>({choices:[{finish_reason:mode==='recover-truncated'?'length':'stop',message:{content:mode==='recover-truncated'?'{partial':'' ,reasoning_content:'mock thinking'}}]})};
+    assert.equal(body.max_tokens,10000);assert.ok(!body.messages.some(m=>m.role==='assistant'));assert.match(body.messages.at(-1).content,/全部日期/);
+    return{ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:JSON.stringify(proposal)}}]})};
+  }
   if(mode==='unauthorized')return{ok:false,status:401};
-  if(mode==='repair-once'){const count=JSON.parse(opts.body).messages.length;return{ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:count===2?'not-json':JSON.stringify(proposal)}}]})};}
+  if(mode==='repair-once'){const count=JSON.parse(opts.body).messages.length;return{ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:count===2?JSON.stringify(proposal).replace(',\"summary\"','\"summary\"'):JSON.stringify(proposal)}}]})};}
   if(mode==='bad-json')return{ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:'not-json'}}]})};
   if(mode==='truncated')return{ok:true,json:async()=>({choices:[{finish_reason:'length',message:{content:'{}'}}]})};
   const result=mode==='invented'?{...proposal,days:proposal.days.map((d,i)=>i?d:{...d,stops:['fake-place']})}:proposal;
@@ -42,7 +48,8 @@ const fixed=R.generate({...input,personalPlaces:[personal]});assert.equal(A.appl
   assert.equal((await fetch(url+'/explore/yunnan/planner/')).status,200);
   mode='ok';response=await post({settings:input});assert.equal(response.status,200);const result=await response.json();assert.ok(result.plan.ai);assert.equal(result.plan.settings.aiRequest,input.aiRequest);
   response=await post({settings:{...input,days:'bad'}});assert.equal(response.status,422);
-  mode='repair-once';const beforeRepair=calls;response=await post({settings:input});assert.equal(response.status,200);assert.equal(calls-beforeRepair,2);assert.equal((await response.json()).plan.ai.correctionAttempts,1);
+  mode='repair-once';const beforeRepair=calls;response=await post({settings:input});assert.equal(response.status,200);assert.equal(calls-beforeRepair,1);assert.equal((await response.json()).plan.ai.correctionAttempts,0);
+  for(const recovery of ['recover-truncated','recover-empty']){mode=recovery;recoveryAttempt=0;const before=calls;response=await post({settings:input});assert.equal(response.status,200);assert.equal(calls-before,2);assert.equal((await response.json()).plan.ai.correctionAttempts,1);}
   for(const failure of ['unauthorized','bad-json','truncated','invented']){mode=failure;response=await post({settings:input});assert.equal(response.status,502);assert.doesNotMatch(await response.text(),/test-only-not-real/);}
   response=await fetch(url+'/api/ai/plan',{method:'POST',headers:{Origin:'https://unrelated.example','Content-Type':'application/json'},body:'{}'});assert.equal(response.status,403);
   const report={passed:true,mode:'mock provider contract tests; no live DeepSeek call',checks:['AI can regroup real catalogue stops','mandatory stop retention','unknown and duplicate IDs rejected','cluster and half-day constraints','precise invented traffic or prices rejected','negative disclaimers accepted','long prose shortened','bounded automatic repair','strict JSON schema','user hotel dates preserved','private env/server paths denied','missing key makes no provider call','valid response carries AI provenance','invalid provider JSON/truncation/auth failures explicit','cross-origin rejected'],providerCalls:calls};

@@ -1,0 +1,9 @@
+const {engine}=require('../server.cjs'),assert=require('node:assert/strict');const W=engine(),E=W.RoamJourneyEdit;
+let p=W.RoamRules.generate({area:'erhai',days:4,pace:'standard',selected:['dali-old-city','dali-wuhua','dali-longkan','dali-panxi','dali-xizhou','dali-shuanglang','dali-xiaoputuo','dali-wenbi','dali-three-pagodas','dali-fengyangyi']});
+const initial=JSON.stringify(p);const moved=E.apply(p,[{type:'move_stop',stopId:'dali-panxi',toDay:3,position:0}]);assert.equal(moved.days[2].stops[0],'dali-panxi');assert.ok(!moved.days[1].stops.includes('dali-panxi'));assert.equal(JSON.stringify(p),initial);assert.equal(moved.days[2].traffic,undefined);
+const locked=E.apply(p,[{type:'lock_day',day:2,locked:true}]);assert.throws(()=>E.apply(locked,[{type:'defer_stop',stopId:'dali-panxi'}],{assistant:true}),/锁定/);
+const profile=E.apply(p,[{type:'profile',values:{companions:'带父母',mobility:'少走路'}}],{assistant:true});assert.equal(profile.profile.companions,'带父母');assert.equal(p.profile,undefined);
+p.settings.personalPlaces=W.RoamPersonalPlaces.normalize([{provider:'amap',poiId:'OFFLINE_TEST_ONLY',name:'离线测试地点',adcode:'532901',city:'大理市',coordinates:[100.18,25.7],coordinateSystem:'GCJ-02',kind:'other',fromDay:1,toDay:1,slot:'afternoon'}]);
+const poi=p.settings.personalPlaces[0],inserted=E.apply(p,[{type:'move_personal',placeId:poi.id,toDay:2,beforeKey:'dali-xizhou'}]);const list=W.RoamPersonalPlaces.sequence(inserted.days[1],inserted.settings);const names=list.map(e=>e.id||e.place.name);assert.equal(names[names.indexOf('dali-xizhou')-1],'离线测试地点');
+const signature=E.signature(p);const trafficOnly=JSON.parse(JSON.stringify(p));trafficOnly.days[0].traffic={changed:true};assert.equal(E.signature(trafficOnly),signature);assert.notEqual(E.signature(moved),signature);
+console.log('PASS: cross-day movement, independent source, invalidated traffic, locked day rejection, confirmed preference, personal POI insertion, stale proposal signature.');

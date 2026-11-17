@@ -16,6 +16,7 @@
   }
   function checkStorage(ok){if(!ok)notify('本地存储不可用：当前可继续使用，但刷新后无法恢复。');return ok;}
   function readForm(){
+    settings.aiProfile={...settings.aiProfile,party:$('#profile-party')?.value||settings.aiProfile?.party||'',mobility:$('#profile-mobility')?.value||settings.aiProfile?.mobility||'regular'};
     const additional=$$('input[name=additional-area]:checked').map(x=>x.value);
     return R.normalize({...settings,area:$('#plan-area').value,areas:additional,days:$('input[name=days]:checked')?.value,pace:$('input[name=pace]:checked')?.value,transport:$('input[name=transport]:checked')?.value,preferences:$$('input[name=preference]:checked').map(x=>x.value),selected:$$('input[name=spot]:checked').map(x=>x.value),mustVisit:$$('input[name=must]:checked').map(x=>x.value),startLocation:$('#start-location').value,endLocation:$('#end-location').value,sameEndAsStart:$('#same-end').checked,arrivalWindow:$('#arrival-window').value,departureWindow:$('#departure-window').value,arrivalTime:$('#arrival-time').value,departureTime:$('#departure-time').value,personalPlaces:settings.personalPlaces,legModes:settings.legModes,poiBindings:settings.poiBindings,aiRequest:$('#ai-expectation').value});
   }
@@ -111,7 +112,8 @@
     if(!plan||document.body.dataset.plannerView!=='result')return;
     const F=window.RoamTraffic,states=plan.days.map(d=>F.assess(plan,d)),over=states.filter(a=>a.status==='over').length,tight=states.filter(a=>a.status==='tight').length;
     const remaining=states.filter(a=>!['empty','transfer'].includes(a.status)&&a.complete!==true).length;
-    $('#traffic-verification-text').textContent=(trafficController?`正在核验各日交通（${trafficCompleted}/${plan.days.filter(d=>d.type!=='transfer').length}）… `:'')+(over?`${over} 天安排过满，请删减或改期。 `:'')+(tight?`${tight} 天时间偏紧。 `:'')+(remaining?`${remaining} 天仍有交通、酒店或停留信息待补。`:states.some(a=>a.status==='transfer')?'城际转场尚需单独核实。':over||tight?'':`各日已完成当前道路与时间预算核验，出行前仍需复核。`);
+    const hasPlaces=plan.days.some(day=>(window.RoamTraffic.entries(day,plan.settings)||[]).length);
+    $('#traffic-verification-text').textContent=hasPlaces?(trafficController?`正在核验各日交通（${trafficCompleted}/${plan.days.filter(d=>d.type!=='transfer').length}）… `:'')+(over?`${over} 天安排过满，请删减或改期。 `:'')+(tight?`${tight} 天时间偏紧。 `:'')+(remaining?`${remaining} 天仍有交通、酒店或停留信息待补。`:states.some(a=>a.status==='transfer')?'城际转场尚需单独核实。':over||tight?'':`各日已完成当前道路与时间预算核验，出行前仍需复核。`):'还没有安排地点；添加地点或填写每日行程后再核验交通。';
     if(window.RoamWorkbench){window.RoamWorkbench.render(plan);renderWarnings();return;}
     const target=$('#day-traffic-assessment');if(target)window.RoamPlannerView.renderAssessment(plan,plan.days[plan.activeDay],target,{applyTrafficSuggestion,editPlan(){settings=plan.settings;showForm(true);}});
     renderTabs();renderWarnings();
@@ -173,7 +175,7 @@
     lastGenerationInput=input;const progress=$('#ai-generation-progress');progress.hidden=false;progress.classList.remove('is-error');$('#ai-generation-message').textContent='正在安排你选择的地点，检查分组与时间；如有冲突会自动校正一次…';$('#cancel-ai-generation').hidden=false;$('#retry-ai-generation').hidden=true;
     $('#travel-form').inert=true;$('.planning-aside').inert=true;$('#result-section').inert=true;
     if(window.RoamPlannerUI?.beginGeneration)window.RoamPlannerUI.beginGeneration();else if(document.body.dataset.plannerView==='result'){$('#planning-section').before(progress);}else{$('#planning-section .planning-layout').before(progress);}
-    const timeout=setTimeout(()=>controller.abort('timeout'),70000);
+    const timeout=setTimeout(()=>controller.abort('timeout'),105000);
     try{
       const generated=await window.RoamAIService.generate(input,controller.signal);if(controller.signal.aborted)return;
       generated.planningMode='ai';generated.settings.planningMode='ai';
@@ -226,9 +228,9 @@
   }
   function storePlan(){checkStorage(S.setPlan(plan));return persistTrip();}
   function replaceCurrent(next,label){
-    plan=R.validatePlan(next);if(!plan){toast('行程格式无效，未采用。');return false;}
-    plan.savedAt=null;if(plan.ai)plan.ai.edited=true;settings=plan.settings;
-    stopTraffic();window.RoamTraffic.clear(plan);assessAfterEdit();persistTrip(true,label);checkStorage(S.setDraft(settings));storePlan();renderResult();return true;
+    const candidate=R.validatePlan(next);if(!candidate){toast('行程格式无效，未采用。');return false;}
+    plan=candidate;plan.savedAt=null;if(plan.ai)plan.ai.edited=true;settings=plan.settings;
+    stopTraffic();assessAfterEdit();persistTrip(true,label);checkStorage(S.setDraft(settings));storePlan();renderResult();return true;
   }
   window.RoamJourneyController={
     context(){return{settings:document.body.dataset.plannerView==='edit'?readForm():settings,plan,trip:activeTrip,initialEntry:!query.has('trip')&&!query.has('spots')&&!query.has('step')&&!query.has('demo')};},
@@ -248,6 +250,7 @@
     update:replaceCurrent,notify:toast,edit(){settings=plan.settings;showForm(true);},
     generate(){settings=R.normalize({...settings,planningMode:'ai',aiProfile:{...settings.aiProfile,confirmed:false}});showForm(true);window.RoamPlannerUI?.showStep(3);},
     saveDraft(){settings=readForm();checkStorage(S.setDraft(settings));persistTrip();},
+    updateDetails(value){settings=R.normalize({...readForm(),days:value.days,startDate:value.startDate});if(activeTrip){activeTrip.title=value.title;activeTrip.startDate=value.startDate;}checkStorage(S.setDraft(settings));persistTrip();renderForm();window.RoamPlannerUI?.showStep(1);window.dispatchEvent(new Event('journey-details'));},
     rename(title){if(!activeTrip)return;activeTrip.title=title;if(plan)plan.title=title;persistTrip(true,'重命名');window.RoamJourneyUI?.render();},
     restore(index){if(!activeTrip)return;const t=window.RoamTripLibrary.restore(activeTrip.id,index);if(t)this.open(t.id);},
     addPersonal:()=>window.RoamPlaceSearch.open('other'),

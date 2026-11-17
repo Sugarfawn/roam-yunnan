@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict'),{engine}=require('../server.cjs'),E=engine(),R=E.RoamRules,A=E.RoamAIPlan;
+const selected=['dali-longkan','dali-panxi','dali-xizhou','dali-ideal','dali-wenbi','dali-xiaoputuo','dali-shuanglang'];
+const poi={provider:'amap',poiId:'OFFLINE-SHAXI',name:'沙溪古镇',city:'剑川县',adcode:'532931',coordinates:[99.85,26.32],coordinateSystem:'GCJ-02',kind:'other',fromDay:3,toDay:3,slot:'morning'};
+const s={area:'erhai',days:4,pace:'standard',transport:'drive',selected,personalPlaces:[poi]},base=R.generate(s);
+const proposal={title:'大理四日顺游',summary:'海西向北、海东向北，沙溪单独一天，保留返程余量。',days:[{dayNumber:1,theme:'海西',reason:'沿西岸向北，避免来回穿插。',stops:['dali-longkan','dali-panxi','dali-xizhou']},{dayNumber:2,theme:'海东',reason:'沿东岸分段停留。',stops:['dali-ideal','dali-wenbi','dali-xiaoputuo']},{dayNumber:3,theme:'沙溪',reason:'按用户确认的日期独立安排沙溪。',stops:[],order:[base.settings.personalPlaces[0].id]},{dayNumber:4,theme:'返程留白',reason:'根据离开时间调整。',stops:[]}]};
+const p=A.apply(base,proposal);assert.ok(p.validation.valid);assert.equal(p.days[2].type,'sightseeing');assert.equal(E.RoamPersonalPlaces.sequence(p.days[2],p.settings)[0].place.name,'沙溪古镇');assert.deepEqual(JSON.parse(JSON.stringify(p.settings.personalPlaces)),JSON.parse(JSON.stringify(base.settings.personalPlaces)));
+const bad=JSON.parse(JSON.stringify(proposal));bad.days[1].stops=['dali-ideal','dali-xiaoputuo','dali-wenbi'];assert.ok(A.apply(base,bad).days[1].routeReview);
+const unknown=JSON.parse(JSON.stringify(proposal));unknown.days[2].order=['not-real'];assert.throws(()=>A.apply(base,unknown),/AI_ORDER_INVALID/);
+const mixed=JSON.parse(JSON.stringify(proposal));mixed.days[2].stops=['dali-shuanglang'];delete mixed.days[2].order;assert.ok(A.apply(base,mixed).days[2].routeReview);
+assert.ok(base.days.flatMap(d=>d.stops).every(id=>selected.includes(id)));console.log('PASS: directional ordering, selected-only Dali catalogue, confirmed Shaxi day, POI order validation and backtracking rejection.');

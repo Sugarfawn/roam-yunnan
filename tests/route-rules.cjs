@@ -19,11 +19,11 @@ changed.days[0].stops.push('dali-shuanglang');assert.equal(R.recheck(changed).va
 const over=serial(a);over.settings.arrivalTime='17:00';assert.equal(R.recheck(over).valid,false);assert.equal(over.days[0].assessment.status,'over');
 const unknown=R.generate({area:'banna',days:1});assert.equal(unknown.days[0].assessment.status,'unknown');assert.equal(unknown.days[0].assessment.totalDurationMinutes,null);
 assert.ok(R.warnings(b).some(w=>w.includes('公共交通')));assert.ok(R.warnings(a).some(w=>w.includes('自驾')));
-assert.ok(A.all.every(s=>s.entrance.status==='unknown'&&s.entrance.coordinates===null));assert.ok(A.all.every(s=>s.dataUpdatedAt==='2026-10-29'&&s.openingHours===null));
+assert.ok(A.all.every(s=>s.entrance.status==='unknown'&&s.entrance.coordinates===null));assert.ok(A.all.every(s=>/^\d{4}-\d{2}-\d{2}$/.test(s.dataUpdatedAt)&&s.openingHours===null));
 for(const spot of A.all){const p=R.generate({area:spot.area,days:1,pace:'standard',selected:[spot.id],mustVisit:[spot.id]});assert.ok(p.days.some(d=>d.stops.includes(spot.id))||p.unassigned.includes(spot.id),spot.id+' must be assigned or explicitly pending');assert.ok(ctx.window.RoamTravelTemplates.areas[spot.area].days.some(t=>t.clusters.includes(spot.cluster)),spot.id+' has an editable region template');}
 let runs=0;for(const area of ['erhai','yulong','meili','shangri','banna'])for(const days of [1,2,3,4])for(const pace of ['slow','standard','full'])for(const transport of ['public','drive','undecided'])for(const arrivalWindow of ['full','half']){
  const input={area,days,pace,transport,arrivalWindow},plan=R.generate(input);assert.equal(JSON.stringify(plan),JSON.stringify(R.generate(input)));assert.equal(plan.days.length,days);const ids=plan.days.flatMap(d=>d.stops);assert.equal(ids.length,new Set(ids).size);
- plan.days.filter(d=>d.type==='sightseeing').forEach(d=>{assert.ok(new Set(d.stops.map(id=>A.get(id).cluster)).size<=1);assert.equal(d.assessment.realTrafficMinutes,null);assert.equal(d.assessment.totalDurationMinutes,null);});assert.ok(R.validatePlan(plan));runs++;
+ plan.days.filter(d=>d.type==='sightseeing').forEach(d=>{const clusters=[...new Set(d.stops.map(id=>A.get(id).cluster))];assert.ok(clusters.length<=1||(area==='erhai'&&days===4&&ctx.window.RoamTravelTemplates.areas.erhai.days.some(t=>t.id.startsWith('dali4-')&&clusters.every(c=>t.clusters.includes(c)))));assert.equal(d.assessment.realTrafficMinutes,null);assert.equal(d.assessment.totalDurationMinutes,null);});assert.ok(R.validatePlan(plan));runs++;
 }
 const old={version:1,settings:{area:'erhai',days:1,selected:['dali-old-city']},days:[{zone:'古城片区',stops:['dali-old-city'],notes:[]}],savedAt:'2026-10-28'};assert.equal(R.validatePlan(old).version,2);
 const originalCatalog=ctx.window.RoamAttractions;

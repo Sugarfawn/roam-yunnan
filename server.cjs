@@ -7,7 +7,7 @@ function environment(){
 }
 function engine(){
  const context={window:{}};vm.createContext(context);
- for(const file of ['trip-model.js','home-photos.js','destinations.js','attractions.js','travel-templates.js','travel-personal-places.js','travel-rules.js','ai-plan.js','ai-adjust.js'])vm.runInContext(fs.readFileSync(path.join(ROOT,file),'utf8'),context,{filename:file,timeout:1500});
+ for(const file of ['trip-model.js','home-photos.js','destinations.js','attractions.js','travel-templates.js','travel-personal-places.js','travel-rules.js','ai-plan.js','ai-adjust.js','journey-edit.js'])vm.runInContext(fs.readFileSync(path.join(ROOT,file),'utf8'),context,{filename:file,timeout:1500});
  return context.window;
 }
 function payload(E,input){
@@ -30,6 +30,9 @@ function createServer(options={}){
    if(!allowed){json(res,403,{error:'此本地服务不接受该来源。'});return;}res.setHeader('Access-Control-Allow-Origin',origin);res.setHeader('Vary','Origin');res.setHeader('Access-Control-Allow-Headers','Content-Type');res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');}
   if(req.method==='OPTIONS'){res.writeHead(204);res.end();return;}
   if(parsed.pathname==='/api/ai/status'&&req.method==='GET'){const c=config();json(res,200,{provider:'deepseek',configured:Boolean(c.apiKey),model:c.model});return;}
+  if(parsed.pathname==='/api/ai/chat'&&req.method==='POST'){
+   await require('./journey-chat.cjs').handle(req,res,{E,config:config(),fetcher,json});return;
+  }
   if(parsed.pathname==='/api/ai/adjust'&&req.method==='POST'){
    const c=config();if(!c.apiKey){json(res,503,{error:'DeepSeek 尚未配置，当前行程没有改变。'});return;}
    const chunks=[];let bytes=0;for await(const chunk of req){bytes+=chunk.length;if(bytes>MAX_BODY){json(res,413,{error:'调整内容过大，请缩短描述。'});return;}chunks.push(chunk);}
@@ -52,25 +55,41 @@ function createServer(options={}){
    const chunks=[];let bytes=0,tooLarge=false;
    for await(const chunk of req){bytes+=chunk.length;if(bytes>MAX_BODY){tooLarge=true;break;}chunks.push(chunk);}if(tooLarge){json(res,413,{error:'本次规划资料过大，请减少附加内容。'});return;}
    let p;try{p=payload(E,JSON.parse(Buffer.concat(chunks).toString('utf8')));}catch(error){json(res,422,{code:'INPUT_INVALID',error:error.message==='BASE_CONFLICT'?'当前酒店日期或景点选择存在冲突，请调整后再生成。':'规划参数无效，请检查所选地区与旅行天数。'});return;}
-   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),60000);res.on('close',()=>{if(!res.writableEnded)controller.abort();});busy++;
+   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),95000);res.on('close',()=>{if(!res.writableEnded)controller.abort();});busy++;
    let lastError;
-   const messages=[{role:'system',content:SYSTEM},{role:'user',content:JSON.stringify({settings:p.settings,catalogue:p.catalogue,baseline:p.baseline,transportData:'AI不提供道路、开放、票务或预约数据；页面另外查询高德道路结果。'})}];
+   const protocolModule=require('./plan-protocol.cjs'),protocol=protocolModule.create(p);
+   const directions=require('./dali-routing-hints.cjs').hints(p.settings).split('\n每个day')[0];
+   const planningSystem=SYSTEM.replace('每日只组合同一cluster内的景点；','每日按同侧走廊组织景点，大理可组合古城与海西喜洲、或海东与双廊，不因小片区标签不同而拆散；');
+   const messages=[{role:'system',content:planningSystem+' '+directions+' 向用户解释时不出现baseline、cluster、budget、pace、ID等实现术语。酒店重复出现为每天出发和返回的正常安排。只使用原有stops格式返回目录景点ID，不要输出order或visits。酒店、餐厅及自选地点由程序按已确认日期和餐段保留，不需要复制它们的ID。可增加tips、alternative、stopNotes作为文字建议，不要引入额外结构。每站建议简短，全部日期必须完整返回。'},{role:'user',content:JSON.stringify({settings:p.settings,catalogue:p.catalogue,baseline:p.baseline})}];
+   let syntaxSource=null;
    try{
     for(let attempt=0;attempt<2;attempt++){
-    const response=await fetcher('https://api.deepseek.com/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+c.apiKey},body:JSON.stringify({model:c.model,messages,response_format:{type:'json_object'},max_tokens:3500,stream:false}),signal:controller.signal});
+    const maxTokens=attempt===0?8000:10000;
+    const response=await fetcher('https://api.deepseek.com/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+c.apiKey},body:JSON.stringify({model:c.model,messages,thinking:{type:'disabled'},response_format:{type:'json_object'},max_tokens:maxTokens,stream:false}),signal:controller.signal});
     if(!response.ok){const messages={401:'DeepSeek 密钥未通过验证，请检查本地配置。',402:'DeepSeek 账户额度不足，请查看开放平台账户状态。',429:'DeepSeek 当前调用受限，请稍后重试。'};json(res,502,{code:'PROVIDER_ERROR',error:messages[response.status]||'DeepSeek 服务暂时不可用，请稍后重试。'});return;}
     const data=await response.json(),choice=data.choices?.[0],content=choice?.message?.content;
     try{
-      if(choice?.finish_reason==='length'||typeof content!=='string'||!content.trim())throw Error('AI_OUTPUT_INCOMPLETE');
+      if(choice?.finish_reason==='length')throw Error('AI_OUTPUT_TRUNCATED');
+      if(typeof content!=='string'||!content.trim())throw Error('AI_OUTPUT_EMPTY');
       const raw=content.trim().replace(/^```(?:json)?\s*\n?([\s\S]*?)\n?```$/i,'$1');
-      const proposal=JSON.parse(raw),plan=E.RoamAIPlan.apply(p.baseline,proposal,{model:c.model,generatedAt:new Date().toISOString()});
-      plan.ai.correctionAttempts=attempt;if(!res.destroyed)json(res,200,{plan});return;
+      const parsed=protocolModule.parse(raw);if(syntaxSource!==null)protocolModule.verifyRepair(syntaxSource,parsed.raw);
+      const proposal=protocol.decode(parsed.value),directionChanges=require('./dali-day-order.cjs').normalize(proposal,p.settings),plan=E.RoamAIPlan.apply(p.baseline,proposal,{model:c.model,generatedAt:new Date().toISOString()});
+      plan.ai.directionChanges=directionChanges;
+      plan.ai.correctionAttempts=attempt;plan.ai.programAdjustments=[...protocol.adjustments];
+      for(const adjustment of protocol.adjustments)plan.warnings.push('Day '+adjustment.day+'：'+adjustment.removed.map(id=>E.RoamAttractions.get(id)?.name||id).join('、')+' 已移至待安排，避免超出所选节奏。');
+      if(!res.destroyed)json(res,200,{plan});return;
     }catch(error){
       lastError=error;
       const feedback=E.RoamAIPlan.explain(error)+(error.issues?.length?' '+error.issues.join(' '):'');
-      try{fs.appendFileSync(path.join(ROOT,'.ai-diagnostics.jsonl'),JSON.stringify({at:new Date().toISOString(),attempt:attempt+1,area:p.settings.area,days:p.settings.days,code:error.message,issues:error.issues||[]})+'\n');}catch{}
+      try{fs.appendFileSync(path.join(ROOT,'.ai-diagnostics.jsonl'),JSON.stringify({at:new Date().toISOString(),attempt:attempt+1,area:p.settings.area,days:p.settings.days,code:error.message,finishReason:choice?.finish_reason||null,contentChars:typeof content==='string'?content.length:0,reasoningChars:typeof choice?.message?.reasoning_content==='string'?choice.message.reasoning_content.length:0,maxTokens,completionTokens:Number(data.usage?.completion_tokens)||null,issues:error.issues||[]})+'\n');}catch{}
       if(attempt===1)throw error;
-      messages.push({role:'assistant',content:typeof content==='string'?content.slice(0,18000):'{}'},{role:'user',content:'请修正刚才的 JSON，保留用户偏好与已确认的酒店餐厅。校验问题：'+feedback+'。可以参考已提供的baseline作为可行边界，重新完整返回所有日期，不要只返回修改片段。'});
+      if(['AI_OUTPUT_TRUNCATED','AI_OUTPUT_EMPTY'].includes(error.message)){
+        // Retry from the original input, without echoing a cut-off assistant response.
+        messages.push({role:'user',content:'上次回复没有完整输出。请重新输出完整JSON并覆盖全部日期，先完成全部stops。summary最多100字，reason每日至多60字，tips每日至多1条，stopNotes每站note至多35字，alternative可省略。不输出推理过程或重复内容。'});
+      }else if(error.message==='AI_JSON_SYNTAX'){
+        syntaxSource=error.raw;
+        messages.push({role:'assistant',content:error.raw.slice(0,30000)},{role:'user',content:'刚才JSON存在语法错误。只修复引号转义、逗号和括号，不改任何地点P编号、日期、顺序、建议内容或用户安排。不删内容，不重新规划。输出完整合法JSON。'});
+      }else messages.push({role:'assistant',content:typeof content==='string'?content.slice(0,18000):'{}'},{role:'user',content:'请修正刚才的 JSON，保留用户偏好与已确认的酒店餐厅。校验问题：'+feedback+'。可以参考已提供的baseline作为可行边界，重新完整返回所有日期，不要只返回修改片段。'});
     }
     }
    }catch(error){if(!res.destroyed)json(res,502,{code:'AI_RESULT_REJECTED',reasonCode:lastError?.message||null,error:controller.signal.aborted?'安排超时或已取消，已有行程保留，请稍后再试。':lastError?'自动校正后仍未通过：'+E.RoamAIPlan.explain(lastError)+' 已有行程已保留。':require('./service-errors.cjs').connectionMessage(error)});}

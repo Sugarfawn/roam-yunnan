@@ -12,7 +12,7 @@
     const list=entries(day,settings),keys=list.slice(0,-1).map((e,i)=>legKey(day,e,list[i+1]));
     return JSON.stringify([day.dayNumber,day.type,day.area,day.stops,settings.days,settings.pace,settings.transport,
       settings.arrivalWindow,settings.departureWindow,settings.arrivalTime,settings.departureTime,
-      day.timings||{},root.RoamPersonalPlaces.forDay(settings,day.dayNumber),day.stops.map(id=>settings.poiBindings?.[id]||null),keys.map(k=>settings.legModes?.[k]||null)]);
+      day.timings||{},day.entryOrder||[],day.startTime||'',root.RoamPersonalPlaces.forDay(settings,day.dayNumber),day.stops.map(id=>settings.poiBindings?.[id]||null),keys.map(k=>settings.legModes?.[k]||null)]);
   }
   function fresh(day,settings,now=Date.now()){
     const t=day.traffic,stamp=Date.parse(t?.queriedAt);

@@ -1,0 +1,18 @@
+{
+  "source": "User-supplied DeepSeek export attachment",
+  "originalBytes": 2337212,
+  "originalSha256": "4d8a006448055a927939bc8766e10c28db09b447fab9d8af245ed4297b7a1b2e",
+  "sanitizedBytes": 2330926,
+  "sanitizedSha256": "a3817181c73beb6eb7662d27627bec1b764e53478185b65633d7428ea35c4ebf",
+  "redactions": {
+    "providerKeys": 1,
+    "githubTokens": 0,
+    "bearerTokens": 0,
+    "mapKeyValues": 8,
+    "environmentValues": 1,
+    "credentialFields": 0,
+    "windowsUserPaths": 1663,
+    "escapedUserPaths": 0
+  },
+  "scope": "Only user-provided DeepSeek export. No Codex conversation added. Message order preserved; mechanical redactions only."
+}

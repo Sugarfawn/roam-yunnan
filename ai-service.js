@@ -11,6 +11,11 @@
     if(!plan?.ai||plan.ai.provider!=='deepseek'||!plan.validation.valid)throw Error('AI 结果未通过本地校验，本次未采用。');
     // Check again in the browser; only catalogue IDs, valid grouping and fixed POIs may survive.
     const checked=root.RoamAIPlan.apply(root.RoamRules.generate(settings),{title:plan.ai.title,summary:plan.ai.summary,days:plan.days.map((day,i)=>({dayNumber:i+1,theme:plan.ai.dayNotes?.[i]?.theme,reason:plan.ai.dayNotes?.[i]?.reason,stops:day.stops}))},{model:plan.ai.model,generatedAt:plan.ai.generatedAt});
+    // The server already validates all optional guide fields; retain them in the local result.
+    checked.ai.dayNotes=plan.ai.dayNotes;
+    checked.ai.programAdjustments=plan.ai.programAdjustments||[];
+    checked.ai.directionChanges=plan.ai.directionChanges||[];
+    for(let i=0;i<checked.days.length;i++)if(Array.isArray(plan.days[i].entryOrder))checked.days[i].entryOrder=[...plan.days[i].entryOrder];
     checked.ai.correctionAttempts=Number(plan.ai.correctionAttempts)||0;return checked;
   }
   async function adjust(plan,message,signal){

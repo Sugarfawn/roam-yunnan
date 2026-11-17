@@ -43,7 +43,7 @@
       for(const day of shown){
         for(const point of day.points||[]){
           if(!point?.poi?.coordinates)continue;
-          const key=point.poi.poiId+':'+point.poi.coordinates.join(',');
+          const key=day.dayNumber+':'+point.poi.poiId+':'+point.poi.coordinates.join(',');
           if(!groups.has(key))groups.set(key,{poi:point.poi,items:[]});
           groups.get(key).items.push({day:day.dayNumber,color:day.color,point});
         }
@@ -51,34 +51,40 @@
       for(const group of groups.values()){
         const first=group.items[0];
         const dayNumbers=[...new Set(group.items.map(item=>item.day))];
-        const content=markerContent(mode==='single'?String(first.point.index+1):dayNumbers.map(d=>'D'+String(d).padStart(2,'0')).join('·'),first.color,group.items.some(item=>item.point.key===activeKey));
-        content.title=first.poi.name;
-        content.setAttribute('aria-label','查看'+first.poi.name);
-        const marker=new AMap.Marker({position:first.poi.coordinates,content,anchor:'center'});
+        const markerLabel=mode==='single'?String(first.point.index+1):'D'+String(dayNumbers[0]).padStart(2,'0')+'·'+String(first.point.index+1);
+        const content=markerContent(markerLabel,first.color,group.items.some(item=>item.point.key===activeKey));
+        content.title=first.point.poi.name;
+        content.setAttribute('aria-label','查看'+first.point.poi.name);
+        const marker=new AMap.Marker({position:first.point.poi.coordinates,content,anchor:'center'});
         marker._wb={group,dayNumbers,keys:group.items.map(item=>item.point.key)};
         marker._wbContent=content;
-        marker.on('click',()=>{
+        let lastPick=0;
+        const pick=()=>{
+          const now=Date.now();if(now-lastPick<180)return;lastPick=now;
           const preferred=dayNumbers.includes(activeDay)?activeDay:dayNumbers[0];
           const item=group.items.find(entry=>entry.day===preferred)||first;
           onMarker?.(preferred,item.point.key);
-        });
+        };
+        content.addEventListener('click',event=>{event.stopPropagation();pick();});
+        marker.on('click',pick);
         markers.push(marker);
       }
       for(const day of shown){
         for(const leg of day.legs||[]){
           for(const path of leg.result?.paths||[]){
             if(!Array.isArray(path)||path.length<2)continue;
-            lines.push(new AMap.Polyline({path,strokeColor:day.color,strokeWeight:5,strokeOpacity:.88,lineJoin:'round',lineCap:'round',showDir:true}));
+            const line=new AMap.Polyline({path,strokeColor:day.color,strokeWeight:5,strokeOpacity:.88,lineJoin:'round',lineCap:'round',showDir:true});line._wbLeg={day:day.dayNumber,from:leg.from.key,to:leg.to.key};lines.push(line);
           }
         }
       }
       map.add([...lines,...markers]);
       map._wbMarkers=markers;
+      map._wbLines=lines;
       map._wbActiveKey=activeKey;
       map._wbActiveDay=activeDay;
       if(markers.length){
         const frame=markers.length+':'+markers.map(m=>m.getPosition().toString()).join('|')+':'+shown.map(d=>d.dayNumber).join(',')+':'+lines.length;
-        if(map._wbFrame!==frame){map.setFitView([...markers,...lines],false,[42,42,42,42]);map._wbFrame=frame;}
+        if(map._wbFrame!==frame){map.setFitView([...markers,...lines],false,[42,42,42,42],14);map._wbFrame=frame;}
       }
       if(activeKey){
         const marker=markers.find(m=>m._wb.keys.includes(activeKey));
@@ -86,9 +92,7 @@
       }
       setTimeout(()=>{try{map.resize();}catch{}},40);
     }catch(error){
-      console.error('RoamWorkbenchMap',error);
       if(container.dataset.mapToken!==token)return;
-      container.dataset.mapError=String(error&&error.stack||error);
       container.replaceChildren();
       const message=document.createElement('p');message.className='wb-map-error';
       message.textContent='高德地图暂时无法加载；每日距离与交通仍以已查结果为准。';
@@ -108,5 +112,6 @@
 
   function resize(){try{instance?.resize();}catch{}}
 
-  root.RoamWorkbenchMap=Object.freeze({render,focus,resize});
+  function focusLeg(day,from,to){if(!instance)return;const lines=(instance._wbLines||[]).filter(l=>l._wbLeg.day===day&&l._wbLeg.from===from&&l._wbLeg.to===to);if(lines.length)instance.setFitView(lines,false,[60,60,60,60],15);}
+  root.RoamWorkbenchMap=Object.freeze({render,focus,resize,focusLeg});
 })(window);

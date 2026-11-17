@@ -14,6 +14,7 @@
     svg.querySelectorAll('.prefecture-label').forEach(node=>node.classList.toggle('is-selected',Number(node.dataset.adcode)===selected.prefectureAdcode));
     $('#map-selected-name').textContent=selected.shortName;
     $('#explore-place').href='/explore/yunnan/planner/?place='+selected.id+'&view=edit';
+    $('#explore-place').firstChild.textContent='规划这趟旅行 ';
   }
   function updatePanel(place){
     const image=$('#selected-image'),backdrop=$('.atlas-background'),credit=$('#selected-source');
@@ -23,6 +24,9 @@
     $('#selected-category').textContent=place.category;
     $('#selected-region').textContent=place.region;
     $('#selected-name').textContent=place.shortName;$('#selected-english').textContent=place.english;$('#selected-introduction').textContent=place.introduction;
+    let tags=$('#selected-highlights');if(!tags){tags=document.createElement('div');tags.id='selected-highlights';tags.className='atlas-region-highlights';$('#selected-introduction').after(tags);}
+    tags.replaceChildren(...(place.hasCatalogue?[]:place.highlights||[]).map(text=>{const span=document.createElement('span');span.textContent=text;return span;}));
+    if(place.hasPhoto)$('#selected-image').alt=place.subject||place.shortName+'实景';
     $('#selection-status').textContent='当前探索：'+place.shortName+'，'+place.region;
     announce((regionNames.get(place.prefectureAdcode)||place.region)+' · 点击地图标记切换风景');
   }
@@ -81,7 +85,8 @@
         if(['ArrowDown','ArrowRight','ArrowUp','ArrowLeft'].includes(event.key)){event.preventDefault();const direction=['ArrowDown','ArrowRight'].includes(event.key)?1:-1,next=items[(items.indexOf(place)+direction+items.length)%items.length];svg.querySelector('[data-place="'+next.id+'"]').focus();select(next.id);}
       });markers.append(marker);
     }
-    svg.append(markers);syncSelection();announce((regionNames.get(selected.prefectureAdcode)||selected.region)+' · 点击标记选择风景');
+    // Administrative regions are the single selectable map layer.
+    markers.replaceChildren();svg.append(markers);syncSelection();announce((regionNames.get(selected.prefectureAdcode)||selected.region)+' · 点击州、市板块选择目的地');
   }
   async function loadMap(){
     const status=$('#map-status');status.hidden=false;status.textContent='正在展开云南…';$('#retry-region-boundaries').hidden=true;

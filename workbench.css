@@ -428,14 +428,12 @@ body.planner-workspace[data-planner-view=result] .result-references{display:none
 .wb-shell.map-collapsed .wb-map-legend,
 .wb-shell.map-collapsed .wb-map-summary,
 .wb-shell.map-collapsed .wb-map-note{display:none}
-.wb-shell.assistant-collapsed .wb-panel-bar,
-.wb-shell.map-collapsed .wb-panel-bar{height:100%;flex-direction:column;justify-content:flex-start;padding-top:8px;border-bottom:0}
-.wb-shell.assistant-collapsed .wb-panel-bar>span,
-.wb-shell.map-collapsed .wb-panel-bar>span{writing-mode:vertical-rl;letter-spacing:.15em}
+.wb-shell.assistant-collapsed .wb-assistant>.wb-panel-bar,
+.wb-shell.map-collapsed .wb-map-panel>.wb-panel-bar{height:100%;flex-direction:column;justify-content:flex-start;padding-top:8px;border-bottom:0}
+.wb-shell.assistant-collapsed .wb-assistant>.wb-panel-bar>span,
+.wb-shell.map-collapsed .wb-map-panel>.wb-panel-bar>span{writing-mode:vertical-rl;letter-spacing:.15em}
 .wb-shell.assistant-collapsed .wb-collapse,
 .wb-shell.map-collapsed .wb-collapse{margin-top:10px}
-.wb-shell.assistant-collapsed .wb-panel-bar{justify-content:flex-start}
-.wb-shell.map-collapsed .wb-panel-bar{justify-content:flex-start}
 
 /* responsive desktop */
 @media(max-width:1260px){
@@ -448,7 +446,7 @@ body.planner-workspace[data-planner-view=result] .result-references{display:none
   .wb-day-column{flex-basis:252px;width:252px}
   .wb-title-line h1{font-size:22px}
   .wb-actions{gap:2px}
-  .wb-save-status{display:none}
+  .wb-save-status{max-width:88px;font-size:7px}
 }
 @media(max-width:940px){
   body.planner-workspace[data-planner-view=result]{--wb-assistant:44px;--wb-map:44px}

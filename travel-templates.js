@@ -48,6 +48,16 @@
   const foothill=areas.yulong.days.find(day=>day.id==='lijiang-2d-yuhu');
   if(foothill)Object.assign(foothill,{cluster:'lijiang-yuhu',clusters:['lijiang-yuhu'],ids:['lijiang-yuhu'],why:'玉湖村单独作为山麓村落主题，未核实交通时不与玉水寨或雪山景区拼接。'});
   areas.yulong.days.push({id:'lijiang-yushui-day',zone:'玉龙山麓 · 玉水寨',cluster:'lijiang-south',clusters:['lijiang-south'],theme:'山麓水景 · 文化游览',ids:['lijiang-yushui'],periods:['上午 / 下午'],meal:'根据园区当日开放安排。',why:'玉水寨作为独立山麓点位，不假设与玉湖村存在已核实接驳。',mobility:'园区入口、接驳与开放安排需官方核实。'});
+  const editorialDays=[
+    {id:'dali4-city',zone:'古城 · 抵达适应',clusters:['dali-west'],theme:'抵达古城，慢逛街巷',ids:['dali-old-city','dali-wuhua'],why:'把抵达与古城街巷放在同一天，给入住和晚餐留白。'},
+    {id:'dali4-west',zone:'海西 · 喜洲',clusters:['dali-west-shore','dali-xizhou'],theme:'海西湖岸，到喜洲慢游',ids:['dali-longkan','dali-panxi','dali-xizhou'],why:'从海西湖岸向北走到喜洲；才村作为替换，避免重复湖岸停留。'},
+    {id:'dali4-east',zone:'双廊 · 海东',clusters:['dali-shuanglang','dali-east'],theme:'双廊与海东，分段停留',ids:['dali-shuanglang','dali-xiaoputuo','dali-wenbi'],why:'海东独立一天；挖色或理想邦择一替换，不强行走满所有村镇。'},
+    {id:'dali4-return',zone:'三塔 · 山麓 · 返程',clusters:['dali-west','dali-foothill'],theme:'人文山麓，留足返程',ids:['dali-three-pagodas','dali-fengyangyi'],why:'返程日保留主要人文停留；离开较早时删减，苍山索道不默认加入。'}
+  ].map(d=>({...d,cluster:d.clusters[0],periods:['上午','下午'],mobility:'道路接驳由高德另行查询；湖岸和山麓内部通行条件需要现场确认。',meal:'用餐与休息留白，不指定未确认商户。'}));
+  areas.erhai.days.push(...editorialDays);
+  areas.erhai.days.push({id:'dali4-west-direction',zone:'古城至海西北岸',clusters:['dali-west','dali-west-shore','dali-xizhou'],ids:[],periods:['上午','下午'],theme:'沿海西向北，减少折返',why:'可选同侧行进方向，地点数量受抵离和节奏限制。',mobility:'古城至湖岸为道路接驳，生态廊道内部通行另行确认。'});
+  areas.erhai.days.push({...editorialDays[2],id:'dali-east-options',clusters:['dali-east'],ids:['dali-wase','dali-xiaoputuo','dali-wenbi','dali-ideal']},{...editorialDays[3],id:'dali-foothill-options',clusters:['dali-foothill'],ids:['dali-fengyangyi','dali-jizhao','dali-canger']});
+  for(const item of classic)if(item.area==='erhai'&&item.days===4){item.sequence=editorialDays.map(d=>d.id);item.reason='古城抵达、海西喜洲、海东、山麓返程分日。实际安排按抵离、体力和已查道路调整。';}
   const defaultStart={meili:'meili-feilai',erhai:'dali-old-city',yulong:'lijiang-old-city',shangri:'shangri-oldtown',banna:'banna-botanical'};
   for(const place of root.RoamDestinations.items){
     if(areas[place.id])continue;

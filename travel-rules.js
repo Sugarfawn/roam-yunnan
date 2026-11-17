@@ -37,13 +37,16 @@
     const startCluster=A().get(settings.startLocation)?.cluster,endCluster=A().get(settings.endLocation)?.cluster;
     if(area===settings.area&&startCluster){const index=slots.findIndex(day=>clustersOf(day).includes(startCluster));if(index>0)slots.unshift(...slots.splice(index,1));}
     if(area===settings.area&&endCluster&&endCluster!==startCluster){const index=slots.findIndex(day=>clustersOf(day).includes(endCluster));if(index>=0&&index<slots.length-1)slots.push(...slots.splice(index,1));}
+    const placedIds=new Set();
     for(const day of slots){
-      const clusters=clustersOf(day),required=selected.filter(spot=>clusters.includes(spot.cluster)).map(spot=>spot.id);
+      const clusters=clustersOf(day),owner=spot=>slots.find(s=>s.ids?.includes(spot.id))||slots.find(s=>clustersOf(s).includes(spot.cluster));
+      const required=selected.filter(spot=>clusters.includes(spot.cluster)&&owner(spot)===day&&!placedIds.has(spot.id)).map(spot=>spot.id);
       const templateIds=uniq(day.ids||[]).filter(id=>{const spot=A().get(id);return spot&&spot.area===area&&clusters.includes(spot.cluster);});
       const catalogue=A().byRegion[area]||[];
       const candidates=catalogue.filter(spot=>clusters.includes(spot.cluster)&&!spot.kind.includes('hike')&&!spot.kind.includes('highland')).sort((a,b)=>settings.preferences.reduce((n,key)=>n+(b.kind.includes(key)?1:0)-(a.kind.includes(key)?1:0),0)||catalogue.indexOf(a)-catalogue.indexOf(b)).map(spot=>spot.id);
-      const limit=settings.pace==='slow'?2:settings.pace==='standard'?3:4,ids=uniq([...required,...templateIds,...candidates]);
+      const limit=settings.pace==='slow'?2:settings.pace==='standard'?3:4,ids=uniq([...required,...templateIds,...candidates]).filter(id=>!placedIds.has(id)&&owner(A().get(id))===day);
       day.stops=ids.slice(0,Math.max(limit,required.length));for(const id of required)if(!day.stops.includes(id))day.stops.push(id);
+      day.stops.forEach(id=>placedIds.add(id));
       day.overCapacity=day.stops.length>limit;day.dayLimit=limit;day.meal=day.meal||'为用餐与休息留出时间；地点按当天安排。';day.mealMinutes=60;day.restMinutes=T().buffer.rest[settings.pace];day.mobilityNote=day.mobility;day.notes=[];
       day.transferReserveMinutes=day.stops.length>1?45:25;day.transferReserveLabel='片区衔接机动的编辑估算，不是道路或公交车程。';
     }
@@ -57,7 +60,7 @@
     if(day.dayNumber===settings.days&&settings.departureWindow==='half')usable=Math.min(usable,240);
     if(settings.days===1&&settings.arrivalWindow==='half'&&settings.departureWindow==='half')usable=210;
     const toMinutes=time=>Number(time.slice(0,2))*60+Number(time.slice(3));
-    const start=day.dayNumber===1&&settings.arrivalTime?Math.max(540,toMinutes(settings.arrivalTime)):540,end=day.dayNumber===settings.days&&settings.departureTime?Math.min(1080,toMinutes(settings.departureTime)):1080;
+    const start=Math.max(day.startTime&&validClock(day.startTime)?toMinutes(day.startTime):540,day.dayNumber===1&&settings.arrivalTime?toMinutes(settings.arrivalTime):540),end=day.dayNumber===settings.days&&settings.departureTime?Math.min(1080,toMinutes(settings.departureTime)):1080;
     usable=Math.min(usable,Math.max(0,end-start));
     const meal=spots.length?(spots.length===1?30:day.mealMinutes||60):0,rest=spots.length?(spots.length===1?15:day.restMinutes||T().buffer.rest[settings.pace]):0,transfer=spots.length?(spots.length===1?25:day.transferReserveMinutes||45):0,min=visitMin+meal+rest+transfer,max=visitMax+meal+rest+transfer;
     const status=!spots.length?'empty':spots.length>(settings.pace==='slow'?2:settings.pace==='standard'?3:4)||min>usable?'over':unknown?'unknown':max>usable?'tight':'within';
@@ -104,10 +107,14 @@
         day.accommodation={label:A().get(settings.startLocation)?.zone||'住宿片区未提供',basis:'沿用用户的抵达片区作为住宿基点，不是酒店推荐；与当日片区不同时接驳待核实。'};
       }
     });
+    if(settings.area==='erhai'&&settings.days===4&&settings.selected.length)for(const day of days)day.stops=day.stops.filter(id=>settings.selected.includes(id));
+    if(settings.area==='erhai'&&settings.days===4)for(const day of days){for(const chain of [['dali-old-city','dali-longkan','dali-caicun','dali-panxi','dali-xizhou'],['dali-ideal','dali-wenbi','dali-xiaoputuo','dali-wase','dali-shuanglang']]){const indexes=day.stops.map((id,i)=>chain.includes(id)?i:-1).filter(i=>i>=0),ordered=indexes.map(i=>day.stops[i]).sort((a,b)=>chain.indexOf(a)-chain.indexOf(b));indexes.forEach((position,i)=>day.stops[position]=ordered[i]);}}
     const assigned=new Set(days.flatMap(day=>day.stops));unassigned.push(...settings.selected.filter(id=>!assigned.has(id)));
     const plan={version:2,settings,days:days.slice(0,settings.days),unassigned:[...new Set(unassigned)],unassignedRegions,savedAt:null,activeDay:0,templates,createdAt:null};plan.validation=recheck(plan);plan.warnings=warnings(plan);return plan;
   }
   function recheck(plan){
+    // User edits remain editable across neighbourhoods; they require renewed road verification.
+    if(plan.userEdited){const result=recheck({...plan,userEdited:false,planningMode:'manual'});for(const day of plan.days)if(day.userEdited)result.warnings.push('Day '+day.dayNumber+' 已按你的操作调整，交通与时间需要重新核验。');return result;}
     const violations=[],warnings=[];if(!plan||!plan.settings||!Array.isArray(plan.days))return{valid:false,violations:['计划数据无效。'],warnings:[]};
     const seen=new Set(),settings=normalize(plan.settings);
     for(const day of plan.days){
@@ -122,9 +129,17 @@
     if(settings.mustVisit.some(id=>!seen.has(id)))warnings.push('仍有必去景点未排入，请检查待安排清单。');
     if(root.RoamTripModel){const timed=root.RoamTripModel.checks(plan);warnings.push(...timed.warnings);violations.push(...timed.violations);}
     if(root.RoamPersonalPlaces){const personal=root.RoamPersonalPlaces.check(plan);warnings.push(...personal.warnings);violations.push(...personal.violations);}
-    return{valid:violations.length===0,violations:[...new Set(violations)],warnings:[...new Set(warnings)]};
+    const checked=violations.filter(message=>{
+      if(settings.area!=='erhai'||settings.days!==4||!message.includes('跨多个未核实片区'))return true;
+      const number=Number(message.match(/Day (\d+)/)?.[1]),d=plan.days[number-1];if(!d)return true;
+      const clusters=d.stops.map(id=>A().get(id)?.cluster);
+      const permitted=T().areas.erhai.days.some(t=>t.id.startsWith('dali4-')&&clusters.every(c=>t.clusters.includes(c)));
+      if(permitted)warnings.push('Day '+number+' 按同侧走廊编排，仍需核实道路与接驳。');return!permitted;
+    });
+    return{valid:checked.length===0,violations:[...new Set(checked)],warnings:[...new Set(warnings)]};
   }
   function warnings(plan){
+    const automatic=(plan.ai?.programAdjustments||[]).map(x=>'Day '+x.day+'：'+x.removed.map(id=>A().get(id)?.name||id).join('、')+' 已留在待安排，避免超出所选节奏。');
     const notes=[],s=plan.settings,spots=plan.days.flatMap(d=>d.stops.map(id=>A().get(id)).filter(Boolean));
     if(plan.unassigned.length)notes.push(`有 ${plan.unassigned.length} 个景点选择未排入，可能过满或超出模板覆盖范围；已保留在待安排清单。`);
     if(plan.unassignedRegions.length)notes.push('所选天数不足以覆盖所有地区与转场日；未安排地区已保留，不假装已到达。');
@@ -136,7 +151,7 @@
     if(s.arrivalWindow==='half')notes.push('抵达日按半日窗口安排；此假设不代表交通一定可达。');if(s.departureWindow==='half')notes.push('离开日按半日窗口处理，不在预留离开时段后增加景点。');if(s.arrivalTime||s.departureTime)notes.push('已记录用户提供的时刻，但没有将其推算为景点到达时间。');if(plan.days.some(x=>x.type==='buffer'))notes.push('保留机动日，未为了填满天数增加未验证景点。');
     const start=A().get(s.startLocation),end=A().get(s.endLocation),first=plan.days.find(d=>d.type==='sightseeing'&&d.stops.length),last=[...plan.days].reverse().find(d=>d.type==='sightseeing'&&d.stops.length);
     if(start&&first&&start.cluster!==A().get(first.stops[0])?.cluster)notes.push('首日片区与出发参考片区不同，请核实接驳后再执行。');if(end&&last&&end.cluster!==A().get(last.stops.at(-1))?.cluster)notes.push('末日片区与结束参考片区不同，请预留真实交通时间。');
-    return[...new Set(notes)];
+    return[...new Set([...notes,...automatic])];
   }
   function validatePlan(value){
     if(!value||![1,2].includes(value.version)||!value.settings||!Array.isArray(value.days))return null;const settings=normalize(value.settings);if(value.days.length!==settings.days)return null;const seen=new Set();

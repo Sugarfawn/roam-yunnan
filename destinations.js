@@ -91,11 +91,27 @@
       journal:Object.freeze({...(place.journal||journals[id]||{region:place.region,overviewTitle:place.lead,catalogueTitle:'挑选想去的地方。',catalogueIntro:place.introduction,photoPosition:photo.position||'50% 50%'}),plannerPhotoPosition:place.journal?.plannerPhotoPosition||plannerPhotoPositions[id]||photo.position||'50% 50%'}),
       mapUrl:'/explore/yunnan/?place='+id,detailUrl:'/destinations/detail.html?id='+id});
   });
-  const regionalItems=regionalEntries.map(([id,city,region,prefectureAdcode,english])=>Object.freeze({
-    id,city,shortName:city,region,county:region,prefectureAdcode,english,category:'自由规划',hasPhoto:false,hasCatalogue:false,
-    introduction:'这里已经开放为旅行目的地。专属图片和景点内容稍后补充，现在可以先建立空白行程，再通过真实地图搜索添加想去的地点。',
-    mapUrl:'/explore/yunnan/?place='+id,detailUrl:'/explore/yunnan/?place='+id
-  }));
+  const stories={
+    kunming:{category:'湖岸与春城日常',introduction:'从滇池的水面走进翠湖与老街，昆明的旅行可以从一段城市慢行开始。把湖岸、博物馆和街巷分开安排，在茶馆与花市之间留一点闲逛时间。',highlights:['滇池湖岸','翠湖与老街','斗南花市'],coordinates:[102.71,25.04]},
+    qujing:{category:'峰林、花田与瀑布',introduction:'罗平的峰林与花田、九龙瀑布的水声，让曲靖呈现出山水与田园交织的层次。花期和水量随季节变化，先选一个县域慢游，再把真正想看的风景串起来。',highlights:['罗平峰林','九龙瀑布','会泽古城'],coordinates:[103.80,25.49]},
+    yuxi:{category:'高原湖泊与山间小城',introduction:'抚仙湖的蓝，是认识玉溪的一种方式。可以选择一段湖岸停留，也可以走向通海的老街与山麓。不同湖区和县城之间留足接驳，别把环湖变成赶路。',highlights:['抚仙湖','通海古城','澄江'],coordinates:[102.55,24.35]},
+    baoshan:{category:'火山热海与古镇街巷',introduction:'在保山，可以从腾冲的地热景观走进和顺的街巷，也能把时间交给高黎贡山麓。温泉、古镇和山地属于不同体验，选一两种慢慢认识这片滇西风景。',highlights:['腾冲热海','和顺古镇','高黎贡山麓'],coordinates:[99.17,25.11]},
+    zhaotong:{category:'乌蒙山地与小城生活',introduction:'昭通的山地、峡谷与城镇，构成云南东北部的另一种尺度。可以从昭阳或镇雄的城市日常开始，也可以把大山包等山地风景单独留日，按天气与实际路况安排。',highlights:['昭阳街巷','镇雄','大山包'],coordinates:[103.72,27.34]},
+    puer:{category:'古茶林与山地村寨',introduction:'景迈山的茶林与村寨，让普洱的旅行有了慢下来的理由。沿着允许进入的村路认识茶与日常，再为思茅城区或其他县域单独留日，不把整片茶山当作一个打卡点。',highlights:['景迈山茶林','传统村寨','思茅城区'],coordinates:[100.97,22.78]},
+    lincang:{category:'茶山与佤乡村落',introduction:'从茶山走向村寨，临沧适合按县域慢慢探索。沧源的佤乡文化、凤庆的茶香与临翔的城市生活各有节奏，先确定落脚地，再按开放与接待情况安排村落访问。',highlights:['沧源翁丁','凤庆茶乡','临翔城区'],coordinates:[100.09,23.89]},
+    chuxiong:{category:'土林地貌与彝乡人文',introduction:'元谋土林的轮廓、禄丰的古镇与楚雄的城市街巷，是认识彝乡的不同入口。地貌观景与人文停留分开安排，给遮阴休息和县域之间的接驳留出余量。',highlights:['元谋土林','禄丰古镇','彝乡人文'],coordinates:[101.55,25.03]},
+    honghe:{category:'梯田、古城与山间村落',introduction:'从元阳梯田到建水街巷，红河的风景既有层叠山地，也有砖瓦之间的生活。梯田光影随农事与天气变化，建水、蒙自和元阳分别留日，更容易看见各自的节奏。',highlights:['元阳梯田','建水古城','蒙自街巷'],coordinates:[103.38,23.36]},
+    wenshan:{category:'喀斯特山水与湖畔村寨',introduction:'普者黑的山峰、湖水和村寨，勾勒出文山柔和的山水层次。可以从丘北选择一处落脚点，再按季节安排湖岸与村路；坝美等其他目的地另留交通与停留时间。',highlights:['丘北普者黑','湖岸与村路','广南坝美'],coordinates:[104.24,23.37]},
+    dehong:{category:'边城烟火与金塔剪影',introduction:'芒市的金塔、市场与街边小吃，是德宏明亮的旅行片段。瑞丽、陇川与盈江各有自己的生活风景，先选择一座城慢逛，再核实边境地区的通行与游览要求。',highlights:['芒市金塔','边城集市','瑞丽与盈江'],coordinates:[98.59,24.43]},
+    nujiang:{category:'峡谷、江流与山地村落',introduction:'怒江沿着群山展开，江流与山路把泸水、福贡和贡山连在一起。老姆登等村落适合留出停步的时间；山地路程按当日条件核实，独龙江等远程方向另作准备。',highlights:['怒江峡谷','福贡老姆登','贡山山地'],coordinates:[98.85,25.85]}
+  };
+  const kunmingPhoto={subject:'昆明滇池',background:'assets/dianchi.webp',card:'assets/dianchi-card.webp',author:'Ngguls（祝鱼贵）',license:'CC BY-SA 4.0',licenseUrl:'https://creativecommons.org/licenses/by-sa/4.0/',source:'https://commons.wikimedia.org/wiki/File:20260222_Kunming_Dianchi_Lake_PANO.jpg',position:'40% 50%'};
+  const regionalItems=regionalEntries.map(([id,city,region,prefectureAdcode,english])=>{
+    const story=stories[id],photo=id==='kunming'?kunmingPhoto:window.RoamRegionPhotos?.[id];
+    return Object.freeze({id,city,shortName:city,region,county:region,prefectureAdcode,english,...story,...photo,hasPhoto:Boolean(photo),hasCatalogue:false,
+      journal:Object.freeze({region:region+' · 云南',overviewTitle:story.category,overviewText:story.introduction,photoPosition:photo?.position||'50% 50%',plannerPhotoPosition:photo?.position||'50% 50%'}),
+      mapUrl:'/explore/yunnan/?place='+id,detailUrl:'/explore/yunnan/?place='+id});
+  });
   const items=[...featuredItems,...regionalItems];
   window.RoamDestinations = Object.freeze({
     items: Object.freeze(items),

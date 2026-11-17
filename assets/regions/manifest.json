@@ -1,0 +1,189 @@
+[
+  {
+    "id": "qujing",
+    "subject": "罗平油菜花田",
+    "background": "assets/regions/qujing.webp",
+    "card": "assets/regions/qujing-card.webp",
+    "author": "Fanghong",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Canola_field_in_Luoping.JPG",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Canola_field_in_Luoping.JPG/1280px-Canola_field_in_Luoping.JPG",
+    "position": "50% 50%",
+    "dimensions": [
+      1280,
+      848
+    ],
+    "sha256": "ab12d15d39a09078fa721d76e1c22185b75935a3f5442097dd0fa436b231fb8a"
+  },
+  {
+    "id": "yuxi",
+    "subject": "抚仙湖",
+    "background": "assets/regions/yuxi.webp",
+    "card": "assets/regions/yuxi-card.webp",
+    "author": "Huangdan2060",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Fuxian_Lake_202107201.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Fuxian_Lake_202107201.jpg/1280px-Fuxian_Lake_202107201.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      1280,
+      960
+    ],
+    "sha256": "e5d98a46f0c4b51770892958a728021b9ca313077655f1af08d67630a8756984"
+  },
+  {
+    "id": "baoshan",
+    "subject": "腾冲热海",
+    "background": "assets/regions/baoshan.webp",
+    "card": "assets/regions/baoshan-card.webp",
+    "author": "Kcx36",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Rehai%2C_Tengchong_02.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Rehai%2C_Tengchong_02.jpg/1280px-Rehai%2C_Tengchong_02.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      900,
+      1200
+    ],
+    "sha256": "b21bc8e9c88f0a2272b8e016c16819e37b31e476f4d8054bd51b3b47ef5f3a23"
+  },
+  {
+    "id": "zhaotong",
+    "subject": "镇雄人民公园",
+    "background": "assets/regions/zhaotong.webp",
+    "card": "assets/regions/zhaotong-card.webp",
+    "author": "DiverDave",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Zhenxiong-People%27s_Park.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Zhenxiong-People%27s_Park.jpg/1280px-Zhenxiong-People%27s_Park.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      1280,
+      721
+    ],
+    "sha256": "e36b7527bdf2c01dca07695248198f7662f9aef70401946ae59564cb94683661"
+  },
+  {
+    "id": "puer",
+    "subject": "景迈山",
+    "background": "assets/regions/puer.webp",
+    "card": "assets/regions/puer-card.webp",
+    "author": "xiquinhosilva",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:%E6%99%AF%E8%BF%88%E5%B1%B1_2026-04-06_02.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/%E6%99%AF%E8%BF%88%E5%B1%B1_2026-04-06_02.jpg/1280px-%E6%99%AF%E8%BF%88%E5%B1%B1_2026-04-06_02.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      1280,
+      853
+    ],
+    "sha256": "9778f3717af20c341ad609dca686334bfcb98dd597a5038cf29c66dc1288264a"
+  },
+  {
+    "id": "lincang",
+    "subject": "沧源翁丁",
+    "background": "assets/regions/lincang.webp",
+    "card": "assets/regions/lincang-card.webp",
+    "author": "瑞丽江的河水",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:%E7%BF%81%E4%B8%81%E4%B8%AD%E5%9B%BD%E6%9C%80%E5%90%8E%E5%8E%9F%E5%A7%8B%E9%83%A8%E8%90%BD_-_2024-10-15.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/%E7%BF%81%E4%B8%81%E4%B8%AD%E5%9B%BD%E6%9C%80%E5%90%8E%E5%8E%9F%E5%A7%8B%E9%83%A8%E8%90%BD_-_2024-10-15.jpg/1280px-%E7%BF%81%E4%B8%81%E4%B8%AD%E5%9B%BD%E6%9C%80%E5%90%8E%E5%8E%9F%E5%A7%8B%E9%83%A8%E8%90%BD_-_2024-10-15.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      900,
+      1200
+    ],
+    "sha256": "29d29c99282c0a0a7b969f2b6ccc235830c80a07ed8955eb160635049e73e96a"
+  },
+  {
+    "id": "chuxiong",
+    "subject": "元谋物茂土林",
+    "background": "assets/regions/chuxiong.webp",
+    "card": "assets/regions/chuxiong-card.webp",
+    "author": "Kcx36",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%85%83%E8%B0%8B%E7%89%A9%E8%8C%82%E5%9C%9F%E6%9E%97_01.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/%E5%85%83%E8%B0%8B%E7%89%A9%E8%8C%82%E5%9C%9F%E6%9E%97_01.jpg/1280px-%E5%85%83%E8%B0%8B%E7%89%A9%E8%8C%82%E5%9C%9F%E6%9E%97_01.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      1280,
+      714
+    ],
+    "sha256": "e318162a354b3b99bafdb19fa1de30c82a26df414c2ab6da4bf4c0189b5fd617"
+  },
+  {
+    "id": "honghe",
+    "subject": "元阳梯田",
+    "background": "assets/regions/honghe.webp",
+    "card": "assets/regions/honghe-card.webp",
+    "author": "David Stanley",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Yuanyang_Rice_Terraces_%2848639450842%29.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Yuanyang_Rice_Terraces_%2848639450842%29.jpg/1280px-Yuanyang_Rice_Terraces_%2848639450842%29.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      1280,
+      960
+    ],
+    "sha256": "fab9e52d934f4a64b650253395a951589146dd3ef1ca3da7e59e4733cf59467a"
+  },
+  {
+    "id": "wenshan",
+    "subject": "普者黑",
+    "background": "assets/regions/wenshan.webp",
+    "card": "assets/regions/wenshan-card.webp",
+    "author": "Zhangmoon618",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Puzhehei_in_Yunnan%2C_China.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/Puzhehei_in_Yunnan%2C_China.jpg/1280px-Puzhehei_in_Yunnan%2C_China.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      1280,
+      766
+    ],
+    "sha256": "9065005bd9a4b745967efb24d60d625780b93a023ac253ba83b0c9b68af339ca"
+  },
+  {
+    "id": "dehong",
+    "subject": "芒市勐焕大金塔",
+    "background": "assets/regions/dehong.webp",
+    "card": "assets/regions/dehong-card.webp",
+    "author": "瑞丽江的河水",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%8B%90%E7%84%95%E5%A4%A7%E9%87%91%E5%A1%94_-_2023-07-30_01.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/%E5%8B%90%E7%84%95%E5%A4%A7%E9%87%91%E5%A1%94_-_2023-07-30_01.jpg/1280px-%E5%8B%90%E7%84%95%E5%A4%A7%E9%87%91%E5%A1%94_-_2023-07-30_01.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      1280,
+      960
+    ],
+    "sha256": "c1d9d184885f59c8fb101cdbadae6352408ae0fa14959277a7c65f3289f0c34e"
+  },
+  {
+    "id": "nujiang",
+    "subject": "福贡老姆登怒江峡谷",
+    "background": "assets/regions/nujiang.webp",
+    "card": "assets/regions/nujiang-card.webp",
+    "author": "Chentaocui",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Grand_Canyon_of_the_Nujiang_River%2C_Yunnan%2C_China_-_2019_May.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/The_Grand_Canyon_of_the_Nujiang_River%2C_Yunnan%2C_China_-_2019_May.jpg/1280px-The_Grand_Canyon_of_the_Nujiang_River%2C_Yunnan%2C_China_-_2019_May.jpg",
+    "position": "50% 50%",
+    "dimensions": [
+      1280,
+      720
+    ],
+    "sha256": "726993c5d9b9c788a83c8551aa57915c98cb34dc9df6a2d937234a4479bf2024"
+  }
+]

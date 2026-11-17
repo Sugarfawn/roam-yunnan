@@ -4,6 +4,15 @@
   const S=()=>root.RoamAMap,P=()=>root.RoamPersonalPlaces;
   const lookups=new Map(),routes=new Map();let pluginPromise;
   const aliases={
+    'dali-wuhua':['五华楼'],
+    'dali-panxi':['磻溪S湾','磻溪村S湾','磻溪村'],
+    'dali-wase':['挖色镇'],
+    'dali-xiaoputuo':['小普陀'],
+    'dali-wenbi':['文笔村'],
+    'dali-ideal':['理想邦旅游度假小镇','理想邦'],
+    'dali-fengyangyi':['凤阳邑茶马古道','凤阳邑'],
+    'dali-jizhao':['寂照庵'],
+    'dali-canger':['苍洱大道'],
     'dali-old-city':['大理古城'],'dali-three-pagodas':['崇圣寺三塔文化旅游区','崇圣寺三塔'],
     'dali-longkan':['龙龛码头','龙龛古渡'],'dali-caicun':['才村码头','才村'],
     'dali-xizhou':['喜洲古镇'],'dali-yan-courtyard':['严家大院博物馆','严家大院'],

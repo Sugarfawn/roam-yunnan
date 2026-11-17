@@ -22,7 +22,10 @@
   function sequence(day,settings){
     const places=forDay(settings,day.dayNumber),hotels=places.filter(p=>p.kind==='hotel'),hotel=hotels[0],other=slot=>places.filter(p=>p.kind!=='hotel'&&p.slot===slot).map(place=>({type:'personal',place}));
     const scenic=(day.stops||[]).map((id,index)=>({type:'attraction',id,index}));
-    return [...(hotel?[{type:'personal',place:hotel,role:'start'}]:[]),...other('morning'),...scenic.slice(0,1),...other('lunch'),...scenic.slice(1),...other('afternoon'),...other('dinner'),...other('evening'),...(hotel?[{type:'personal',place:hotel,role:'end'}]:[])];
+    const middle=[...other('morning'),...scenic.slice(0,1),...other('lunch'),...scenic.slice(1),...other('afternoon'),...other('dinner'),...other('evening')];
+    const key=e=>e.type==='attraction'?e.id:e.place.id+':'+e.place.slot;
+    if(Array.isArray(day.entryOrder)){const rank=new Map(day.entryOrder.map((id,i)=>[id,i]));middle.sort((a,b)=>(rank.get(key(a))??1000)-(rank.get(key(b))??1000));}
+    return [...(hotel?[{type:'personal',place:hotel,role:'start'}]:[]),...middle,...(hotel?[{type:'personal',place:hotel,role:'end'}]:[])];
   }
   function check(plan){
     const places=normalize(plan.settings.personalPlaces),warnings=[],violations=[];

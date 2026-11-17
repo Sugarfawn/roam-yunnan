@@ -5,6 +5,7 @@ body.explore-page.cinematic-atlas{--atlas-gutter:clamp(24px,4.2vw,80px);--ink:#f
 .atlas-background img{display:block;width:100%;height:100%;object-fit:cover;transition:opacity .65s ease,transform 1.3s ease;opacity:1}
 .atlas-background.is-changing img{opacity:.7;transform:scale(1.008)}
 .atlas-background.is-placeholder img{opacity:0}
+.atlas-region-highlights{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.atlas-region-highlights:empty{display:none}.atlas-region-highlights span{border:1px solid #f1dfb83b;color:#f6ebd4b8;background:#102d2326;border-radius:3px;padding:5px 9px;font-size:10px;letter-spacing:.6px}.cinematic-atlas #selected-source[hidden]{display:none}
 .atlas-background:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#091d1b70,transparent 48%,#0d211a18 58%,#0a1d1882),linear-gradient(180deg,#081d1d4d,transparent 32%,transparent 70%,#0a1d1a91)}
 .cinematic-atlas .route-header{position:relative;z-index:4;border-bottom:1px solid #f2ead22b;height:clamp(68px,9dvh,92px)}
 .cinematic-atlas .route-brand{color:#fff7e6}

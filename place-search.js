@@ -88,7 +88,7 @@
     if(!chosen)return;
     if(binding){const callback=binding.confirm,poi={...chosen,match:'user-confirmed',queriedAt:new Date().toISOString()};close();callback(poi);return;}
     const place={...chosen,kind:$('#place-kind').value,fromDay:Number($('#personal-from-day').value),toDay:Number($('#personal-to-day').value),slot:$('#personal-slot').value};
-    const result=bridge.add(place,editingId);if(!result.ok){status(result.message);return;}close();
+    const result=bridge.add(place,editingId);if(!result.ok){status(result.message);return;}window.RoamWorkbench?.personalAdded?.(place,editingId);close();
   });
   for(const button of document.querySelectorAll('[data-open-place-search]'))button.addEventListener('click',()=>open(button.dataset.openPlaceSearch||'hotel'));
   window.RoamPlaceSearch=Object.freeze({open,edit:place=>open(place.kind,place),bind:(spot,confirm)=>open('other',null,{spot,confirm})});
