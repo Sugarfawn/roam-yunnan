@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "mode": "offline UI and recorded provider replay; no paid API or live traffic",
+  "calls": 2,
+  "checks": [
+    "manual creates empty dates with zero AI calls",
+    "add pending and assign a date",
+    "user times and notes persist",
+    "overlapping schedule flagged",
+    "move/defer/shrink returns pending places",
+    "same-region multiple trips remain independent",
+    "adaptive preference questions precede real provider path",
+    "confirmed family/easy preferences reach provider",
+    "history restores previous version",
+    "refresh restores title/dates/times",
+    "mobile no horizontal overflow",
+    "AI failure preserves existing manual itinerary",
+    "deleted current trip does not return after refresh"
+  ],
+  "errors": []
+}

@@ -14,6 +14,7 @@
     draft(area){const draft=state.drafts[area]||{};return root.RoamRules.normalize({...draft,area,selected:draft.areas?.length>1?draft.selected:this.selection(area),mustVisit:draft.mustVisit||this.mustVisits(area)});},
     setDraft(settings){const clean=root.RoamRules.normalize(settings);state.drafts[clean.area]=clean;for(const area of clean.areas){state.selections[area]=clean.selected.filter(id=>root.RoamAttractions.get(id)?.area===area);state.mustVisits[area]=clean.mustVisit.filter(id=>root.RoamAttractions.get(id)?.area===area);}state.lastArea=clean.area;return write();},
     plan(area){return root.RoamRules.validatePlan(state.plans[area]);},
+    removePlan(area){delete state.plans[area];return write();},
     setPlan(plan){const valid=root.RoamRules.validatePlan(plan);if(!valid)return false;state.plans[valid.settings.area]=valid;state.lastArea=valid.settings.area;return write();},
     lastArea(){return root.RoamDestinations.get(state.lastArea)?state.lastArea:'erhai';},
     available(){return available;}

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "mode": "sanitized-clone browser, no model credentials, no live map or paid calls",
+  "checks": [
+    "home and map enter selected region",
+    "third-version selected and mandatory IDs migrated once",
+    "empty map credential template loads without 404",
+    "missing DeepSeek key shows retry and keeps choices",
+    "old selection URL redirects",
+    "cleared selections stay empty after reload",
+    "five-region planner and local images",
+    "destination guide assets",
+    "no page errors or missing resources"
+  ],
+  "errors": [],
+  "missing": []
+}

@@ -12,7 +12,7 @@
     const list=entries(day,settings),keys=list.slice(0,-1).map((e,i)=>legKey(day,e,list[i+1]));
     return JSON.stringify([day.dayNumber,day.type,day.area,day.stops,settings.days,settings.pace,settings.transport,
       settings.arrivalWindow,settings.departureWindow,settings.arrivalTime,settings.departureTime,
-      root.RoamPersonalPlaces.forDay(settings,day.dayNumber),day.stops.map(id=>settings.poiBindings?.[id]||null),keys.map(k=>settings.legModes?.[k]||null)]);
+      day.timings||{},root.RoamPersonalPlaces.forDay(settings,day.dayNumber),day.stops.map(id=>settings.poiBindings?.[id]||null),keys.map(k=>settings.legModes?.[k]||null)]);
   }
   function fresh(day,settings,now=Date.now()){
     const t=day.traffic,stamp=Date.parse(t?.queriedAt);
@@ -41,7 +41,8 @@
     const mealMinutes=Math.max(base.mealMinutes,lunch*60)+(dinner*60),restMinutes=Math.max(base.restMinutes,list.length?root.RoamTravelTemplates.buffer.rest[s.pace]:0);
     const unknownStops=day.stops.filter(id=>!root.RoamAttractions.get(id).estimate).length+places.filter(p=>p.kind==='other').length;
     const hotel=places.some(p=>p.kind==='hotel'),missingHotel=!hotel&&Boolean(day.stops.length||places.length),bufferMinutes=30;
-    const minimumMinutes=base.visitMin+mealMinutes+restMinutes+bufferMinutes+roadMinutes,maximumMinutes=base.visitMax+mealMinutes+restMinutes+bufferMinutes+roadMinutes;
+    let visitMin=base.visitMin,visitMax=base.visitMax;for(const id of day.stops){const time=day.timings?.[id],estimate=root.RoamAttractions.get(id).estimate;if(time?.start&&time?.end&&time.end>time.start){const m=t=>Number(t.slice(0,2))*60+Number(t.slice(3)),duration=m(time.end)-m(time.start);visitMin+=duration-(estimate?.min||0);visitMax+=duration-(estimate?.max||0);}}
+    const minimumMinutes=visitMin+mealMinutes+restMinutes+bufferMinutes+roadMinutes,maximumMinutes=visitMax+mealMinutes+restMinutes+bufferMinutes+roadMinutes;
     const internalTransportUnknown=day.stops.some(id=>root.RoamAttractions.get(id).kind.some(k=>['hike','dedicated'].includes(k)));
     const usableMinutes=base.usableMinutes,complete=hasEvidence&&!missingLegs&&!unknownStops&&!missingHotel&&!internalTransportUnknown;
     const status=minimumMinutes>usableMinutes?'over':maximumMinutes>usableMinutes?'tight':!hasEvidence?'pending':!complete?'partial':'within';
@@ -58,7 +59,7 @@
     if(day.stops.some(id=>root.RoamAttractions.get(id).kind.some(k=>['highland','hike','dedicated'].includes(k))))notes.push('园内接驳、索道、排队和徒步条件未完成核实，仍需按官方安排预留。');
     notes.push('游览、用餐、休息与 30 分钟机动为编排估算；交通为高德当前查询，均非出行保证。');
     return{status,label:labels[status],hasEvidence,complete,knownLegs:valid.length,totalLegs:expected.length,missingLegs,roadMinutes,
-      visitMin:base.visitMin,visitMax:base.visitMax,mealMinutes,restMinutes,bufferMinutes,minimumMinutes,maximumMinutes,usableMinutes,unknownStops,missingHotel,notes,
+      visitMin,visitMax,mealMinutes,restMinutes,bufferMinutes,minimumMinutes,maximumMinutes,usableMinutes,unknownStops,missingHotel,notes,
       internalTransportUnknown,checkedAt:hasEvidence?stored.queriedAt:null};
   }
   function clear(plan){for(const day of plan.days)if(day.traffic&&!fresh(day,plan.settings))delete day.traffic;return plan;}

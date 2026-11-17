@@ -1,6 +1,6 @@
 {
   "name": "roam-yunnan",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "description": "漫游云南：基于 DeepSeek 与高德地图的个性化旅行规划 Web 应用",
   "engines": {
@@ -15,7 +15,8 @@
     "test:map": "node tests/map-browser.cjs",
     "test:migration": "node tests/selection-migration.cjs",
     "test:selection": "node tests/selection-migration.cjs",
-    "test:integration": "node tests/complete-browser.cjs"
+    "test:integration": "node tests/complete-browser.cjs",
+    "test:journeys": "node tests/journey-browser.cjs"
   },
   "devDependencies": {
     "playwright": "1.64.1"

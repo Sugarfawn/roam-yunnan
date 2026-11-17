@@ -6,7 +6,7 @@ for(const file of fs.readdirSync(root).filter(name=>/\.(?:js|cjs)$/.test(name)&&
   const result=spawnSync(process.execPath,['--check',path.join(root,file)],{stdio:'inherit'});
   if(result.status!==0)process.exit(result.status||1);
 }
-for(const file of ['route-rules.cjs','personal-places.cjs','traffic-feasibility.cjs','selection-migration.cjs','ai-contract.cjs']){
+for(const file of ['route-rules.cjs','personal-places.cjs','traffic-feasibility.cjs','journey-model.cjs','selection-migration.cjs','ai-contract.cjs']){
   const result=spawnSync(process.execPath,[path.join(__dirname,file)],{stdio:'inherit',cwd:root});
   if(result.status!==0)process.exit(result.status||1);
 }

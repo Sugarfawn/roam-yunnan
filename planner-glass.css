@@ -1,0 +1,91 @@
+/* Photography is visible through a readable warm glass work surface. */
+body.planner-workspace{--journey-glass:rgba(247,245,233,.70);--journey-line:rgba(255,255,244,.62)}
+body.planner-workspace::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(120deg,#183b32a8,#d6c7a95c),var(--planner-page-photo,url('/assets/selected/erhai-background.webp')) center/cover;filter:blur(3px)}
+body.planner-workspace[data-planner-view=edit]::before{background-image:linear-gradient(120deg,#22443966,#ede4ce55),var(--planner-page-photo);filter:blur(3px)}
+body.planner-workspace .travel-main{background:linear-gradient(115deg,#f9f7eda6,#f6f1df70);border:1px solid var(--journey-line);backdrop-filter:blur(23px);-webkit-backdrop-filter:blur(23px);border-radius:7px}
+body.planner-workspace[data-planner-view=edit] .travel-main{background:linear-gradient(115deg,#faf8edbd,#f0eddd82);backdrop-filter:blur(24px)}
+body.planner-workspace[data-planner-view=result] .travel-main{width:var(--page-width);padding:0 24px 22px;box-sizing:border-box;margin:12px auto 30px;background:linear-gradient(115deg,#faf8edcf,#f3efdfb3)}
+.planner-workspace .daily-stop-card,.planner-workspace .personal-stop-card{background:#fffefb36;border-color:#fffdf56b}
+.planner-workspace .route-overview{background:#f4f3e34f;backdrop-filter:blur(16px)}
+.planner-workspace .result-day-tabs{background:#f5f1dfb0;backdrop-filter:blur(10px)}
+.planner-workspace .planning-aside{background:#fcfaec40!important;border-color:#fffef590!important}
+.planner-workspace .journey-global-actions{display:flex;gap:14px;align-items:center}
+.planner-workspace .journey-global-actions button{font-size:11px!important;color:inherit!important;letter-spacing:.5px!important;white-space:nowrap}
+.journey-mode-line{display:flex;align-items:center;gap:10px;margin:0 0 14px;color:#637653;font-size:11px;flex:none;flex-wrap:wrap}
+.journey-mode-line>span{flex:1}.journey-mode-line button{padding:7px 13px;border:1px solid #7c916f55;border-radius:4px;background:#fffbea30;color:#4c6b47;font-size:11px}
+.journey-dialog{width:min(650px,calc(100vw - 32px));box-sizing:border-box;max-height:calc(100dvh - 38px);padding:28px;border:1px solid #fdf8dfb3;border-radius:12px;background:linear-gradient(120deg,#f6f4e9eb,#eaeadae6);color:#315440;backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);box-shadow:0 30px 100px #0a251d4d;overflow:auto}
+.journey-dialog::backdrop{background:#15382b9c;backdrop-filter:blur(9px)}
+.journey-dialog-head{display:flex;gap:18px;justify-content:space-between;align-items:center;margin-bottom:13px}
+.journey-dialog h2{font-size:24px;line-height:1.6;font-weight:400;margin:0}.journey-dialog h3{font-size:16px;margin:0 0 5px;font-weight:500}
+.journey-dialog button{cursor:pointer;font:inherit;border:0;background:none;color:inherit}.journey-dialog .journey-close{font-size:27px;padding:0 5px;color:#7c8d72}
+.journey-dialog .journey-dialog-copy{font-size:12px;color:#687e60;line-height:1.95;margin:0 0 20px}
+.journey-create-form{display:flex;flex-direction:column;gap:17px}.journey-field{display:flex;flex-direction:column;gap:7px;font-size:12px;color:#4b6745;line-height:1.7}
+.journey-field input,.journey-field select,.journey-dialog textarea{min-width:0;box-sizing:border-box;width:100%;padding:10px 12px;border:1px solid #72896940;border-radius:4px;background:#fffef66b;font:inherit;color:#365b46;font-size:14px}
+.journey-dialog textarea{height:150px;resize:vertical;margin:0 0 14px}
+.journey-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.journey-mode-options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.journey-dialog .journey-mode-options button{border:1px solid #72896944;padding:18px;text-align:left;display:flex;flex-direction:column;gap:9px;border-radius:6px;background:#fffef52e;transition:background .2s,border-color .2s}
+.journey-dialog .journey-mode-options button[aria-pressed=true]{background:#d7e4cc72;border-color:#749064}
+.journey-mode-options strong{font-size:17px;font-weight:500}.journey-mode-options small{font-size:11px;color:#6c805f;line-height:1.9}
+.journey-dialog .gold-button{border:1px solid #446a51;background:#385f48;color:#fff7e5;border-radius:4px;padding:12px 21px;font-size:13px;text-align:center}
+.journey-dialog .journey-shelf-row{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid #7c916f33}
+.journey-shelf-row>div{flex:1;min-width:0}.journey-shelf-row p{font-size:11px;margin:0;line-height:1.9;color:#728064}.journey-shelf-row small{font-size:10px;color:#809073}
+.journey-dialog .journey-shelf-row button{font-size:11px;padding:6px;border:1px solid #7c916f40;border-radius:3px;white-space:nowrap}
+.journey-shelf{margin-bottom:20px}.journey-question-group{border:0;padding:0;margin:0 0 20px}.journey-question-group legend{font-size:15px;margin-bottom:12px;line-height:1.8}
+.journey-question-group label{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #7c916f30;border-radius:4px;margin-bottom:8px;background:#fffbea28;font-size:13px}
+.journey-question-group label:has(input:checked){background:#d8e4cf77;border-color:#7c916f88}.journey-question-group input{accent-color:#466b4c}
+.journey-question-actions{display:flex;gap:15px;justify-content:space-between;align-items:center}.journey-question-actions button{font-size:12px}.journey-question-body{min-height:190px}
+.journey-workbench-tools{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0 17px;padding:12px 0;border-block:1px solid #7c916f30}
+.journey-workbench-tools button{font-size:11px;color:#546f4d;padding:4px 0;line-height:1.8}
+.journey-day-tools{display:flex;gap:15px;flex-wrap:wrap;margin:0 0 16px}.journey-day-tools button{border:1px solid #7c916f40;padding:7px 12px;border-radius:4px;font-size:11px;color:#5a7752;background:#fffbea33}
+.planner-workspace .journey-time{font-size:12px!important;color:#6b7953!important;padding:7px 0 0;margin:0}
+.planner-workspace .journey-user-note{font-size:12px!important;line-height:1.9;color:#607855!important;white-space:pre-wrap;overflow-wrap:anywhere;margin:4px 0}
+.pending-place{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #7c916f2b}.pending-place>span{flex:1;min-width:0;font-size:13px;color:#456641}
+.pending-place select{max-width:130px;border:1px solid #7c916f3b;background:#fffbea44;border-radius:3px;padding:7px;font-size:11px;color:#506d47}
+.pending-place button,.unassigned-spots>button{font-size:11px;color:#81714f;padding:8px}
+.journey-catalogue-list{max-height:46dvh;overflow:auto;margin:14px 0;scrollbar-width:thin}.journey-catalogue-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid #7c916f30}.journey-catalogue-row img{width:55px;height:55px;object-fit:cover;border-radius:4px}.journey-catalogue-row>div{flex:1;min-width:0}.journey-catalogue-row strong{display:block;font-size:13px;font-weight:500}.journey-catalogue-row small{display:block;font-size:10px;color:#809273;margin-top:5px}.journey-dialog .journey-catalogue-row button{font-size:11px;padding:8px;border:1px solid #7c916f40;border-radius:3px}
+.journey-form-error{font-size:12px;color:#9a6845;line-height:1.8;margin:0}
+.journey-dialog .journey-resume-link{display:block;margin:14px auto 0;font-size:12px;color:#758468;text-decoration:underline;text-underline-offset:4px}
+.planner-workspace .stop-card-copy h3,.planner-workspace .day-intro h2{color:#31583e}
+.planner-workspace .stop-card-copy>small,.planner-workspace .day-arrangement-note,.planner-workspace .route-leg-text{color:#5a7350}
+.planner-workspace[data-planner-view=result]>.route-header{background:#f5f1dfb0;backdrop-filter:blur(20px);border-bottom:1px solid #fff8dc80;border-radius:0 0 5px 5px}
+@media(min-width:951px){
+ html:has(body.planner-workspace[data-planner-view=result]){height:100%;overflow:hidden}
+ body.planner-workspace[data-planner-view=result]{height:100dvh;overflow:hidden}
+ body.planner-workspace[data-planner-view=result]>.route-header{height:66px}
+ body.planner-workspace[data-planner-view=result] .travel-main{height:calc(100dvh - 78px);margin:6px auto;display:flex;flex-direction:column;min-height:0;padding-bottom:15px;overflow:hidden}
+ body.planner-workspace[data-planner-view=result] .travel-breadcrumb{height:30px;flex:none}
+ body.planner-workspace[data-planner-view=result] #result-section{display:flex;flex:1;min-height:0;flex-direction:column}
+ body.planner-workspace[data-planner-view=result] .result-heading{margin:8px 0 7px;flex:none}
+ body.planner-workspace[data-planner-view=result] .result-heading h1{font-size:25px;margin-bottom:4px}
+ body.planner-workspace[data-planner-view=result] .local-plan-status{margin:0;padding:4px 0;font-size:10px;flex:none}
+ body.planner-workspace[data-planner-view=result] .journey-workbench-tools{margin:5px 0 6px;padding:5px 0;flex:none}
+ body.planner-workspace[data-planner-view=result] .local-plan-status #result-add-place{display:none}
+ body.planner-workspace[data-planner-view=result] .traffic-verification{margin:5px 0 12px;padding:6px 0;flex:none;font-size:10px;gap:10px}
+ body.planner-workspace[data-planner-view=result] .traffic-verification button{font-size:10px}
+ body.planner-workspace[data-planner-view=result] .travel-result-layout{flex:1;min-height:0;overflow:hidden;align-items:stretch;gap:24px}
+ body.planner-workspace[data-planner-view=result] .daily-itinerary{min-height:0;overflow:hidden;display:flex;flex-direction:column;padding-right:10px}
+ body.planner-workspace[data-planner-view=result] #day-itinerary{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:5px}
+ body.planner-workspace[data-planner-view=result] #unassigned-spots{flex:none;max-height:35%;min-height:85px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;margin-top:12px;padding:13px 17px}
+ body.planner-workspace[data-planner-view=result] #unassigned-spots h3{font-size:16px;margin:0 0 4px}
+ body.planner-workspace[data-planner-view=result] #unassigned-spots p{font-size:11px;margin:0 0 5px}
+ body.planner-workspace[data-planner-view=result] .journey-day-tools{flex:none;margin-bottom:10px}
+ body.planner-workspace[data-planner-view=result] .result-day-tabs{position:static;flex:none;background:#f5f1dfdc}
+ body.planner-workspace[data-planner-view=result] .empty-day-edit{padding:16px 12px;margin:10px 0;font-size:12px}
+ body.planner-workspace[data-planner-view=result] .route-overview{position:static;min-height:0;display:flex;flex-direction:column;overflow:auto;scrollbar-width:thin}
+ body.planner-workspace[data-planner-view=result] .route-overview .travel-map{height:auto;min-height:190px;flex:1}
+ body.planner-workspace[data-planner-view=result] .personal-day-map{min-height:190px}
+ body.planner-workspace[data-planner-view=result] .overview-heading{padding:12px 18px;flex:none}
+ body.planner-workspace[data-planner-view=result] .route-order{padding:6px 18px 10px;flex:none}
+ body.planner-workspace[data-planner-view=result] .result-references{margin-top:7px;padding:8px 0;max-height:22dvh;overflow:auto;flex:none}
+ body.planner-workspace[data-planner-view=result] #ai-result-summary{margin:0;flex:none;max-height:20dvh;overflow:auto}
+ body.planner-workspace[data-planner-view=result] .result-day-tabs{margin-bottom:12px}
+ body.planner-workspace[data-planner-view=result] .result-day-tabs button{padding:10px 13px}
+ body.planner-workspace[data-planner-view=result] .day-important-note{padding:7px 10px}
+ body.planner-workspace[data-planner-view=result] .traffic-assessment{padding:12px 14px}
+ body.planner-workspace[data-planner-view=result] .result-references[open] .result-reference-body{padding-top:7px}
+}
+@media(min-width:951px) and (max-height:780px){.journey-mode-line{display:none}}
+@media(max-width:1100px){.planner-workspace .journey-global-actions{gap:8px}.planner-workspace #site-header nav{gap:16px}.journey-mode-line{font-size:10px}}
+@media(max-width:600px){.journey-dialog{padding:22px 18px}.journey-dialog h2{font-size:21px}.journey-mode-options{grid-template-columns:1fr}.journey-dialog .journey-mode-options button{padding:13px}.journey-form-row{gap:10px}.journey-shelf-row{flex-wrap:wrap}.journey-shelf-row>div{flex-basis:100%}.journey-global-actions button{font-size:10px!important}.planner-workspace #site-header nav>a{display:none}.planner-workspace[data-planner-view=result] .travel-main{padding:0 14px 20px}.journey-question-actions{gap:9px;flex-wrap:wrap}.journey-workbench-tools{gap:8px 15px}.pending-place{gap:8px}.journey-mode-line>span{flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){.journey-dialog *{transition:none!important}}
