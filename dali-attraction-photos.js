@@ -1,0 +1,192 @@
+/* Dali guide images; exact works, authors and licenses in assets/dali-attractions/manifest.json. */
+window.DaliAttractionPhotos = Object.freeze({
+  "dali-old-city": {
+    "id": "dali-old-city",
+    "name": "大理古城",
+    "title": "File:202605 Streets in Dali Old Town 03.jpg",
+    "src": "assets/dali-attractions/dali-old-city.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:202605_Streets_in_Dali_Old_Town_03.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/202605_Streets_in_Dali_Old_Town_03.jpg/1280px-202605_Streets_in_Dali_Old_Town_03.jpg",
+    "author": "Jonashtand",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "Streets in Dali Old Town",
+    "downloadedAt": "2026-10-29",
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "sourceDimensions": [
+      1280,
+      853
+    ],
+    "originalWorkDimensions": [
+      6000,
+      4000
+    ],
+    "transformations": "Resize and crop to 3:2; WebP conversion. No colour adjustment.",
+    "downloadSha256": "bcaa7fc0dc88aa64378fb7b7edacd5cdf81cdada1d1bd1813ccfea1efd1fef59"
+  },
+  "dali-three-pagodas": {
+    "id": "dali-three-pagodas",
+    "name": "崇圣寺三塔",
+    "title": "File:Dali Yunnan China Chongsheng-Temple-03.jpg",
+    "src": "assets/dali-attractions/dali-three-pagodas.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Dali_Yunnan_China_Chongsheng-Temple-03.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Dali_Yunnan_China_Chongsheng-Temple-03.jpg/1280px-Dali_Yunnan_China_Chongsheng-Temple-03.jpg",
+    "author": "CEphoto, Uwe Aranas",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "description": "Dali, Yunnan, China: Chongsheng Temple, the three towers",
+    "downloadedAt": "2026-10-29",
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "sourceDimensions": [
+      1280,
+      706
+    ],
+    "originalWorkDimensions": [
+      3500,
+      1931
+    ],
+    "transformations": "Resize and crop to 3:2; WebP conversion. No colour adjustment.",
+    "downloadSha256": "24aabd3fd79bbcdf1f17473b88dbe72b25d10827d94da57476e0212907e0d10b"
+  },
+  "dali-caicun": {
+    "id": "dali-caicun",
+    "name": "才村湖岸",
+    "title": "File:大理才村的洱海 02.jpg",
+    "src": "assets/dali-attractions/dali-caicun.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E7%90%86%E6%89%8D%E6%9D%91%E7%9A%84%E6%B4%B1%E6%B5%B7_02.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/%E5%A4%A7%E7%90%86%E6%89%8D%E6%9D%91%E7%9A%84%E6%B4%B1%E6%B5%B7_02.jpg/1280px-%E5%A4%A7%E7%90%86%E6%89%8D%E6%9D%91%E7%9A%84%E6%B4%B1%E6%B5%B7_02.jpg",
+    "author": "Liuxingy",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "​大理才村的洱海",
+    "downloadedAt": "2026-10-29",
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "sourceDimensions": [
+      1280,
+      853
+    ],
+    "originalWorkDimensions": [
+      6000,
+      4000
+    ],
+    "transformations": "Resize and crop to 3:2; WebP conversion. No colour adjustment.",
+    "downloadSha256": "6b1e9c0f940bf37912ea321662eea189ba0b50834346c12e8f6e78ec74909b0a"
+  },
+  "dali-xizhou": {
+    "id": "dali-xizhou",
+    "name": "喜洲古镇",
+    "title": "File:Xizhou Old Town.jpg",
+    "src": "assets/dali-attractions/dali-xizhou.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Xizhou_Old_Town.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Xizhou_Old_Town.jpg/1280px-Xizhou_Old_Town.jpg",
+    "author": "Mx. Granger",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "description": "Xizhou Old Town in Dali.",
+    "downloadedAt": "2026-10-29",
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "sourceDimensions": [
+      1280,
+      742
+    ],
+    "originalWorkDimensions": [
+      4160,
+      2412
+    ],
+    "transformations": "Resize and crop to 3:2; WebP conversion. No colour adjustment.",
+    "downloadSha256": "886a34d444b7be5a5191855c045341b406b485e80abdf1467e18088a37223173"
+  },
+  "dali-yan-courtyard": {
+    "id": "dali-yan-courtyard",
+    "name": "喜洲严家大院",
+    "title": "File:喜洲古镇-严家大院大门.jpg",
+    "src": "assets/dali-attractions/dali-yan-courtyard.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%96%9C%E6%B4%B2%E5%8F%A4%E9%95%87-%E4%B8%A5%E5%AE%B6%E5%A4%A7%E9%99%A2%E5%A4%A7%E9%97%A8.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/%E5%96%9C%E6%B4%B2%E5%8F%A4%E9%95%87-%E4%B8%A5%E5%AE%B6%E5%A4%A7%E9%99%A2%E5%A4%A7%E9%97%A8.jpg/1280px-%E5%96%9C%E6%B4%B2%E5%8F%A4%E9%95%87-%E4%B8%A5%E5%AE%B6%E5%A4%A7%E9%99%A2%E5%A4%A7%E9%97%A8.jpg",
+    "author": "Kcx36",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "​喜洲古镇-严家大院大门",
+    "downloadedAt": "2026-10-29",
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "sourceDimensions": [
+      1280,
+      720
+    ],
+    "originalWorkDimensions": [
+      3584,
+      2016
+    ],
+    "transformations": "Resize and crop to 3:2; WebP conversion. No colour adjustment.",
+    "downloadSha256": "114cd36ffd43309ec463656697e15ecd92246fd81210ccd6eb7a092fa9322cde"
+  },
+  "dali-shuanglang": {
+    "id": "dali-shuanglang",
+    "name": "双廊湖岸",
+    "title": "File:Shuanglang, Dali, Yunnan, China 01.jpg",
+    "src": "assets/dali-attractions/dali-shuanglang.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Shuanglang,_Dali,_Yunnan,_China_01.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Shuanglang%2C_Dali%2C_Yunnan%2C_China_01.jpg/1280px-Shuanglang%2C_Dali%2C_Yunnan%2C_China_01.jpg",
+    "author": "Zhangmoon618",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "description": "​中国云南大理双廊镇",
+    "downloadedAt": "2026-10-29",
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "sourceDimensions": [
+      1280,
+      720
+    ],
+    "originalWorkDimensions": [
+      3200,
+      1800
+    ],
+    "transformations": "Resize and crop to 3:2; WebP conversion. No colour adjustment.",
+    "downloadSha256": "1bf41fad15cfff60556882eda898df71785884e53d038e807e431920ac3935a2"
+  },
+  "dali-erhai-park": {
+    "id": "dali-erhai-park",
+    "name": "洱海公园",
+    "title": "File:20260223 Erhai Park in Dali, Yunnan NE.jpg",
+    "src": "assets/dali-attractions/dali-erhai-park.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:20260223_Erhai_Park_in_Dali,_Yunnan_NE.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/20260223_Erhai_Park_in_Dali%2C_Yunnan_NE.jpg/1280px-20260223_Erhai_Park_in_Dali%2C_Yunnan_NE.jpg",
+    "author": "Ngguls",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "Erhai Park in Dali, Yunnan",
+    "downloadedAt": "2026-10-29",
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "sourceDimensions": [
+      1280,
+      960
+    ],
+    "originalWorkDimensions": [
+      4096,
+      3072
+    ],
+    "transformations": "Resize and crop to 3:2; WebP conversion. No colour adjustment.",
+    "downloadSha256": "41b5a6f30ec1f1affbea0d233e6574d19d87b86a236a146ec136912bbe77b9c0"
+  }
+});

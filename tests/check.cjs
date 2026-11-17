@@ -1,6 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict'),crypto=require('node:crypto'),{spawnSync}=require('node:child_process');
 const root=path.resolve(__dirname,'..'),context={window:{}};vm.createContext(context);
-for(const file of ['home.js','home-photos.js','server.cjs','explore.js','destinations.js','site-shell.js','map-geometry.js','map-regions.js']){const result=spawnSync(process.execPath,['--check',path.join(root,file)],{stdio:'inherit'});assert.equal(result.status,0);}
+for(const file of ['home.js','home-photos.js','server.cjs','explore.js','destinations.js','site-shell.js','map-geometry.js','map-regions.js','attractions.js','attraction-photos.js','dali-attraction-photos.js','attraction-photo-data.js','assets/js/attractions.js','assets/js/attractions-catalogue.js']){const result=spawnSync(process.execPath,['--check',path.join(root,file)],{stdio:'inherit'});assert.equal(result.status,0);}
 vm.runInContext(fs.readFileSync(path.join(root,'home-photos.js'),'utf8'),context);
 vm.runInContext(fs.readFileSync(path.join(root,'destinations.js'),'utf8'),context);
 const regions=JSON.parse(fs.readFileSync(path.join(root,'data/yunnan-prefectures.geojson'),'utf8'));

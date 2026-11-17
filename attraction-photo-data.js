@@ -1,0 +1,503 @@
+/* Local verified attraction images. Generated from assets/attractions/manifest.json. */
+window.AdditionalAttractionPhotos = Object.freeze({
+  "lijiang-black-dragon": {
+    "id": "lijiang-black-dragon",
+    "name": "黑龙潭公园",
+    "title": "File:Black Dragon Pool, Lijiang - panoramio.jpg",
+    "src": "assets/attractions/lijiang-black-dragon.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Black_Dragon_Pool,_Lijiang_-_panoramio.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Black_Dragon_Pool%2C_Lijiang_-_panoramio.jpg/1280px-Black_Dragon_Pool%2C_Lijiang_-_panoramio.jpg",
+    "downloadFile": "assets/attractions/lijiang-black-dragon-download.jpg",
+    "author": "Colin W",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "description": "Black Dragon Pool, Lijiang",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      720
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "82dc56d727ebcb47c4aec01e29841d013da6b9ec0ae00bf36ceb948c26848b14",
+    "subject": "黑龙潭公园实景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "lijiang-shuhe": {
+    "id": "lijiang-shuhe",
+    "name": "束河古镇",
+    "title": "File:Shuhe Street, Lijiang, Yunnan, China.jpg",
+    "src": "assets/attractions/lijiang-shuhe.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Shuhe_Street,_Lijiang,_Yunnan,_China.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Shuhe_Street%2C_Lijiang%2C_Yunnan%2C_China.jpg/1280px-Shuhe_Street%2C_Lijiang%2C_Yunnan%2C_China.jpg",
+    "downloadFile": "assets/attractions/lijiang-shuhe-download.jpg",
+    "author": "Luke Chantrell",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "Shuhe Street, Lijiang, Yunnan, China",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      960
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "59cff680d6cb97dec8aa0757aaee854f0ba7ee7a673b1a0c4f65b9b618737f13",
+    "subject": "束河古镇实景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "lijiang-baisha": {
+    "id": "lijiang-baisha",
+    "name": "白沙古镇",
+    "title": "File:白沙古镇 03.jpg",
+    "src": "assets/attractions/lijiang-baisha.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E6%B2%99%E5%8F%A4%E9%95%87_03.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/%E7%99%BD%E6%B2%99%E5%8F%A4%E9%95%87_03.jpg/1280px-%E7%99%BD%E6%B2%99%E5%8F%A4%E9%95%87_03.jpg",
+    "downloadFile": "assets/attractions/lijiang-baisha-download.jpg",
+    "author": "Caitriana Nicholson",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "description": "​丽江白沙古镇",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      960
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "80983d31e3723257c7bd3842bac16cada176f1c68c126bd7b30040400b070c78",
+    "subject": "白沙古镇实景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "lijiang-mural": {
+    "id": "lijiang-mural",
+    "name": "白沙壁画",
+    "title": "File:白沙壁画景区大门 2024-08-06.jpg",
+    "src": "assets/attractions/lijiang-mural.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E6%B2%99%E5%A3%81%E7%94%BB%E6%99%AF%E5%8C%BA%E5%A4%A7%E9%97%A8_2024-08-06.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/%E7%99%BD%E6%B2%99%E5%A3%81%E7%94%BB%E6%99%AF%E5%8C%BA%E5%A4%A7%E9%97%A8_2024-08-06.jpg/1280px-%E7%99%BD%E6%B2%99%E5%A3%81%E7%94%BB%E6%99%AF%E5%8C%BA%E5%A4%A7%E9%97%A8_2024-08-06.jpg",
+    "downloadFile": "assets/attractions/lijiang-mural-download.jpg",
+    "author": "Kcx36",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "​白沙壁画景区大门",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      961
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "2adbc331486b7a9b6b5f96c56bd105336527056c86b615cc8138b55efbd5e9aa",
+    "subject": "白沙壁画景区入口外观，非壁画内景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "lijiang-yuhu": {
+    "id": "lijiang-yuhu",
+    "name": "玉湖村",
+    "title": "File:Lijiang Oct 2007 232.jpg",
+    "src": "assets/attractions/lijiang-yuhu.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Lijiang_Oct_2007_232.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Lijiang_Oct_2007_232.jpg/1280px-Lijiang_Oct_2007_232.jpg",
+    "downloadFile": "assets/attractions/lijiang-yuhu-download.jpg",
+    "author": "G41rn8",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "Courtyard of Joseph Rock's House. Yuhu Village near Lijiang, in Yunnan province. Joseph Rock was a true original: a wealthy Austrian botanist who lived near Lijiang from 1922-1949, gathering over 80,000 plant specimens and compiling the first dictionary of the Naxi language. His entourage numbered in the hundreds: cooks, mercenaries, and servants to carry his gramophone, gold dinner service, and bathtub. His modest rooms here have been turned into a local museum (photos not permitted), that emphasizes the hardships of his life, perhaps as a concession to the Cultural Revolution, but neglects to mention his golden forks and spoons. Dr. Rock is celebrated as the first Westerner, however eccentric, who cared about Naxi culture and introduced it to the European world.",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      960
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "73d2941af96f1f455be5dda946779c67d9c4f9e93828112abf303684447355be",
+    "subject": "玉湖村 · 洛克故居院落",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "meili-feilai": {
+    "id": "meili-feilai",
+    "name": "飞来寺观景区域",
+    "title": "File:卡瓦格博峰 - 2025-05-10 IMG 3511.jpg",
+    "src": "assets/attractions/meili-feilai.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%8D%A1%E7%93%A6%E6%A0%BC%E5%8D%9A%E5%B3%B0_-_2025-05-10_IMG_3511.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/%E5%8D%A1%E7%93%A6%E6%A0%BC%E5%8D%9A%E5%B3%B0_-_2025-05-10_IMG_3511.jpg/1280px-%E5%8D%A1%E7%93%A6%E6%A0%BC%E5%8D%9A%E5%B3%B0_-_2025-05-10_IMG_3511.jpg",
+    "downloadFile": "assets/attractions/meili-feilai-download.jpg",
+    "author": "瑞丽江的河水",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "Kawagarbo , is the highest peak of Meili Snow Mountain (standard name Taizi (Prince) Snow Mountains), which rises to 6,740 metres, and holds the highest point of Yunnan Province, China. It is located at the border between Deqin County, Diqing Tibetan Autonomous Prefecture, Yunnan Province, and Zayu County, Nyingchi City, Tibet Autonomous Region, China, and constitutes an important component of the UNESCO World Heritage site Three Parallel Rivers of Yunnan Protected Areas. Kawagarbo has not been successfully summited. In 1991, a joint Chinese–Japanese mountaineering expedition suffered a fatal accident on Kawagarbo, resulting in the deaths of all 17 team members. This picture shows the eastern face of Kawagarbo, photographed at sunrise on 10 May 2025 from the Feilai Temple Viewing Platform in Deqin County.",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      820
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "445e2b8bd17c590384cfc037b263a08ea361d30196834ec19120e25b697b51f4",
+    "subject": "从飞来寺观景区域望向卡瓦格博",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "meili-moon-bend": {
+    "id": "meili-moon-bend",
+    "name": "金沙江大湾观景区域",
+    "title": "File:云南，月亮湾.jpg",
+    "src": "assets/attractions/meili-moon-bend.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:%E4%BA%91%E5%8D%97%EF%BC%8C%E6%9C%88%E4%BA%AE%E6%B9%BE.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/%E4%BA%91%E5%8D%97%EF%BC%8C%E6%9C%88%E4%BA%AE%E6%B9%BE.jpg/1280px-%E4%BA%91%E5%8D%97%EF%BC%8C%E6%9C%88%E4%BA%AE%E6%B9%BE.jpg",
+    "downloadFile": "assets/attractions/meili-moon-bend-download.jpg",
+    "author": "Smwy09",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "description": "Moon-shaped Bend of Jinsha River",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      960
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "4d93599856a2242a14e044765ddbc612df76f7c822eb0252be87db67449b6cc8",
+    "subject": "金沙江大湾观景区域实景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "meili-mingyong": {
+    "id": "meili-mingyong",
+    "name": "明永冰川",
+    "title": "File:Mingyong Glacier 明永冰川, Yunnan, 2009 - 51992055541.jpg",
+    "src": "assets/attractions/meili-mingyong.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Mingyong_Glacier_%E6%98%8E%E6%B0%B8%E5%86%B0%E5%B7%9D,_Yunnan,_2009_-_51992055541.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Mingyong_Glacier_%E6%98%8E%E6%B0%B8%E5%86%B0%E5%B7%9D%2C_Yunnan%2C_2009_-_51992055541.jpg/1280px-Mingyong_Glacier_%E6%98%8E%E6%B0%B8%E5%86%B0%E5%B7%9D%2C_Yunnan%2C_2009_-_51992055541.jpg",
+    "downloadFile": "assets/attractions/meili-mingyong-download.jpg",
+    "author": "Cogburn CC",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "description": "​Mingyong Glacier 明永冰川, Yunnan, 2009",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      1912
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "4c2ad6b22ba243ed61ec3fba749911e23806ba0c33733fcf94377e76c5165200",
+    "subject": "明永冰川实景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "meili-deqin-town": {
+    "id": "meili-deqin-town",
+    "name": "德钦县城周边",
+    "title": "File:阿墩子古城 - 昇平公园 - 2025-05-10 01.jpg",
+    "src": "assets/attractions/meili-deqin-town.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:%E9%98%BF%E5%A2%A9%E5%AD%90%E5%8F%A4%E5%9F%8E_-_%E6%98%87%E5%B9%B3%E5%85%AC%E5%9B%AD_-_2025-05-10_01.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/%E9%98%BF%E5%A2%A9%E5%AD%90%E5%8F%A4%E5%9F%8E_-_%E6%98%87%E5%B9%B3%E5%85%AC%E5%9B%AD_-_2025-05-10_01.jpg/1280px-%E9%98%BF%E5%A2%A9%E5%AD%90%E5%8F%A4%E5%9F%8E_-_%E6%98%87%E5%B9%B3%E5%85%AC%E5%9B%AD_-_2025-05-10_01.jpg",
+    "downloadFile": "assets/attractions/meili-deqin-town-download.jpg",
+    "author": "瑞丽江的河水",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "​阿墩子古城昇平公园",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      961
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "82ae1f54e32408684f062d9d4843d06a2c08316caa7b69c6a17e681bb002d0f1",
+    "subject": "德钦县城 · 阿墩子古城昇平公园",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "lijiang-yushui": {
+    "id": "lijiang-yushui",
+    "name": "玉水寨",
+    "title": "File:Jade Water Village Exit- Mountains In Backdrop.JPG",
+    "src": "assets/attractions/lijiang-yushui.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Jade_Water_Village_Exit-_Mountains_In_Backdrop.JPG",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Jade_Water_Village_Exit-_Mountains_In_Backdrop.JPG/1280px-Jade_Water_Village_Exit-_Mountains_In_Backdrop.JPG",
+    "downloadFile": "assets/attractions/lijiang-yushui-download.jpg",
+    "author": "User:Tdxiang",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "description": "Jade Water Village 's exit, with the sacred bird statue in view. Taken by Tdxiang.",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      958
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "12341bbcd11d5779000cf81f53c46164d0a84591d1c73afd9c3755debf0d8a31",
+    "subject": "玉水寨 · 神鸟雕像与周边",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "lijiang-yulong-mountain": {
+    "id": "lijiang-yulong-mountain",
+    "name": "玉龙雪山景区",
+    "title": "File:1 yulong xueshan 2012.jpg",
+    "src": "assets/attractions/lijiang-yulong-mountain.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:1_yulong_xueshan_2012.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/1_yulong_xueshan_2012.jpg/1280px-1_yulong_xueshan_2012.jpg",
+    "downloadFile": "assets/attractions/lijiang-yulong-mountain-download.jpg",
+    "author": "chensiyuan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "yulong xueshan jade dragon snow mountain lijiang yunnan china glacier 2012",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      864
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "ca368a60760ea80f24b6c2301c02d74dbe1885be05fdff4d6b656da6f19ca8b2",
+    "subject": "玉龙雪山景区实景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "shangri-napahai": {
+    "id": "shangri-napahai",
+    "name": "纳帕海周边",
+    "title": "File:纳帕海 - 2025-05-07 01.jpg",
+    "src": "assets/attractions/shangri-napahai.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:%E7%BA%B3%E5%B8%95%E6%B5%B7_-_2025-05-07_01.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/%E7%BA%B3%E5%B8%95%E6%B5%B7_-_2025-05-07_01.jpg/1280px-%E7%BA%B3%E5%B8%95%E6%B5%B7_-_2025-05-07_01.jpg",
+    "downloadFile": "assets/attractions/shangri-napahai-download.jpg",
+    "author": "瑞丽江的河水",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "​香格里拉纳帕海",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      961
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "b5b46aa09ae2a8f67b38083581d9e8274203981464108acf2163b6e8c6d1c59c",
+    "subject": "纳帕海周边实景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "shangri-songzanlin": {
+    "id": "shangri-songzanlin",
+    "name": "噶丹·松赞林寺",
+    "title": "File:1 songzanlin monastery yunnan 2018.jpg",
+    "src": "assets/attractions/shangri-songzanlin.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:1_songzanlin_monastery_yunnan_2018.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/1_songzanlin_monastery_yunnan_2018.jpg/1280px-1_songzanlin_monastery_yunnan_2018.jpg",
+    "downloadFile": "assets/attractions/shangri-songzanlin-download.jpg",
+    "author": "Chensiyuan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "panorama songzanlin monastery yunnan 2018",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      464
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "77a96f09731aa0402827a1f740f834aa876152627228e421793aeeec8d7386bb",
+    "subject": "噶丹·松赞林寺实景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "shangri-oldtown": {
+    "id": "shangri-oldtown",
+    "name": "独克宗古城",
+    "title": "File:20260225 Skyline of Dukezong Ancient Town Shangri-La 06.jpg",
+    "src": "assets/attractions/shangri-oldtown.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:20260225_Skyline_of_Dukezong_Ancient_Town_Shangri-La_06.jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/20260225_Skyline_of_Dukezong_Ancient_Town_Shangri-La_06.jpg/1280px-20260225_Skyline_of_Dukezong_Ancient_Town_Shangri-La_06.jpg",
+    "downloadFile": "assets/attractions/shangri-oldtown-download.jpg",
+    "author": "祝鱼贵",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "=A view overlooking Dukezong Ancient Town and the skyline of Shangri-La from Guishan Park, Jiantang Town, Diqing, Yunnan, China.",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      960
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "77b7f956afbfdad0ca393eedd19f500e9ead873ea454cf58fc4552e1b063d1c6",
+    "subject": "独克宗古城实景",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "banna-botanical": {
+    "id": "banna-botanical",
+    "name": "中国科学院西双版纳热带植物园",
+    "title": "File:Tropical Botanical Garden, Xishuangbanna - panoramio - Colin W (1).jpg",
+    "src": "assets/attractions/banna-botanical.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Tropical_Botanical_Garden,_Xishuangbanna_-_panoramio_-_Colin_W_(1).jpg",
+    "download": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Tropical_Botanical_Garden%2C_Xishuangbanna_-_panoramio_-_Colin_W_%281%29.jpg/1280px-Tropical_Botanical_Garden%2C_Xishuangbanna_-_panoramio_-_Colin_W_%281%29.jpg",
+    "downloadFile": "assets/attractions/banna-botanical-download.jpg",
+    "author": "Colin W",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "description": "Tropical Botanical Garden, Xishuangbanna",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      1280,
+      720
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "4f78bcba50c0b2db90162b2591983ca434f88078c00786aa9449a8973df0e251",
+    "subject": "热带植物园内水景与植物",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "banna-gasa": {
+    "id": "banna-gasa",
+    "name": "西双版纳傣族园",
+    "title": "File:Dai Ethnic Garden, Xishuangbanna Prefecture, China.jpg",
+    "src": "assets/attractions/banna-gasa.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Dai_Ethnic_Garden,_Xishuangbanna_Prefecture,_China.jpg",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Dai_Ethnic_Garden%2C_Xishuangbanna_Prefecture%2C_China.jpg",
+    "downloadFile": "assets/attractions/banna-gasa-download.jpg",
+    "author": "Jacek Karczmarczyk",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "description": "Dai Ethnic Garden, Xishuangbanna Prefecture, China is one of the most popular theme parks in China",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      990,
+      659
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "7e3f448a3b19777d30ad93c2d4c1818695ea8644f259a40d7a18b5075aa1ef7e",
+    "subject": "傣族园内建筑屋顶",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "banna-menghai": {
+    "id": "banna-menghai",
+    "name": "景洪市区与澜沧江沿岸",
+    "title": "File:Jinghong-view-of-mekong.jpg",
+    "src": "assets/attractions/banna-menghai.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Jinghong-view-of-mekong.jpg",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Jinghong-view-of-mekong.jpg",
+    "downloadFile": "assets/attractions/banna-menghai-download.jpg",
+    "author": "The original uploader was Pratyeka at English Wikipedia .",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "description": "Looking west along the en:Mekong river from the main bridge at en:Jinghong , en:Yunnan , en:China .  (Photographer: prat ,  2004-11-20).",
+    "downloadedAt": "2026-10-29",
+    "sourceDimensions": [
+      791,
+      526
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "来源下载版本经 3:2 裁切、缩放及 WebP 转换；未调色。",
+    "downloadSha256": "14a25644d215b33b09938e39a69a605d6a67dc65830cd5cf44c8eba768bf1886",
+    "subject": "景洪市区 · 澜沧江沿岸",
+    "reviewedAt": "2026-10-29",
+    "record": "/assets/attractions/CREDITS.md"
+  },
+  "shangri-abuji": {
+    "id": "shangri-abuji",
+    "name": "香格里拉阿布吉措",
+    "src": "assets/attractions/shangri-abuji.webp",
+    "source": "https://unsplash.com/photos/turquoise-lake-nestled-among-rugged-green-mountains--EctH6zaHsQ",
+    "author": "Sebastian S",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "sourceDimensions": [
+      5184,
+      3888
+    ],
+    "processedDimensions": [
+      900,
+      600
+    ],
+    "cropNote": "沿用用户指定的阿布吉措摄影原图，另制 3:2 裁切；未调色。",
+    "subject": "用户指定的阿布吉措湖泊实景",
+    "reusedOriginal": "assets/selected/originals/shangri.jpg",
+    "sourceSha256": "a79ffa91814bca28557deaaaf626c9d250c4bac1fae329a5bfc6246fed9c0054",
+    "reviewedAt": "2026-10-29",
+    "record": "/PHOTO-CREDITS.md",
+    "licenseVerification": "Exact work-page author and image CDN association confirmed through metadata. General Unsplash License recorded; full license page access blocked in this environment. User identified the work as free."
+  }
+});
+window.MissingAttractionPhotos = Object.freeze([
+  {
+    "id": "dali-longkan",
+    "name": "龙龛码头与湖岸",
+    "reason": "暂未取得地点与可用授权均可确认的合适照片，保留待补提示；未使用异地或AI照片替代。"
+  },
+  {
+    "id": "lijiang-yunshanping",
+    "name": "云杉坪",
+    "reason": "暂未取得地点与可用授权均可确认的合适照片，保留待补提示；未使用异地或AI照片替代。"
+  },
+  {
+    "id": "banna-mengyuan",
+    "name": "勐远仙境",
+    "reason": "暂未取得地点与可用授权均可确认的合适照片，保留待补提示；未使用异地或AI照片替代。"
+  }
+]);

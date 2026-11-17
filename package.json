@@ -1,8 +1,8 @@
 {
   "name": "roam-yunnan-cover-stage",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "漫游云南：摄影封面与交互式云南探索地图",
+  "description": "漫游云南：摄影封面、云南地图与景点选择",
   "engines": {
     "node": ">=20"
   },
@@ -10,7 +10,8 @@
     "start": "node server.cjs",
     "test": "node tests/check.cjs",
     "test:browser": "node tests/browser.cjs",
-    "test:map": "node tests/map-browser.cjs"
+    "test:map": "node tests/map-browser.cjs",
+    "test:selection": "node tests/selection-browser.cjs"
   },
   "devDependencies": {
     "playwright": "1.64.1"

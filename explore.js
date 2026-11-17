@@ -13,7 +13,8 @@
     svg.querySelectorAll('.atlas-region').forEach(node=>{const active=Number(node.dataset.adcode)===selected.prefectureAdcode;node.classList.toggle('is-selected',active);node.setAttribute('aria-pressed',String(active));});
     svg.querySelectorAll('.prefecture-label').forEach(node=>node.classList.toggle('is-selected',Number(node.dataset.adcode)===selected.prefectureAdcode));
     $('#map-selected-name').textContent=selected.shortName;
-    $('#explore-place').setAttribute('aria-label','探索'+selected.shortName);
+    $('#explore-place').setAttribute('aria-label','选择'+selected.shortName+'的景点');
+    $('#explore-place').href='/attractions.html?place='+selected.id;
   }
   function updatePanel(place){
     const image=$('#selected-image');image.src='/'+place.background;image.alt='';image.style.objectPosition=place.position||'50% 50%';
@@ -95,16 +96,5 @@
   }
   $('#retry-region-boundaries').addEventListener('click',loadMap);$('#map-source-button').addEventListener('click',()=>$('#open-sources').click());
   window.addEventListener('popstate',()=>select(new URLSearchParams(location.search).get('place')||items[0].id,false));
-  const detail=$('#destination-dialog');
-  $('#explore-place').addEventListener('click',()=>{
-    $('#destination-dialog-region').textContent=selected.region;
-    $('#destination-dialog-title').textContent=selected.shortName;
-    $('#destination-dialog-story').textContent=selected.story;
-    $('#destination-dialog-practical').textContent=selected.practical;
-    $('#destination-dialog-highlights').replaceChildren(...selected.highlights.map(text=>{const row=document.createElement('li');row.textContent=text;return row;}));
-    detail.showModal();
-  });
-  $('#close-destination').addEventListener('click',()=>detail.close());
-  detail.addEventListener('click',event=>{if(event.target===detail)detail.close();});
   updatePanel(selected);syncSelection();loadMap();
 })();

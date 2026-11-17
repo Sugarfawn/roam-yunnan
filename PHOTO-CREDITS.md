@@ -13,3 +13,7 @@
 背景与卡片来自各自同一张原图；只进行裁切、缩放与 WebP 编码。本版包含 10 张优化图片，原始高清文件未随本版分发。
 
 第三方摄影按来源许可使用，不随源码被统一重新授权。以上地点名称沿用现有作品标注；摄影机位不代表已核实的景区入口。
+
+## 景点选择页配图
+
+大理和其余地区的对应景点照片保留在 assets/dali-attractions 与 assets/attractions，作者、许可和来源见各目录 CREDITS.md 与 manifest.json。丽江古城使用 chensiyuan 的 [作品](https://commons.wikimedia.org/wiki/File:1_lijiang_old_town_2012.jpg)，许可 CC BY-SA 4.0。没有对应照片的景点明确待补。
