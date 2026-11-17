@@ -1,0 +1,11 @@
+{
+  "inputSha256": "8950b054de97e4e622f4c6f8651a4fa6eb9e5ed4669296826b6764bb66d7795c",
+  "outputSha256": "ff5d5eeaf7878b263f2cf286a5122a18ead920615a88d2537df79ac44ad1d7e2",
+  "inputBytes": 908370,
+  "outputBytes": 905250,
+  "userDirectoryReplacements": 708,
+  "credentialRedactions": 0,
+  "actualLocalSecretScan": "passed",
+  "transcriptOrder": "preserved",
+  "attachments": "text references only"
+}

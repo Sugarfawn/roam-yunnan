@@ -60,6 +60,10 @@ npm run test:map
 
 Windows PowerShell 如果拦截 `npm.ps1`，可用 `npm.cmd` 代替 `npm`。浏览器测试检查轮播、自动播放、导航按钮、单屏及多尺寸布局，截图和报告生成到 `tests/artifacts/`。也可通过 `PLAYWRIGHT_EXECUTABLE_PATH` 指定本机 Chrome / Edge。
 
-## 摄影
+## AI 协同记录
+
+需求、封面和地图开发的 DeepSeek 会话导出及提交对应索引见 [docs/ai-records/README.md](docs/ai-records/README.md)。导出已去除个人目录前缀并检查本地密钥，原始消息顺序保留。索引说明了对话中实现与当前仓库实现的关系。
+
+## 摄影来源
 
 五张作品的作者与来源见 [PHOTO-CREDITS.md](PHOTO-CREDITS.md)。图片使用范围以各来源许可为准，公开源码不改变第三方摄影许可。
