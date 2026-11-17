@@ -1,0 +1,235 @@
+[
+  {
+    "id": "meili",
+    "name": "梅里雪山",
+    "author": "Lu Li",
+    "source": "https://www.pexels.com/photo/a-snow-covered-mountain-under-the-dark-sky-10520915/",
+    "download": "https://images.pexels.com/photos/10520915/pexels-photo-10520915.jpeg",
+    "license": "Pexels License",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "center": [
+      0.5,
+      0.5
+    ],
+    "background": "assets/selected/meili-background.webp",
+    "card": "assets/selected/meili-card.webp",
+    "sourceDimensions": [
+      6000,
+      4000
+    ],
+    "sourceSha256": "36b6a9abd0a35988f04c29d1095dad9f01f9ecdd5c27bf7fc0e287e5d028dea8",
+    "originalBytes": 3631877,
+    "downloaded": "2026-10-28",
+    "metadataMethod": "Exact user-selected page metadata resolved through Microlink; image downloaded directly from the page image CDN.",
+    "licenseVerification": "Pexels free-download metadata confirmed. Unsplash work-page metadata confirmed; full license page requests blocked in this environment, user identifies these as free works.",
+    "backgroundDimensions": [
+      2560,
+      1440
+    ],
+    "cardDimensions": [
+      600,
+      800
+    ],
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
+    "originalInFullProject": "assets/selected/originals/meili.jpg",
+    "originalIncludedInThisStage": false,
+    "stageAssets": {
+      "background": {
+        "path": "assets/selected/meili-background.webp",
+        "sha256": "b4f9e74c966d2e837066b946b7d967a335da8bfc9082fd0ae4555d7493bbdca5"
+      },
+      "card": {
+        "path": "assets/selected/meili-card.webp",
+        "sha256": "725eaad23b1bb1cb07c8a1f604134d1532a605b01644c4b4f490268d0cc740b8"
+      }
+    }
+  },
+  {
+    "id": "erhai",
+    "name": "大理洱海",
+    "author": "Yubing Zhang",
+    "source": "https://unsplash.com/photos/the-sun-is-setting-over-a-body-of-water-o1tFimzl2lk",
+    "download": "https://images.unsplash.com/photo-1676558382668-26caa3bddfca",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "center": [
+      0.5,
+      0.5
+    ],
+    "background": "assets/selected/erhai-background.webp",
+    "card": "assets/selected/erhai-card.webp",
+    "sourceDimensions": [
+      5304,
+      7952
+    ],
+    "sourceSha256": "1693f2f21f44f65580b0953fd44035b2497a98da32b9f3e2bd952cab8dc7de57",
+    "originalBytes": 7694072,
+    "downloaded": "2026-10-28",
+    "metadataMethod": "Exact user-selected page metadata resolved through Microlink; image downloaded directly from the page image CDN.",
+    "licenseVerification": "Exact work-page author and image CDN association confirmed through metadata. General Unsplash License recorded; full license page access blocked in this environment. User identified the work as free.",
+    "backgroundDimensions": [
+      2560,
+      1440
+    ],
+    "cardDimensions": [
+      600,
+      800
+    ],
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
+    "originalInFullProject": "assets/selected/originals/erhai.jpg",
+    "originalIncludedInThisStage": false,
+    "stageAssets": {
+      "background": {
+        "path": "assets/selected/erhai-background.webp",
+        "sha256": "768feeaa568341996d468219f0e9f36921d84fdfe33867ea8b41a866cc8fdba4"
+      },
+      "card": {
+        "path": "assets/selected/erhai-card.webp",
+        "sha256": "47830e3107065507e133081d32b8942111d078dd6989e96836cc59b369677a33"
+      }
+    }
+  },
+  {
+    "id": "yulong",
+    "name": "丽江玉龙雪山",
+    "author": "jony Y",
+    "source": "https://unsplash.com/photos/a-mountain-range-is-reflected-in-the-still-water-of-a-lake-XPF8T42BhxY",
+    "download": "https://images.unsplash.com/photo-1736079523442-117187bae8eb",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "center": [
+      0.5,
+      0.5
+    ],
+    "background": "assets/selected/yulong-background.webp",
+    "card": "assets/selected/yulong-card.webp",
+    "sourceDimensions": [
+      6000,
+      4000
+    ],
+    "sourceSha256": "d9af19856cc98da01bd06a180cf89eef3d3b20badd6dbf7a3d6fb8aeed1feb02",
+    "originalBytes": 2677666,
+    "downloaded": "2026-10-28",
+    "metadataMethod": "Exact user-selected page metadata resolved through Microlink; image downloaded directly from the page image CDN.",
+    "licenseVerification": "Exact work-page author and image CDN association confirmed through metadata. General Unsplash License recorded; full license page access blocked in this environment. User identified the work as free.",
+    "backgroundDimensions": [
+      2560,
+      1440
+    ],
+    "cardDimensions": [
+      600,
+      800
+    ],
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
+    "originalInFullProject": "assets/selected/originals/yulong.jpg",
+    "originalIncludedInThisStage": false,
+    "stageAssets": {
+      "background": {
+        "path": "assets/selected/yulong-background.webp",
+        "sha256": "caade3727308eb98587488a234f26a4422b9f005ebd2e0d87e2684538e909261"
+      },
+      "card": {
+        "path": "assets/selected/yulong-card.webp",
+        "sha256": "876b6025c0345012bc6f4a0a5eb511f79117c031161a6d0b491d07def86a0c47"
+      }
+    }
+  },
+  {
+    "id": "shangri",
+    "name": "香格里拉阿布吉措",
+    "author": "Sebastian S",
+    "source": "https://unsplash.com/photos/turquoise-lake-nestled-among-rugged-green-mountains--EctH6zaHsQ",
+    "download": "https://images.unsplash.com/photo-1765741328062-b5bde7c44654",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "center": [
+      0.5,
+      0.5
+    ],
+    "background": "assets/selected/shangri-background.webp",
+    "card": "assets/selected/shangri-card.webp",
+    "sourceDimensions": [
+      5184,
+      3888
+    ],
+    "sourceSha256": "a79ffa91814bca28557deaaaf626c9d250c4bac1fae329a5bfc6246fed9c0054",
+    "originalBytes": 3424427,
+    "downloaded": "2026-10-28",
+    "metadataMethod": "Exact user-selected page metadata resolved through Microlink; image downloaded directly from the page image CDN.",
+    "licenseVerification": "Exact work-page author and image CDN association confirmed through metadata. General Unsplash License recorded; full license page access blocked in this environment. User identified the work as free.",
+    "backgroundCropCenter": [
+      0.5,
+      1
+    ],
+    "cardCropCenter": [
+      0.43,
+      0.5
+    ],
+    "backgroundDimensions": [
+      2560,
+      1440
+    ],
+    "cardDimensions": [
+      600,
+      800
+    ],
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
+    "originalInFullProject": "assets/selected/originals/shangri.jpg",
+    "originalIncludedInThisStage": false,
+    "stageAssets": {
+      "background": {
+        "path": "assets/selected/shangri-background.webp",
+        "sha256": "5f288cb822007e9c031a558efa88d5f32bf6b636ddac1bba4c63c90556520606"
+      },
+      "card": {
+        "path": "assets/selected/shangri-card.webp",
+        "sha256": "a8eba81ffa3397cf0a509ea420838e0e8f7b545a700041cfa254b521d4a50212"
+      }
+    }
+  },
+  {
+    "id": "banna",
+    "name": "西双版纳热带雨林",
+    "author": "Jack Wu",
+    "source": "https://unsplash.com/photos/a-banana-tree-in-the-middle-of-a-forest-YdpzQY_nBF0",
+    "download": "https://images.unsplash.com/photo-1672563700471-f47502fac8c7",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "center": [
+      0.5,
+      0.5
+    ],
+    "background": "assets/selected/banna-background.webp",
+    "card": "assets/selected/banna-card.webp",
+    "sourceDimensions": [
+      6240,
+      4160
+    ],
+    "sourceSha256": "1a6d78124bdbdafbc2bce6181bd97b74502157599bdbf3156a0d22c036f73f4b",
+    "originalBytes": 3699338,
+    "downloaded": "2026-10-28",
+    "metadataMethod": "Exact user-selected page metadata resolved through Microlink; image downloaded directly from the page image CDN.",
+    "licenseVerification": "Exact work-page author and image CDN association confirmed through metadata. General Unsplash License recorded; full license page access blocked in this environment. User identified the work as free.",
+    "backgroundDimensions": [
+      2560,
+      1440
+    ],
+    "cardDimensions": [
+      600,
+      800
+    ],
+    "transformations": "Crop, resize and WebP encoding only. No colour correction, filter or replacement photograph.",
+    "originalInFullProject": "assets/selected/originals/banna.jpg",
+    "originalIncludedInThisStage": false,
+    "stageAssets": {
+      "background": {
+        "path": "assets/selected/banna-background.webp",
+        "sha256": "37c3e72734dfa26d7ce57bee43498c61d49ee4807517a04fd69154b4c452c8b7"
+      },
+      "card": {
+        "path": "assets/selected/banna-card.webp",
+        "sha256": "8d23b335999b67ba29663e64b2250026817ef281f5b1bf57387944f32c7aca22"
+      }
+    }
+  }
+]
